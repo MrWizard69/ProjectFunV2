@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+body{ /*.this is the jquery mobile wrapper over the body*/
+	
+	/*background-color: #6c6c6c;*/
+	background-color: black;
+	text-shadow:0 0 0;
+	font-family: 'Droid Sans', sans-serif;
+	
+}

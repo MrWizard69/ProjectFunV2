@@ -1,0 +1,251 @@
+
+
+#score{
+	
+	text-align: center;
+}
+
+#shootStick{
+	
+	/*--------------This is what activates GPU graphic rendering------------------*/
+	-webkit-transform: translateZ(0); 
+	-moz-transform: translateZ(0); 
+	-ms-transform: translateZ(0); 
+	-o-transform: translateZ(0); 
+	transform: translateZ(0); 
+	
+	-moz-transition: all 1s; 
+	-webkit-transition: all 1s; 
+	-o-transition: all 1s; 
+	transition: all 1s ;  
+	/*margin-left: 2%;*/
+	/*margin-top: -13%;*/
+	/*--------------This is what activates GPU graphic rendering End------------------*/
+	
+}
+
+#container{
+
+	/*margin-left: 1%;*/
+	/*margin-top: -13%;*/
+}
+
+#canvas {
+    border:1px solid #000;
+	border-radius: 5px;
+	margin-left: 13%;
+	margin-top: -0.6%;
+	/*background-color: #151B54;*/
+	background-color: #000;
+	/*This is the game stage*/
+	/*--------------This is what activates GPU graphic rendering------------------*/
+	-webkit-transform: translateZ(0); 
+	-moz-transform: translateZ(0); 
+	-ms-transform: translateZ(0); 
+	-o-transform: translateZ(0); 
+	transform: translateZ(0); 
+	
+	-moz-transition: all 1s; 
+	-webkit-transition: all 1s; 
+	-o-transition: all 1s; 
+	transition: all 1s ;  
+	/*--------------This is what activates GPU graphic rendering End------------------*/
+}
+
+canvas {
+	/*This is the joystick*/
+	/*--------------This is what activates GPU graphic rendering------------------*/
+	-webkit-transform: translateZ(0); 
+	-moz-transform: translateZ(0); 
+	-ms-transform: translateZ(0); 
+	-o-transform: translateZ(0); 
+	transform: translateZ(0); 
+	
+	-moz-transition: all 1s; 
+	-webkit-transition: all 1s; 
+	-o-transition: all 1s; 
+	transition: all 1s;  
+	/*--------------This is what activates GPU graphic rendering End------------------*/
+}
+
+#title{
+	text-align: center;
+	/*margin-top: -.1%;*/
+	/*color: black;*/
+	color: white;
+	
+	
+}
+
+#RotWarBox{
+
+	background-color: #cfcfcf;
+	width: 75%;
+	position: absolute;
+	z-index: 15;
+	top: 30%;
+	left: 12%;
+	border-radius: 5px;
+	
+
+}
+
+#rotMessage{
+
+	text-align: center;
+	color: darkred;
+
+}
+
+
+h3{
+	text-align: center;
+	margin-top: -3%;
+	/*color: black;*/
+	color: white;
+	/*margin-top: -3%;*/
+}
+
+
+html, body {
+    /*margin-bottom: 100%;*/
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	display:inline;
+	overflow: hidden; /*  Disable scrollbars */
+	display: block;  /* No floating content on sides */
+}
+
+#up{
+	
+	position: fixed;
+	left: 84%;
+	top: 15%;
+	width: 10%;
+	height: 10%;
+	display:none;
+	
+}
+
+#left{
+	
+	position: fixed;
+	left: 79%;
+	top: 33%;
+	width: 10%;
+	height: 10%;
+	display:none;
+	
+}
+
+#right{
+	
+	position: fixed;
+	left: 89.5%;
+	top: 33%;
+	width: 10%;
+	height: 10%;
+	display:none;
+	
+}
+
+#down{
+	
+	position: fixed;
+	left: 84%;
+	top: 50%;
+	width: 10%;
+	height: 10%;
+	display:none;
+	
+}
+
+#shootWrap{
+	
+	position: fixed;
+	right: 89%;
+	top: 33%;
+	width: 11%;
+	height: 10%;
+	display:none;
+	
+}
+
+#rest{
+	
+	width: 17%;	
+	
+}
+
+
+#pDiv{
+	
+	margin-top: -21.8%;
+	width: 50%;
+	margin-left: 22%;
+}
+
+#restartDiv{
+	
+	margin-top: -21.8%;
+	width: 50%;
+	margin-left: 22%;
+
+	
+}
+
+#rotWar{
+	
+	color: darkred;
+	text-align: center;
+	margin-bottom: -.5%;
+	margin-top: -4%;
+}
+
+#DL{
+	margin-top: -0.5%;
+}
+
+#MoveStickInfo{
+
+	margin-left: 86%;
+	margin-top: -14%;
+}
+
+#ShootStickInfo{
+
+	margin-right: 86%;
+	margin-top: -2%;	
+}
+
+@media screen and (max-width: 1000px) {
+    #rest{
+	
+		margin-bottom: -7%;
+	
+	}
+	h2{
+		margin-top: 7%;
+	}
+
+	#canvas{
+		margin-top: -3%;
+	}
+
+}
+
+@media screen and (max-width: 600px) {
+
+	#restartDiv{
+		
+		margin-top: -100%;
+
+	}
+	
+	
+}
+
+
+
+/*this is the full screen size of both me and my bros phone: 450 px*/
