@@ -1,4 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
+//import * as joy from './joy-stick';
 
 @Component({
 	selector: 'joystick',
@@ -8,13 +9,17 @@ import { Component, OnInit, Injectable } from '@angular/core';
 
 @Injectable()
 
+
 export class VirtualJoysticks {
 
+	constructor(){
+		//joystick
+	}
 
 	createJoy(opts){
 
-		var VirtualJoystick	= function(opt)
-		{
+		function VirtualJoystick(opt){
+
 			console.log(opt);
 
 			let opts			= opt			|| {};
@@ -29,6 +34,24 @@ export class VirtualJoysticks {
 			this._limitStickTravel	= opts.limitStickTravel || false
 			this._stickRadius	= opts.stickRadius !== undefined ? opts.stickRadius : 100
 			this._useCssTransform	= opts.useCssTransform !== undefined ? opts.useCssTransform : false
+		}
+
+		VirtualJoystick.prototype.setup= function(opt)
+		{
+			console.log(opt);
+
+			// let opts			= opt			|| {};
+			// this._container		= opts.container	|| document.body;
+			// this._strokeStyle	= opts.strokeStyle	|| 'white';//'#333333';// this changes the color of the joystick
+			// this._stickEl		= opts.stickElement	|| this._buildJoystickStick();
+			// this._baseEl		= opts.baseElement	|| this._buildJoystickBase();
+			// this._mouseSupport	= opts.mouseSupport !== undefined ? opts.mouseSupport : false;
+			// this._stationaryBase	= opts.stationaryBase || false;
+			// this._baseX		= this._stickX = opts.baseX || 0
+			// this._baseY		= this._stickY = opts.baseY || 0
+			// this._limitStickTravel	= opts.limitStickTravel || false
+			// this._stickRadius	= opts.stickRadius !== undefined ? opts.stickRadius : 100
+			// this._useCssTransform	= opts.useCssTransform !== undefined ? opts.useCssTransform : false
 
 			this._container.style.position	= "absolute"
 
