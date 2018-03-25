@@ -14,7 +14,7 @@ export class HomeComponent implements AfterViewInit {
     aframe: any;
     timeout: any;
 
-    title = 'Home Page';
+    title = 'Space-C'; //Project Fun
     NewVirtualJoystick: any;
   
 	//@ViewChild(VirtualJoysticks) VirtualJoystick;
@@ -221,7 +221,7 @@ canvas1.height = canvas.height;
 	
 	
     document.getElementById("score").style.display = "none";
-    document.getElementById("restartDiv").style.display = "none";
+	document.getElementById("restartBtn").style.display = "none";
     document.getElementById("RotWarBox").style.display = "none";
 
     document.getElementById("MoveStickInfo").style.display = "none";
@@ -249,7 +249,7 @@ canvas1.height = canvas.height;
 	
     //when the game is quit, the screen goes back to normal and the page is reloaded or a message appears
 
-    document.getElementById('RG').addEventListener('touchstart', rgTap);
+    document.getElementById('exitGame').addEventListener('touchstart', rgTap);
     
     function rgTap(){
 
@@ -319,11 +319,10 @@ canvas1.height = canvas.height;
 		InfectedFleet = [];
 		LazerBattery = [];
         document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-        document.getElementById("restartDiv").style.display = "none";
+		document.getElementById("restartBtn").style.display = "none";
     }
 	
-    document.getElementById("RG").style.display = "none";
-    document.getElementById("dwnload").style.display = "none";
+    document.getElementById("exitGame").style.display = "none";
 
     document.getElementById('container').addEventListener('touchend', containerTapEnd);
 
@@ -448,11 +447,11 @@ canvas1.height = canvas.height;
 		
 		menu = false;
 		
-        document.getElementById("RG").style.display = "inline-block";
+        document.getElementById("exitGame").style.display = "inline-block";
 		
 		setTimeout(function() {
 			
-
+			//this.VirtualJoystick.createJoy();
 			//this makes the joystick
 		 joystick = new VirtualJoystick({
 				container: document.getElementById('container'),
@@ -605,7 +604,6 @@ canvas1.height = canvas.height;
 		}, 30000);		
         
         document.getElementById("play").style.display = "none";
-        document.getElementById("pDiv").style.display = "none";
         document.getElementById("title").style.display = "none";
         document.getElementById("score").style.display = "inline-block";
         document.getElementById("MoveStickInfo").style.display = "inline-block";
@@ -715,8 +713,6 @@ canvas1.height = canvas.height;
 		if(canvas.width <= 300){
 
             document.getElementById("play").style.display = "none";
-            document.getElementById("pDiv").style.display = "none";
-            document.getElementById("dwnload").style.display = "inline-block";
             document.getElementById("ShootStickInfo").style.marginTop = "-6.5%";
             document.getElementById("rotWar").style.display = "inline-block";
             document.getElementById("shootStick").style.display = "none";
@@ -726,21 +722,17 @@ canvas1.height = canvas.height;
 		else if(canvas.width >= 350 && menu == false){
 
             document.getElementById("play").style.display = "none";
-            document.getElementById("pDiv").style.display = "none";
 
 		}		
 		 else if(canvas.width >= 350){
 			
             document.getElementById("play").style.display = "inline-block";
-            document.getElementById("pDiv").style.display = "inline-block";
-            document.getElementById("dwnload").style.display = "none";
             document.getElementById("shootStick").style.display = "inline-block";
             document.getElementById("container").style.display = "inline-block";
 			
 			 if(exitReload == 1){
 
                 document.getElementById("play").style.display = "none";
-                document.getElementById("pDiv").style.display = "none";
                 document.getElementById("restartDiv").style.display = "inline-block";
 			 }
              //document.getElementById("rotWar").style.display = "none";
@@ -5466,12 +5458,11 @@ canvas1.height = canvas.height;
 			
 			else{
 				
-				//$("#pDiv").css("margin-top", "90%");
 				x = canvas.width * 0.50;
 				y = canvas.height * 0.50;
 				menu = true;
-				//$("#restartBtn").closest('.ui-btn').show();
-                document.getElementById("restartDiv").style.display = "inline-block";
+
+				document.getElementById("restartBtn").style.display = "inline-block";
 				
 				
 			}
@@ -6119,7 +6110,7 @@ function Star(x, y, length, opacity) {
 
 function VirtualJoystick(opt){
 
-	console.log(opt);
+	//console.log(opt);
 
 	let opts			= opt			|| {};
 	this._container		= opts.container	|| document.body;
@@ -6134,16 +6125,18 @@ function VirtualJoystick(opt){
 	this._stickRadius	= opts.stickRadius !== undefined ? opts.stickRadius : 100;
 	this._useCssTransform	= opts.useCssTransform !== undefined ? opts.useCssTransform : false;
 
-	console.log(this._stickEl);
+	//console.log(this._stickEl);
 
-	this._container.style.position	= "absolute"
+	this._container.style.position	= "absolute";
 
-			this._container.appendChild(this._baseEl)
-			this._baseEl.style.position	= "absolute"
-			this._baseEl.style.display	= "none"
-			this._container.appendChild(this._stickEl)
-			this._stickEl.style.position	= "absolute"
-			this._stickEl.style.display	= "none"
+			this._container.appendChild(this._baseEl);
+			this._baseEl.style.position	= "absolute";
+			this._baseEl.style.display	= "none";
+			this._baseEl.style.border = "1px solid white";
+			this._baseEl.style.borderRadius = "50px";
+			this._container.appendChild(this._stickEl);
+			this._stickEl.style.position	= "absolute";
+			this._stickEl.style.display	= "none";
 
 			this._pressed	= false;
 			this._touchIdx	= null;
