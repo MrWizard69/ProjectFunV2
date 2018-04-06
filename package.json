@@ -10,11 +10,11 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "createGhPages" : "npm install --save-dev angular-cli-ghpages",
-    "remoterepo": "git remote add origin ssh://git@github.com/MrWizard69/Norri-Jane.git",
+    "remoterepo": "git remote add origin ssh://git@github.com/MrWizard69/ProjectFunV2.git",
     "resetRepo": "git remote set-url origin git://new.url.here",
     "deploymaster": "ng build --prod && angular-cli-ghpages --branch master",
     "buildprod": "ng build --prod",
-    "ghpagesdeploy": "ng build --prod --base-href https://mrwizard69.github.io/Norri-Jane/",
+    "ghpagesdeploy": "ng build --prod --base-href https://mrwizard69.github.io/ProjectFunV2/",
     "publishpages": "ngh"
   },
   "private": true,

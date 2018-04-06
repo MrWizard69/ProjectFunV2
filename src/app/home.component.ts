@@ -1,6 +1,8 @@
 
-import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit   } from '@angular/core';
-import { VirtualJoysticks } from './VirtualJoystick';
+import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit, NgZone } from '@angular/core';
+import { element } from 'protractor';
+import { Element } from '@angular/compiler';
+//import { VirtualJoysticks } from './VirtualJoystick';
 
 @Component({
   selector: 'home',
@@ -15,7 +17,12 @@ export class HomeComponent implements AfterViewInit {
     timeout: any;
 
     title = 'Space-C'; //Project Fun
-    NewVirtualJoystick: any;
+	NewVirtualJoystick: any;
+	
+	constructor(private zone: NgZone){
+
+
+	}
   
 	//@ViewChild(VirtualJoysticks) VirtualJoystick;
 //   constructor(ref: ElementRef,VirtualJoystickz:VirtualJoysticks) {
@@ -28,6 +35,8 @@ export class HomeComponent implements AfterViewInit {
     
     
 ngAfterViewInit(){
+
+	this.zone.runOutsideAngular(() => {
 
 	//this.NewVirtualJoystick = this.VirtualJoystick.createJoy;
 
@@ -43,58 +52,58 @@ ngAfterViewInit(){
 
         //this.VirtualJoystick = new this.VirtualJoystick.VirtualJoystick1();
         //this is all the variables for the star background
-var stars = [];
-var numStars = 20; //<- 40 maybe good for mobile //250; <- that is good for desktop screen size//2000
+let stars = [];
+let numStars = 20; //<- 40 maybe good for mobile //250; <- that is good for desktop screen size//2000
 
-var exitReload = 0;
-var bulletPower = 0;
-var bulletLoop;
-var bulletSpeed = 0;
-var shootStickTouch = false;
-var playersSizeW;
-var playerSizeH;
-var bulletSizeW;
-var bulletSizeH;
-var slowMoWatch = 0;
-var slowMotion = false;
-var slowMoDelay;
-var x = 0;
-var y = 0;
-var ctx;
-var slowHue = 240;
-var slowShade = 100;
-var slowBrightness = 60;
-var borderHue = 50;
-var borderShade = 29;
-var borderBrightness = 61;
-var KeyboardBulletDelay = 10;
+let exitReload = 0;
+let bulletPower = 0;
+let bulletLoop;
+let bulletSpeed = 0;
+let shootStickTouch = false;
+let playersSizeW;
+let playerSizeH;
+let bulletSizeW;
+let bulletSizeH;
+let slowMoWatch = 0;
+let slowMotion = false;
+let slowMoDelay;
+let x = 0;
+let y = 0;
+let ctx;
+let slowHue = 240;
+let slowShade = 100;
+let slowBrightness = 60;
+let borderHue = 50;
+let borderShade = 29;
+let borderBrightness = 61;
+let KeyboardBulletDelay = 10;
 	
 	// Obtain a reference to the canvas element
 	// using its id.
 	
-    var canvas = <HTMLCanvasElement> document.getElementById("canvas");
+    let canvas = <HTMLCanvasElement> document.getElementById("canvas");
     ctx = canvas.getContext("2d");
 
 
 // starting hue for the explosion
-var hue = 120;
+let hue = 120;
 
-var menu = true;
-var mousePos;
+let menu = true;
+let mousePos;
 
-var canvas2 = <HTMLCanvasElement> document.getElementById("canvas"),
+let canvas2 = <HTMLCanvasElement> document.getElementById("canvas"),
    	ctx2 = canvas2.getContext("2d");
 	   
 	   
 // Create all the stars
-		for(var i = 0; i < numStars; i++) {
-			var x = Math.round(Math.random() * canvas.width);
-			var y = Math.round(Math.random() * canvas.height);
-			var length = 1 + Math.random() * 2;
-			var opacity = Math.random();
+		for(let i = 0; i < numStars; i++) {
+			let x = Math.round(Math.random() * canvas.width);
+			let y = Math.round(Math.random() * canvas.height);
+			let length = 1 + Math.random() * 2;
+			let opacity = Math.random();
 		
 			// Create a new star and draw
-			var star = new Star(x, y, length, opacity);
+			let star = new Star(x, y, length, opacity);
 		
 		// Add the the stars array
         stars.push(star);
@@ -108,7 +117,7 @@ var canvas2 = <HTMLCanvasElement> document.getElementById("canvas"),
 
 	
 	// now we will setup our basic variables for the demo
- var canvas1 = <HTMLCanvasElement> document.getElementById("canvas"),
+ let canvas1 = <HTMLCanvasElement> document.getElementById("canvas"),
    	ctx1 = canvas1.getContext("2d"),
 		//full screen dimensions
 		//cw = canvas1.width,
@@ -135,89 +144,63 @@ canvas1.width = canvas.width;
 canvas1.height = canvas.height;
 	
 	let joystick: any;
-	let shootStick: any;
-	//----------------------this guys sets up the virtual joystick. Thank you virtualjoystick.js--------------------------------//
-		// let joystick = new VirtualJoystick({
-		// 		container: document.getElementById('container'),
-		// 		mouseSupport: true,
-		// 		limitStickTravel: true,
-		// 		stationaryBase: true, // to make the joystick appear anywhere, set to false and comment out BaseX and BaseY
-        //               baseX: 200,//joyStickX, // this size is only good for mobile not tablets
-        //               baseY: 200,//joyStickY, // this size is only good for mobile not tablets
-		// 		stickRadius: 25
-		// 	});	
-			
-            //joystick.destroy; //************************ the joysticks are still broken *****************************
-            //joystick.prototype.destroy();
-			
-		// let shootStick = new VirtualJoystick({
-		// 		container: document.getElementById('shootStick'),
-		// 		mouseSupport: true,
-		// 		limitStickTravel: true,
-		// 		stationaryBase: true, // to make the joystick appear anywhere, set to false and comment out BaseX and BaseY
-        //               baseX: 400,//shootStickX, // this size is only good for mobile not tablets
-        //               baseY: 400,//shootStickY, // this size is only good for mobile not tablets
-		// 		stickRadius: 25
-		// 	});
-			
-			//shootStick.destroy;	
-			
+	let shootStick: any;			
 	
-	var playerSize = 0;
-	var bulletSize = 0;
+	let playerSize = 0;
+	let bulletSize = 0;
 	
-	var playerPositionX = 0;
-	var playerPositionY = 0;
+	let playerPositionX = 0;
+	let playerPositionY = 0;
 	
 
 	
-	var playArea = 0;
+	let playArea = 0;
 	
 	//var entities = [];
-	var RandomShipFleet = [];
-	var HunterFleet = [];
-	var StalkerFleet = [];
-	var BlackBox = [];
-	var BHEnemys = [];
-	var InfectedFleet = [];
+	let RandomShipFleet = [];
+	let HunterFleet = [];
+	let StalkerFleet = [];
+	let BlackBox = [];
+	let BHEnemys = [];
+	let InfectedFleet = [];
 	
-	var score = 0;
-	var lives = 3;
+	let score = 0;
+	let lives = 3;
 	
 	
-	var bulletClip = [];
-	var LifePowerPack = [];
-	var BulletPowerPack = [];
-	var LazerBattery = [];
+	let bulletClip = [];
+	let LifePowerPack = [];
+	let BulletPowerPack = [];
+	let LazerBattery = [];
 	//var numOfEnemyShips = 4;
 	
-	var bullet = new Object();
-	var bulletPC = new Object();
+	let bullet = new Object();
+	let bulletPC = new Object();
 
-	var bigLazer = new Object();
+	let bigLazer = new Object();
 	
-	var Enemy1 = new Object();
-	var Enemy2 = new Object();
-	var Enemy3 = new Object();
-	var Enemy4 = new Object();
-	var Enemy5 = new Object();
-	var Enemy6 = new Object();
+	let Enemy1 = new Object();
+	let Enemy2 = new Object();
+	let Enemy3 = new Object();
+	let Enemy4 = new Object();
+	let Enemy5 = new Object();
+	let Enemy6 = new Object();
 	
-	var LifePup = new Object();
-	var BulletPup = new Object();
+	let LifePup = new Object();
+	let BulletPup = new Object();
 	
-	var joyStickX = 0;
-	var joyStickY = 0;
-	var shootStickX = 0;
-	var shootStickY = 0;
-	var joyDirX = "";
-	var joyDirY = "";
-	var shootStickDirX = "";
-	var shootStickDirY = "";
-	var joyTouch = false;
+	let joyStickX = 0;
+	let joyStickY = 0;
+	let shootStickX = 0;
+	let shootStickY = 0;
+	let joyDirX = "";
+	let joyDirY = "";
+	let shootStickDirX = "";
+	let shootStickDirY = "";
+	let joyTouch = false;
 
-	var moveReady = false;
-	var shootReady = false;
+	let moveReady = false;
+	let shootReady = false;
 	
 	
     document.getElementById("score").style.display = "none";
@@ -249,7 +232,8 @@ canvas1.height = canvas.height;
 	
     //when the game is quit, the screen goes back to normal and the page is reloaded or a message appears
 
-    document.getElementById('exitGame').addEventListener('touchstart', rgTap);
+	document.getElementById('exitGame').addEventListener('touchstart', rgTap);
+	document.getElementById('exitGame').addEventListener('click', rgTap);
     
     function rgTap(){
 
@@ -263,36 +247,36 @@ canvas1.height = canvas.height;
 			// 		document.msExitFullscreen();
 			// } else if (document.mozCancelFullScreen) {
 			// 		document.mozCancelFullScreen();
-			// } else if (document.webkitExitFullscreen) {
-			// 		document.webkitExitFullscreen();
-			// }
+			else if (document.webkitExitFullscreen) {
+					document.webkitExitFullscreen();
+			}
 			
 			
 			window.location.reload();
 			//alert("reload");
 		}
-		else if(canvas.width < 499){
-			if(canvas.width < 261){
+		// else if(canvas.width < 499){
+		// 	if(canvas.width < 261){
 				
-				if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-				// } else if (document.msExitFullscreen) {
-				// 	document.msExitFullscreen();
-				// } else if (document.mozCancelFullScreen) {
-				// 	document.mozCancelFullScreen();
-				// } else if (document.webkitExitFullscreen) {
-				// 	document.webkitExitFullscreen();
-				// }
+		// 		if (document.exitFullscreen) {
+        //             document.exitFullscreen();
+        //         }
+		// 		// } else if (document.msExitFullscreen) {
+		// 		// 	document.msExitFullscreen();
+		// 		// } else if (document.mozCancelFullScreen) {
+		// 		// 	document.mozCancelFullScreen();
+		// 		// } else if (document.webkitExitFullscreen) {
+		// 		// 	document.webkitExitFullscreen();
+		// 		// }
 				
 				
-				window.location.reload();
-			}
-			else{
-				alert("Please rotate your device and tap this button again to properly quit.");
-			}
-			//alert("hit the button");
-		}
+		// 		window.location.reload();
+		// 	}
+		// 	else{
+		// 		alert("Please rotate your device and tap this button again to properly quit.");
+		// 	}
+		// 	//alert("hit the button");
+		// }
     }
 
     document.getElementById('restartBtn').addEventListener('touchstart', restartBtnTap);
@@ -340,7 +324,7 @@ canvas1.height = canvas.height;
         joyTouch = true; // the joystick was touched and now in the Update function it will be checking the direction of the joystick
         moveReady = true;//this checks the joystick to see if the player knows what it does. First touch starts the game
         document.getElementById("MoveStickInfo").style.display = "none"; //hides the message
-        document.getElementById("ShootStickInfo").style.marginTop = "-13.8%";
+        //document.getElementById("ShootStickInfo").style.marginTop = "-13.8%";
     }
 
     document.getElementById('shootStick').addEventListener('touchstart', shootStickTap);
@@ -350,7 +334,7 @@ canvas1.height = canvas.height;
         //console.log("shoot stick");
 			
 			shootReady = true; //this checks the shootStick to see if the player knows what it does. First touch starts the game
-            document.getElementById("MoveStickInfo").style.marginTop = "-14%";
+            //document.getElementById("MoveStickInfo").style.marginTop = "-14%";
 
             document.getElementById("ShootStickInfo").style.display = "none";
 			
@@ -431,18 +415,24 @@ canvas1.height = canvas.height;
 		clearInterval(bulletLoop);
     }
 
-    document.getElementById('play').addEventListener('touchstart', playTap);
+	document.getElementById('play').addEventListener('click', playTap);
+	//document.getElementById('play').addEventListener('touchstart', playTap);
     //when the play button is pressed the full screen is started, the joystick is set up and the enemy interval is started
 
     function playTap(){
 
-        //------------------------------this guys sets up full screen for the browsers--------------------------//
+		//------------------------------this guys sets up full screen for the browsers--------------------------//
+
 
         if (!document.fullscreenElement) {  // current working methods
 				if (document.documentElement.requestFullscreen) {
 						document.documentElement.requestFullscreen();
-				} 
-        }
+				}
+				else if (document.documentElement.webkitRequestFullscreen) {
+					document.documentElement.webkitRequestFullScreen();
+					//if(Element.ALLOW_KEYBOARD_INPUT)
+		} 
+		}
     //----------------------End of full screen------------------------------------------//
 		
 		menu = false;
@@ -668,14 +658,14 @@ canvas1.height = canvas.height;
 		//$("#result").html(canvas.width); //display the screen size/////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 		
 		// Create all the stars
-		for(var i = 0; i < numStars; i++) {
-			var x = Math.round(Math.random() * canvas.width);
-			var y = Math.round(Math.random() * canvas.height);
-			var length = 1 + Math.random() * 2;
-			var opacity = Math.random();
+		for(let i = 0; i < numStars; i++) {
+			let x = Math.round(Math.random() * canvas.width);
+			let y = Math.round(Math.random() * canvas.height);
+			let length = 1 + Math.random() * 2;
+			let opacity = Math.random();
 		
 			// Create a new star and draw
-			var star = new Star(x, y, length, opacity);
+			let star = new Star(x, y, length, opacity);
 		
 		// Add the the stars array
 		stars.push(star);
@@ -691,15 +681,21 @@ canvas1.height = canvas.height;
 	
 		if(canvas.width >= 241){
 			
-			joyStickX = (window.innerWidth) * .93;
-			joyStickY = (window.innerHeight) * .55;	
+			shootStickX = (window.innerWidth) * .91;
+			shootStickY = (window.innerHeight) * .55;	
 			
-			shootStickX = (window.innerWidth) * .07;
-			shootStickY = (window.innerHeight) * 0.55;
+			joyStickX = (window.innerWidth) * .07;
+			joyStickY = (window.innerHeight) * 0.55;
 
-			//console.log("one");
+
+			//old joystick layout
+			//******************************************/
+			// joyStickX = (window.innerWidth) * .93;
+			// joyStickY = (window.innerHeight) * .55;	
 			
-			//$("#play").closest('.ui-btn').show();
+			// shootStickX = (window.innerWidth) * .07;
+			// shootStickY = (window.innerHeight) * 0.55;
+			//******************************************/
 
 			// if(canvas.width > 450){
 
@@ -713,8 +709,8 @@ canvas1.height = canvas.height;
 		if(canvas.width <= 300){
 
             document.getElementById("play").style.display = "none";
-            document.getElementById("ShootStickInfo").style.marginTop = "-6.5%";
-            document.getElementById("rotWar").style.display = "inline-block";
+            //document.getElementById("ShootStickInfo").style.marginTop = "-6.5%";
+            // document.getElementById("rotWar").style.display = "inline-block";
             document.getElementById("shootStick").style.display = "none";
             document.getElementById("container").style.display = "none";
 			
@@ -733,7 +729,6 @@ canvas1.height = canvas.height;
 			 if(exitReload == 1){
 
                 document.getElementById("play").style.display = "none";
-                document.getElementById("restartDiv").style.display = "inline-block";
 			 }
              //document.getElementById("rotWar").style.display = "none";
 		 }	
@@ -751,13 +746,13 @@ canvas1.height = canvas.height;
 		y = playerPositionY;
 		
         // This is the players velocity, speed, friction and an array of keys that are being pressed    
-        var velY = 0,
+        let velY = 0,
             velX = 0,
             speed = 6,
             friction = 0.3, //0.98
             keys = [];
 			
-		var timeout;	
+		let timeout;	
 
         function update() { //------------player movement with keyboard---------------------------------//
 			
@@ -2707,7 +2702,7 @@ canvas1.height = canvas.height;
 		
 		
 		
-		var RandomShip = {
+		let RandomShip = {
   			color: "green",
   			x: Math.round(Math.random() * (canvas.width * .90)),
   			y: Math.round(Math.random() * (canvas.height * .90)),
@@ -2892,7 +2887,7 @@ canvas1.height = canvas.height;
 					
             	 }
 				 
-				 for(var i = 0; i < BlackBox.length; i++){
+				 for(let i = 0; i < BlackBox.length; i++){
 
 					 if (this.x < BlackBox[i].x + (playerSize * 17)  && this.x + (playerSize * 17)  > BlackBox[i].x &&
 					 this.y < BlackBox[i].y + (playerSize * 17) && this.y + (playerSize * 17) > BlackBox[i].y) {
@@ -2968,7 +2963,7 @@ canvas1.height = canvas.height;
 			  
 		};
 
-		var InfectedShip = {
+		let InfectedShip = {
   			color: "blue",
   			x: Math.round(Math.random() * (canvas.width * .90)),
   			y: Math.round(Math.random() * (canvas.height * .90)),
@@ -2985,7 +2980,7 @@ canvas1.height = canvas.height;
  			 },
 			 movement: function(){
 				 
-				 for(var i = 0; i < BlackBox.length; i++){
+				 for(let i = 0; i < BlackBox.length; i++){
 
 					 if (this.x < BlackBox[i].x + (playerSize * 20)  && this.x + (playerSize * 20)  > BlackBox[i].x &&
 					 this.y < BlackBox[i].y + (playerSize * 20) && this.y + (playerSize * 20) > BlackBox[i].y) {
@@ -3057,7 +3052,7 @@ canvas1.height = canvas.height;
 
 				 }
 
-				 for(var i = 0; i < RandomShipFleet.length; i++){
+				 for(let i = 0; i < RandomShipFleet.length; i++){
 
 				//this will make direct the enemy move in the direction of the player
 				 if(this.x < RandomShipFleet[i].x){
@@ -3117,10 +3112,6 @@ canvas1.height = canvas.height;
 				 }
 
 			}
-
-
-
-
 
 			if(this.x < x){
 					 
@@ -3182,7 +3173,7 @@ canvas1.height = canvas.height;
 		};
 
 
-		var BHjectile = {
+		let BHjectile = {
 			hue: 90,
 			shade: Math.floor((Math.random() * 100) + 1),
 			brightness: Math.floor((Math.random() * 100) + 1),
@@ -3370,7 +3361,7 @@ canvas1.height = canvas.height;
 					
             	 }
 				 
-				 for(var i = 0; i < BlackBox.length; i++){
+				 for(let i = 0; i < BlackBox.length; i++){
 
 					 if (this.x < BlackBox[i].x + (playerSize * 17)  && this.x + (playerSize * 17)  > BlackBox[i].x &&
 					 this.y < BlackBox[i].y + (playerSize * 17) && this.y + (playerSize * 17) > BlackBox[i].y) {
@@ -3447,7 +3438,7 @@ canvas1.height = canvas.height;
 			  
 		};
 
-		var InfectedLazer = {
+		let InfectedLazer = {
 			hue: 0,
 			shade: 69,
 			brightness: Math.floor((Math.random() * 100) + 1),
@@ -3463,7 +3454,7 @@ canvas1.height = canvas.height;
  			 },
 			 movement: function(){
 				 
-				 for(var i = 0; i < BlackBox.length; i++){
+				 for(let i = 0; i < BlackBox.length; i++){
 
 					 if (this.x < BlackBox[i].x + (playerSize * 17)  && this.x + (playerSize * 17)  > BlackBox[i].x &&
 					 this.y < BlackBox[i].y + (playerSize * 17) && this.y + (playerSize * 17) > BlackBox[i].y) {
@@ -3599,7 +3590,7 @@ canvas1.height = canvas.height;
 			  
 		};
 		
-		var Hunter = {
+		let Hunter = {
   			color: "orange",
   			x: Math.round(Math.random() * (canvas.width * .90)),
   			y: Math.round(Math.random() * (canvas.height * .90)),
@@ -3613,7 +3604,7 @@ canvas1.height = canvas.height;
 			 movement: function(){
 
 
-				 	for(var i = 0; i < BlackBox.length; i++){
+				 	for(let i = 0; i < BlackBox.length; i++){
 
 					 if (this.x < BlackBox[i].x + (playerSize * 17)  && this.x + (playerSize * 17)  > BlackBox[i].x &&
 					 this.y < BlackBox[i].y + (playerSize * 17) && this.y + (playerSize * 17) > BlackBox[i].y) {
@@ -3746,7 +3737,7 @@ canvas1.height = canvas.height;
 			  
 };
 		
-		var Stalker = {
+		let Stalker = {
   			color: "red",
   			x: Math.round(Math.random() * (canvas.width * .90)),
   			y: Math.round(Math.random() * (canvas.height * .90)),
@@ -3893,7 +3884,7 @@ canvas1.height = canvas.height;
 				 }
 
 
-				for(var i = 0; i < BlackBox.length; i++){
+				for(let i = 0; i < BlackBox.length; i++){
 
 					 if (this.x < BlackBox[i].x + (playerSize * 17)  && this.x + (playerSize * 17)  > BlackBox[i].x &&
 					 this.y < BlackBox[i].y + (playerSize * 17) && this.y + (playerSize * 17) > BlackBox[i].y) {
@@ -4041,7 +4032,7 @@ canvas1.height = canvas.height;
 			  
 		};
 		
-		var LifePowerUp = {
+		let LifePowerUp = {
   			color: "DarkGreen",
   			x: Math.round(Math.random() * (canvas.width * .90)),
   			y: Math.round(Math.random() * (canvas.height * .90)),
@@ -4064,7 +4055,7 @@ canvas1.height = canvas.height;
  			 }						  
 		};
 		
-		var BulletPowerUp = {
+		let BulletPowerUp = {
   			color: "DarkSlateGray",
   			x: Math.round(Math.random() * (canvas.width * .90)),
   			y: Math.round(Math.random() * (canvas.height * .90)),
@@ -4091,7 +4082,7 @@ canvas1.height = canvas.height;
  			 }						  
 		};
 
-		var BlackHole = {
+		let BlackHole = {
   			color: "Black",
   			x: Math.round(Math.random() * (canvas.width * .90)),
   			y: Math.round(Math.random() * (canvas.height * .90)),
@@ -4135,7 +4126,7 @@ canvas1.height = canvas.height;
 															 						
 			//enemy.draw();
 			//this will loop through the list of RandomShip enemies
-			for(var i = 0; i < RandomShipFleet.length; i++){
+			for(let i = 0; i < RandomShipFleet.length; i++){
 				
 				RandomShipFleet[i].draw(); //this will draw the enemies as they are created
 				RandomShipFleet[i].movement();//this will activate the enemies movement
@@ -4150,49 +4141,7 @@ canvas1.height = canvas.height;
 						
 					}
 				}
-								
-				//this is a colision with the randomly spawning ai guys
-				if (x < RandomShipFleet[i].x + playerSize  && x + playerSize  > RandomShipFleet[i].x &&
-				y < RandomShipFleet[i].y + playerSize && y + playerSize > RandomShipFleet[i].y) {
-					// The objects are touching
-				
-					velX *= friction - 2; //this will stop the player from moving
-					velY *= friction - 2;
-					
-					lives -= 1;
-					slowMo();
-					
-					if(bulletPower > 0){
-						
-						bulletPower -= 1;
-					}
-					else{
-						bulletPower = 0;
-					}
-					
-					if(shootStickTouch == false){
-						
-                        shootStickTapEnd();
-					}
-					else{
-                        shootStickTapEnd();
-                        shootStickTap();
-					}
-					
-					fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
-                    document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-					
-					if(lives < 1){
-							
-							exitReload = 1;
-							slowMotion = false;
-							lives = 0;
-                            document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-						}
-					
-					RandomShipFleet.splice(i, 1); //this will destroy the enemy on colision with the player
-				}
-				
+
 				if (RandomShipFleet[i].x > canvas.width - playerSize + 1) { // colision with game boarders x-axis playerSize is about 19.43999
 				
 					RandomShipFleet.splice(i, 1);
@@ -4207,9 +4156,56 @@ canvas1.height = canvas.height;
             	} else if (RandomShipFleet[i].y < playerSize - 1) {
 				
 					RandomShipFleet.splice(i, 1);
-            	}
+				}
+				
+				if(RandomShipFleet[i] != undefined){
 
-				for(var b = 0; b < BlackBox.length; b++){
+					//this is a colision with the randomly spawning ai guys
+					if (x < RandomShipFleet[i].x + playerSize  && x + playerSize  > RandomShipFleet[i].x &&
+					y < RandomShipFleet[i].y + playerSize && y + playerSize > RandomShipFleet[i].y) {
+						// The objects are touching
+						
+						velX *= friction - 2; //this will stop the player from moving
+						velY *= friction - 2;
+							
+						lives -= 1;
+						slowMo();
+							
+						if(bulletPower > 0){
+								
+							bulletPower -= 1;
+						}
+						else{
+							bulletPower = 0;
+						}
+							
+						if(shootStickTouch == false){
+								
+							shootStickTapEnd();
+						}
+						else{
+							shootStickTapEnd();
+							shootStickTap();
+						}
+							
+						fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
+						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+							
+						if(lives < 1){
+									
+							exitReload = 1;
+							slowMotion = false;
+							lives = 0;
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+						}
+							
+						RandomShipFleet.splice(i, 1); //this will destroy the enemy on colision with the player
+					}
+				}
+								
+
+
+				for(let b = 0; b < BlackBox.length; b++){
 
 					
 					if (RandomShipFleet[i].x < BlackBox[b].x + (playerSize * 3)  && RandomShipFleet[i].x + (playerSize * 3)  > BlackBox[b].x &&
@@ -4227,7 +4223,7 @@ canvas1.height = canvas.height;
 			}
 
 			//this will loop through the list of InfectedShip enemies
-			for(var i = 0; i < InfectedFleet.length; i++){
+			for(let i = 0; i < InfectedFleet.length; i++){
 				
 				InfectedFleet[i].draw(); //this will draw the enemies as they are created
 				InfectedFleet[i].movement();//this will activate the enemies movement
@@ -4249,7 +4245,7 @@ canvas1.height = canvas.height;
 					bigLazer.x = InfectedFleet[i].x + (InfectedFleet[i].size / 2);
 					bigLazer.y = InfectedFleet[i].y + (InfectedFleet[i].size / 2);
 
-					var launch = Math.floor((Math.random() * 70) + 1);
+					let launch = Math.floor((Math.random() * 70) + 1);
 
 					if(launch == 35){
 
@@ -4265,7 +4261,7 @@ canvas1.height = canvas.height;
 
 				}
 
-				for(var j = 0; j < RandomShipFleet.length; j++){
+				for(let j = 0; j < RandomShipFleet.length; j++){
 
 					//this is a colision with the randomly spawning ai guys
 					if (RandomShipFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && RandomShipFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
@@ -4280,7 +4276,7 @@ canvas1.height = canvas.height;
 
 				}
 
-				for(var j = 0; j < StalkerFleet.length; j++){
+				for(let j = 0; j < StalkerFleet.length; j++){
 
 					//this is a colision with the randomly spawning ai guys
 					if (StalkerFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && StalkerFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
@@ -4295,7 +4291,7 @@ canvas1.height = canvas.height;
 
 				}
 
-				for(var j = 0; j < HunterFleet.length; j++){
+				for(let j = 0; j < HunterFleet.length; j++){
 
 					//this is a colision with the randomly spawning ai guys
 					if (HunterFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && HunterFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
@@ -4310,7 +4306,7 @@ canvas1.height = canvas.height;
 
 				}
 
-				for(var j = 0; j < BHEnemys.length; j++){
+				for(let j = 0; j < BHEnemys.length; j++){
 
 					//this is a colision with the randomly spawning ai guys
 					if (BHEnemys[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && BHEnemys[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
@@ -4325,7 +4321,7 @@ canvas1.height = canvas.height;
 
 				}
 
-				for(var j = 0; j < InfectedFleet.length; j++){
+				for(let j = 0; j < InfectedFleet.length; j++){
 
 					//this is a colision with the randomly spawning ai guys
 					if (InfectedFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && InfectedFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
@@ -4344,7 +4340,7 @@ canvas1.height = canvas.height;
 
 				}
 
-				for(var k = 0; k < BulletPowerPack.length; k++){
+				for(let k = 0; k < BulletPowerPack.length; k++){
 
 					//this is a colision with the randomly spawning ai guys
 					if (BulletPowerPack[k].x < InfectedFleet[i].x + InfectedFleet[i].size  && BulletPowerPack[k].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
@@ -4359,7 +4355,7 @@ canvas1.height = canvas.height;
 
 				}
 
-				for(var l = 0; l < LifePowerPack.length; l++){
+				for(let l = 0; l < LifePowerPack.length; l++){
 
 					//this is a colision with the randomly spawning ai guys
 					if (LifePowerPack[l].x < InfectedFleet[i].x + InfectedFleet[i].size  && LifePowerPack[l].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
@@ -4428,7 +4424,7 @@ canvas1.height = canvas.height;
 				
 				
 
-				for(var b = 0; b < BlackBox.length; b++){
+				for(let b = 0; b < BlackBox.length; b++){
 
 					
 					if (InfectedFleet[i].x < BlackBox[b].x + ((InfectedFleet[i].size / 4) * 3)  && InfectedFleet[i].x + ((InfectedFleet[i].size / (playerSize / 4)) * 3)  > BlackBox[b].x &&
@@ -4457,7 +4453,7 @@ canvas1.height = canvas.height;
 			}
 			
 			//this will loop through the list of Hunter enemies
-			for(var i = 0; i < HunterFleet.length; i++){
+			for(let i = 0; i < HunterFleet.length; i++){
 				
 				HunterFleet[i].draw(); //this will draw the enemies as they are created
 				HunterFleet[i].movement();//this will activate the enemies movement
@@ -4512,7 +4508,7 @@ canvas1.height = canvas.height;
 					HunterFleet.splice(i, 1); //this will destroy the enemy on colision with the player
 				}
 
-				for(var b = 0; b < BlackBox.length; b++){
+				for(let b = 0; b < BlackBox.length; b++){
 
 					
 					if (HunterFleet[i].x < BlackBox[b].x + (playerSize * 3)  && HunterFleet[i].x + (playerSize * 3)  > BlackBox[b].x &&
@@ -4546,7 +4542,7 @@ canvas1.height = canvas.height;
 			}
 
 			//this will loop through the list of Hunter enemies
-			for(var i = 0; i < LazerBattery.length; i++){
+			for(let i = 0; i < LazerBattery.length; i++){
 				
 				LazerBattery[i].draw(); //this will draw the enemies as they are created
 				LazerBattery[i].movement();//this will activate the enemies movement
@@ -4602,7 +4598,7 @@ canvas1.height = canvas.height;
 					LazerBattery.splice(i, 1); //this will destroy the enemy on colision with the player
 				}
 
-				for(var b = 0; b < BlackBox.length; b++){
+				for(let b = 0; b < BlackBox.length; b++){
 
 					
 					if (LazerBattery[i].x < BlackBox[b].x + (playerSize * 3)  && LazerBattery[i].x + (playerSize * 3)  > BlackBox[b].x &&
@@ -4636,7 +4632,7 @@ canvas1.height = canvas.height;
 			}
 			
 			//this will loop through the list of Stalker enemies
-			for(var i = 0; i < StalkerFleet.length; i++){
+			for(let i = 0; i < StalkerFleet.length; i++){
 				
 				StalkerFleet[i].draw(); //this will draw the enemies as they are created
 				StalkerFleet[i].movement();//this will activate the enemies movement
@@ -4694,7 +4690,7 @@ canvas1.height = canvas.height;
 					StalkerFleet.splice(i, 1); //this will destroy the enemy on colision with the player
 				}
 
-				for(var b = 0; b < BlackBox.length; b++){
+				for(let b = 0; b < BlackBox.length; b++){
 
 					
 					if (StalkerFleet[i].x < BlackBox[b].x + (playerSize * 3)  && StalkerFleet[i].x + (playerSize * 3)  > BlackBox[b].x &&
@@ -4727,7 +4723,7 @@ canvas1.height = canvas.height;
 				
 			}
 
-			for(var i = 0; i < BHEnemys.length; i++){
+			for(let i = 0; i < BHEnemys.length; i++){
 
 				BHEnemys[i].draw();
 				BHEnemys[i].hue = Math.floor((Math.random() * 120) + 1);
@@ -4805,7 +4801,7 @@ canvas1.height = canvas.height;
 					BHEnemys.splice(i, 1);
             	}
 
-				for(var b = 0; b < BlackBox.length; b++){
+				for(let b = 0; b < BlackBox.length; b++){
 
 					
 					if (BHEnemys[i].x < BlackBox[b].x + (playerSize * 3)  && BHEnemys[i].x + (playerSize * 3)  > BlackBox[b].x &&
@@ -4825,7 +4821,7 @@ canvas1.height = canvas.height;
 			}
 
 			//this will loop through the list of black holes
-			for(var i = 0; i < BlackBox.length; i++){
+			for(let i = 0; i < BlackBox.length; i++){
 				
 				BlackBox[i].draw(); //this will draw the life black holes as they are created
 				BlackBox[i].hue = Math.floor((Math.random() * 120) + 1);
@@ -4834,7 +4830,7 @@ canvas1.height = canvas.height;
 
 				if(BlackBox[i].hp < 7){
 
-					var size = Math.floor(Math.random() * 2) + 1;
+					let size = Math.floor(Math.random() * 2) + 1;
 
 					if(size == 1){
 						
@@ -4849,7 +4845,7 @@ canvas1.height = canvas.height;
 				}
 				if(BlackBox[i].hp <= 2){
 
-					var size = Math.floor(Math.random() * 4) + 1;
+					let size = Math.floor(Math.random() * 4) + 1;
 					
 					if(size == 1){
 						
@@ -5043,7 +5039,7 @@ canvas1.height = canvas.height;
 				 if(BlackBox[i].hp < 1){
 
 					slowMo();
-					var superNova = 4;
+					let superNova = 4;
 					//superNova == true;
 					BlackBox[i].size = playerSize * 4;
 					BlackBox[i].hp = 0;
@@ -5074,7 +5070,7 @@ canvas1.height = canvas.height;
 													
 													
 
-													for(var k = 0; k <= 14; k++){
+													for(let k = 0; k <= 14; k++){
 
                                                         let Enemy5 = Object.assign({}, BHjectile);
 														Enemy5.x = BlackBox[i].x;
@@ -5109,7 +5105,7 @@ canvas1.height = canvas.height;
 			}
 			
 			//draws the bullets and makes them move
-			for(var j = 0; j < bulletClip.length; j++){
+			for(let j = 0; j < bulletClip.length; j++){
 					
 					bulletClip[j].draw();
 					bulletClip[j].movement();					
@@ -5137,16 +5133,18 @@ canvas1.height = canvas.height;
 			}
 									
 			//this is what detects colisions for bullets and RandomShip enemys
-			for(var j = 0; j < bulletClip.length; j++){
+			for(let j = 0; j < bulletClip.length; j++){
 			
 				//bulletClip[j].draw(); // this will add a cool blur to the bullet
 			
-				for(var i = 0; i < RandomShipFleet.length; i++){
+				for(let i = 0; i < RandomShipFleet.length; i++){
 					
 					//RandomShipFleet[i].draw(); //this will add a cool blur to the enemys
-				
-					if (bulletClip[j].x < RandomShipFleet[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > RandomShipFleet[i].x &&
-					bulletClip[j].y < RandomShipFleet[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > RandomShipFleet[i].y) {
+
+					if(bulletClip[j] != undefined){
+
+						if (bulletClip[j].x < RandomShipFleet[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > RandomShipFleet[i].x &&
+						bulletClip[j].y < RandomShipFleet[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > RandomShipFleet[i].y) {
 						// The objects are touching
 						
 						score += 1;
@@ -5159,202 +5157,223 @@ canvas1.height = canvas.height;
 						RandomShipFleet.splice(i, 1); //this will destroy the enemy on colision with the bullet
 						bulletClip.splice(j, 1);
 						
-					 }
+					 	}
+					}
+				
+					
 				}
 			
 			}
 
 			//this is what detects colisions for bullets and RandomShip enemys
-			for(var j = 0; j < bulletClip.length; j++){
+			for(let j = 0; j < bulletClip.length; j++){
 			
 				//bulletClip[j].draw(); // this will add a cool blur to the bullet
 			
-				for(var i = 0; i < InfectedFleet.length; i++){
+				for(let i = 0; i < InfectedFleet.length; i++){
 					
 					//RandomShipFleet[i].draw(); //this will add a cool blur to the enemys
+
+					if(bulletClip[j] != undefined){
 				
-					if (bulletClip[j].x < InfectedFleet[i].x + (InfectedFleet[i].size)  && bulletClip[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
-					bulletClip[j].y < InfectedFleet[i].y + (InfectedFleet[i].size) && bulletClip[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
-						// The objects are touching
-						
-						score += 1;
-						InfectedFleet[i].hp -= 1;
-						//loop();
-						fireworks.push( new Firework( canvas.width / 2, canvas.height, (InfectedFleet[i].x + (InfectedFleet[i].size / 2) ), (InfectedFleet[i].y + (InfectedFleet[i].size / 2) ) ));
+						if (bulletClip[j].x < InfectedFleet[i].x + (InfectedFleet[i].size)  && bulletClip[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
+						bulletClip[j].y < InfectedFleet[i].y + (InfectedFleet[i].size) && bulletClip[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
+							// The objects are touching
+							
+							score += 1;
+							InfectedFleet[i].hp -= 1;
+							//loop();
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, (InfectedFleet[i].x + (InfectedFleet[i].size / 2) ), (InfectedFleet[i].y + (InfectedFleet[i].size / 2) ) ));
 
-						timerTick = 0;
-						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+							timerTick = 0;
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
 
-						if(InfectedFleet[i].hp < 1){
+							if(InfectedFleet[i].hp < 1){
 
-							InfectedFleet[i].size = playerSize;
-							fireworks.push( new Firework( canvas.width / 2, canvas.height, InfectedFleet[i].x, InfectedFleet[i].y ) );
-							fireworks.push( new Firework( canvas.width / 2, canvas.height, InfectedFleet[i].x, InfectedFleet[i].y ) );
-							InfectedFleet.splice(i, 1); //this will destroy the enemy on colision with the bullet
+								InfectedFleet[i].size = playerSize;
+								fireworks.push( new Firework( canvas.width / 2, canvas.height, InfectedFleet[i].x, InfectedFleet[i].y ) );
+								fireworks.push( new Firework( canvas.width / 2, canvas.height, InfectedFleet[i].x, InfectedFleet[i].y ) );
+								InfectedFleet.splice(i, 1); //this will destroy the enemy on colision with the bullet
 
+							}
+
+							//InfectedFleet.splice(i, 1); //this will destroy the enemy on colision with the bullet
+							bulletClip.splice(j, 1);
+							
 						}
-
-						//InfectedFleet.splice(i, 1); //this will destroy the enemy on colision with the bullet
-						bulletClip.splice(j, 1);
-						
-					 }
+					}
 				}
 			
 			}
 
 			//this is what detects colisions for bullets and BHEnemys enemys
-			for(var j = 0; j < bulletClip.length; j++){
+			for(let j = 0; j < bulletClip.length; j++){
 			
 				//bulletClip[j].draw(); // this will add a cool blur to the bullet
 			
-				for(var i = 0; i < BHEnemys.length; i++){
+				for(let i = 0; i < BHEnemys.length; i++){
 					
 					//RandomShipFleet[i].draw(); //this will add a cool blur to the enemys
-				
-					if (bulletClip[j].x < BHEnemys[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > BHEnemys[i].x &&
-					bulletClip[j].y < BHEnemys[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > BHEnemys[i].y) {
-						// The objects are touching
-						
-						score += 1;
-						//loop();
-						fireworks.push( new Firework( canvas.width / 2, canvas.height, BHEnemys[i].x, BHEnemys[i].y ) );
 
-						timerTick = 0;
-						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+					if(bulletClip[j] != undefined){
 				
-						BHEnemys.splice(i, 1); //this will destroy the enemy on colision with the bullet
-						bulletClip.splice(j, 1);
-						
-					 }
+						if (bulletClip[j].x < BHEnemys[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > BHEnemys[i].x &&
+						bulletClip[j].y < BHEnemys[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > BHEnemys[i].y) {
+							// The objects are touching
+							
+							score += 1;
+							//loop();
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BHEnemys[i].x, BHEnemys[i].y ) );
+
+							timerTick = 0;
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+					
+							BHEnemys.splice(i, 1); //this will destroy the enemy on colision with the bullet
+							bulletClip.splice(j, 1);
+							
+						}
+					}
 				}
 			
 			}
 			
 			//this is what detects colisions for bullets and Hunter enemys
-			for(var j = 0; j < bulletClip.length; j++){
+			for(let j = 0; j < bulletClip.length; j++){
 			
 				//bulletClip[j].draw(); // this will add a cool blur to the bullet
 			
-				for(var i = 0; i < HunterFleet.length; i++){
+				for(let i = 0; i < HunterFleet.length; i++){
 					
 					//RandomShipFleet[i].draw(); //this will add a cool blur to the enemys
+
+					if(bulletClip[j] != undefined){
 				
-					if (bulletClip[j].x < HunterFleet[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > HunterFleet[i].x &&
-					bulletClip[j].y < HunterFleet[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > HunterFleet[i].y) {
-						// The objects are touching
-						
-						score += 2;
-						//loop();
-						fireworks.push( new Firework( canvas.width / 2, canvas.height, HunterFleet[i].x, HunterFleet[i].y ) );
-						timerTick = 0;
-						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-				
-						HunterFleet.splice(i, 1); //this will destroy the enemy on colision with the bullet
-						bulletClip.splice(j, 1);
-						
-					 }
+						if (bulletClip[j].x < HunterFleet[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > HunterFleet[i].x &&
+						bulletClip[j].y < HunterFleet[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > HunterFleet[i].y) {
+							// The objects are touching
+							
+							score += 2;
+							//loop();
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, HunterFleet[i].x, HunterFleet[i].y ) );
+							timerTick = 0;
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+					
+							HunterFleet.splice(i, 1); //this will destroy the enemy on colision with the bullet
+							bulletClip.splice(j, 1);
+							
+						}
+					}
 				}
 			
 			}
 
 			//this is what detects colisions for bullets and Big Lazer enemys
-			for(var j = 0; j < bulletClip.length; j++){
+			for(let j = 0; j < bulletClip.length; j++){
 			
 				//bulletClip[j].draw(); // this will add a cool blur to the bullet
 			
-				for(var i = 0; i < LazerBattery.length; i++){
+				for(let i = 0; i < LazerBattery.length; i++){
 					
 					//RandomShipFleet[i].draw(); //this will add a cool blur to the enemys
+
+					if(bulletClip[j] != undefined){
 				
-					if (bulletClip[j].x < LazerBattery[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > LazerBattery[i].x &&
-					bulletClip[j].y < LazerBattery[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > LazerBattery[i].y) {
-						// The objects are touching
-						
-						score += 2;
-						//loop();
-						fireworks.push( new Firework( canvas.width / 2, canvas.height, LazerBattery[i].x, LazerBattery[i].y ) );
-						timerTick = 0;
-						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-				
-						LazerBattery.splice(i, 1); //this will destroy the enemy on colision with the bullet
-						bulletClip.splice(j, 1);
-						
-					 }
+						if (bulletClip[j].x < LazerBattery[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > LazerBattery[i].x &&
+						bulletClip[j].y < LazerBattery[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > LazerBattery[i].y) {
+							// The objects are touching
+							
+							score += 2;
+							//loop();
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, LazerBattery[i].x, LazerBattery[i].y ) );
+							timerTick = 0;
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+					
+							LazerBattery.splice(i, 1); //this will destroy the enemy on colision with the bullet
+							bulletClip.splice(j, 1);
+							
+						}
+					}
 				}
 			
 			}
 			
 			//this is what detects colisions for bullets and Stalker enemys
-			for(var j = 0; j < bulletClip.length; j++){
+			for(let j = 0; j < bulletClip.length; j++){
 			
 				//bulletClip[j].draw(); // this will add a cool blur to the bullet
 			
-				for(var i = 0; i < StalkerFleet.length; i++){
+				for(let i = 0; i < StalkerFleet.length; i++){
 					
 					//RandomShipFleet[i].draw(); //this will add a cool blur to the enemys
+
+					if(bulletClip[j] != undefined){
 				
-					if (bulletClip[j].x < StalkerFleet[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > StalkerFleet[i].x &&
-					bulletClip[j].y < StalkerFleet[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > StalkerFleet[i].y) {
-						// The objects are touching
-						
-						score += 3;
-						
-						fireworks.push( new Firework( canvas.width / 2, canvas.height, StalkerFleet[i].x, StalkerFleet[i].y ) );
-						timerTick = 0;
-						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-				
-						StalkerFleet.splice(i, 1); //this will destroy the enemy on colision with the bullet
-						bulletClip.splice(j, 1);
-						
-					 }
+						if (bulletClip[j].x < StalkerFleet[i].x + (bulletSize * 3)  && bulletClip[j].x + (bulletSize * 3)  > StalkerFleet[i].x &&
+						bulletClip[j].y < StalkerFleet[i].y + (bulletSize * 3) && bulletClip[j].y + (bulletSize * 3) > StalkerFleet[i].y) {
+							// The objects are touching
+							
+							score += 3;
+							
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, StalkerFleet[i].x, StalkerFleet[i].y ) );
+							timerTick = 0;
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+					
+							StalkerFleet.splice(i, 1); //this will destroy the enemy on colision with the bullet
+							bulletClip.splice(j, 1);
+							
+						}
+					}
 				}
 			
 			}
 
 			//this is what detects colisions for bullets and RandomShip enemys
-			for(var j = 0; j < bulletClip.length; j++){
+			for(let j = 0; j < bulletClip.length; j++){
 			
 				//bulletClip[j].draw(); // this will add a cool blur to the bullet
 			
-				for(var i = 0; i < BlackBox.length; i++){
+				for(let i = 0; i < BlackBox.length; i++){
 					
 					//RandomShipFleet[i].draw(); //this will add a cool blur to the enemys
+
+					if(bulletClip[j] != undefined){
 				
-					if (bulletClip[j].x < BlackBox[i].x + (bulletSize * 7)  && bulletClip[j].x + (bulletSize * 7)  > BlackBox[i].x &&
-					bulletClip[j].y < BlackBox[i].y + (bulletSize * 7) && bulletClip[j].y + (bulletSize * 7) > BlackBox[i].y) {
-						// The objects are touching
-						
-						BlackBox[i].hp -= 1;
-						score += 1;
-						//loop();
-						fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[i].x, BlackBox[i].y ) );
-						fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[i].x, BlackBox[i].y ) );
-
-						timerTick = 0;
-						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-
-						bulletClip.splice(j, 1);
-
-						//BlackBox[i].size = playerSize * 3;
-						//clearTimeout(jump);
-
-						// var jump = setTimeout(function() {
+						if (bulletClip[j].x < BlackBox[i].x + (bulletSize * 7)  && bulletClip[j].x + (bulletSize * 7)  > BlackBox[i].x &&
+						bulletClip[j].y < BlackBox[i].y + (bulletSize * 7) && bulletClip[j].y + (bulletSize * 7) > BlackBox[i].y) {
+							// The objects are touching
 							
-						// 	BlackBox[i].size = playerSize * 2;
-						// 	//clearTimeout(jump);
+							BlackBox[i].hp -= 1;
+							score += 1;
+							//loop();
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[i].x, BlackBox[i].y ) );
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[i].x, BlackBox[i].y ) );
 
-						// }, 100);
-						BlackBox[i].size = playerSize;
-						BlackBox[i].size = playerSize * 2;
+							timerTick = 0;
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
 
-					 }
+							bulletClip.splice(j, 1);
+
+							//BlackBox[i].size = playerSize * 3;
+							//clearTimeout(jump);
+
+							// var jump = setTimeout(function() {
+								
+							// 	BlackBox[i].size = playerSize * 2;
+							// 	//clearTimeout(jump);
+
+							// }, 100);
+							BlackBox[i].size = playerSize;
+							BlackBox[i].size = playerSize * 2;
+
+						}
+					}
 				}
 			
 			}
 			
 			
 			//this will loop through the list of lives power ups
-			for(var i = 0; i < LifePowerPack.length; i++){
+			for(let i = 0; i < LifePowerPack.length; i++){
 				
 				LifePowerPack[i].draw(); //this will draw the life power up as they are created
 								
@@ -5397,7 +5416,7 @@ canvas1.height = canvas.height;
 			 }
 			 
 			 			//this will loop through the list of lives power ups
-			for(var i = 0; i < BulletPowerPack.length; i++){
+			for(let i = 0; i < BulletPowerPack.length; i++){
 				
 				BulletPowerPack[i].draw(); //this will draw the life power up as they are created
 								
@@ -5476,7 +5495,7 @@ canvas1.height = canvas.height;
 		
 	//gets the mouse position
 	function getMousePos(canvas, evt) {
-        var rect = canvas.getBoundingClientRect();
+        let rect = canvas.getBoundingClientRect();
         return {
           x: evt.clientX - rect.left,
           y: evt.clientY - rect.top
@@ -5622,7 +5641,7 @@ function random( min, max ) {
 
 // calculate the distance between two points
 function calculateDistance( p1x, p1y, p2x, p2y ) {
-	var xDistance = p1x - p2x,
+	let xDistance = p1x - p2x,
 			yDistance = p1y - p2y;
 	return Math.sqrt( Math.pow( xDistance, 2 ) + Math.pow( yDistance, 2 ) );
 }
@@ -5734,7 +5753,7 @@ Firework.prototype.update = function( index ) {
 	this.speed *= this.acceleration;
 	
 	// get the current velocities based on angle and speed
-	var vx = Math.cos( this.angle ) * this.speed,
+	let vx = Math.cos( this.angle ) * this.speed,
 			vy = Math.sin( this.angle ) * this.speed;
 	// how far will the firework have traveled with velocities applied?
 	this.distanceTraveled = calculateDistance( this.sx, this.sy, this.x + vx, this.y + vy );
@@ -5769,7 +5788,7 @@ TitleFirework.prototype.update = function( index ) {
 	this.speed *= this.acceleration;
 	
 	// get the current velocities based on angle and speed
-	var vx = Math.cos( this.angle ) * this.speed,
+	let vx = Math.cos( this.angle ) * this.speed,
 			vy = Math.sin( this.angle ) * this.speed;
 	// how far will the firework have traveled with velocities applied?
 	this.distanceTraveled = calculateDistance( this.sx, this.sy, this.x + vx, this.y + vy );
@@ -5804,7 +5823,7 @@ WCFirework.prototype.update = function( index ) {
 	this.speed *= this.acceleration;
 	
 	// get the current velocities based on angle and speed
-	var vx = Math.cos( this.angle ) * this.speed,
+	let vx = Math.cos( this.angle ) * this.speed,
 			vy = Math.sin( this.angle ) * this.speed;
 	// how far will the firework have traveled with velocities applied?
 	this.distanceTraveled = calculateDistance( this.sx, this.sy, this.x + vx, this.y + vy );
@@ -5924,7 +5943,7 @@ Particle.prototype.draw = function() {
 // create particle group/explosion
 function createParticles( x, y ) {
 	// increase the particle count for a bigger explosion, beware of the canvas performance hit with the increased particles though
-	var particleCount = 5;//125
+	let particleCount = 5;//125
 	while( particleCount-- ) {
 		particles.push( new Particle( x, y ) );
 	}
@@ -5933,7 +5952,7 @@ function createParticles( x, y ) {
 // create particle group/explosion
 function createWCParticles( x, y ) {
 	// increase the particle count for a bigger explosion, beware of the canvas performance hit with the increased particles though
-	var particleCount = 3;//125
+	let particleCount = 3;//125
 	while( particleCount-- ) {
 		particles.push( new Particle( x, y ) );
 	}
@@ -5942,7 +5961,7 @@ function createWCParticles( x, y ) {
 // create particle group/explosion
 function createTitleParticles( x, y ) {
 	// increase the particle count for a bigger explosion, beware of the canvas performance hit with the increased particles though
-	var particleCount = 10;//7
+	let particleCount = 10;//7
 	while( particleCount-- ) {
 		particles.push( new Particle( x, y ) );
 	}
@@ -5971,17 +5990,17 @@ function loop() {
 	//ctx1.globalCompositeOperation = 'lighter';
 	
 	// loop over each firework, draw it, update it
-    var i = fireworks.length;
+    let i = fireworks.length;
 	while( i-- ) {
 		fireworks[ i ].draw();
 		fireworks[ i ].update( i );
 	}
 	
 	// loop over each particle, draw it, update it
-	var i = particles.length;
-	while( i-- ) {
-		particles[ i ].draw();
-		particles[ i ].update( i );
+	let j = particles.length;
+	while( j-- ) {
+		particles[ j ].draw();
+		particles[ j ].update( j );
 	}
 	
 	// launch fireworks automatically to random coordinates, when the mouse isn't down
@@ -6071,7 +6090,7 @@ function animateStar() {
         i.opacity += i.increment * i.factor;
         
         ctx2.beginPath()
-        for (var j = 5; j--;) {
+        for (let j = 5; j--;) {
             ctx2.lineTo(0, i.length);
             ctx2.translate(0, i.length);
             ctx2.rotate((Math.PI * 2 / 10));
@@ -6198,9 +6217,9 @@ VirtualJoystick.prototype.destroy	= function()
 			destObj.dispatchEvent		= function(event /* , args... */){
 				if(this._events === undefined) 	this._events	= {};
 				if( this._events[event] === undefined )	return;
-				var tmpArray	= this._events[event].slice(); 
-				for(var i = 0; i < tmpArray.length; i++){
-					var result	= tmpArray[i].apply(this, Array.prototype.slice.call(arguments, 1))
+				let tmpArray	= this._events[event].slice(); 
+				for(let i = 0; i < tmpArray.length; i++){
+					let result	= tmpArray[i].apply(this, Array.prototype.slice.call(arguments, 1))
 					if( result !== undefined )	return result;
 				}
 				return undefined
@@ -6216,32 +6235,32 @@ VirtualJoystick.prototype.destroy	= function()
 
 		VirtualJoystick.prototype.up	= function(){
 			if( this._pressed === false )	return false;
-			var deltaX	= this.deltaX();
-			var deltaY	= this.deltaY();
+			let deltaX	= this.deltaX();
+			let deltaY	= this.deltaY();
 			if( deltaY >= 0 )				return false;
 			if( Math.abs(deltaX) > 2*Math.abs(deltaY) )	return false;
 			return true;
 		}
 		VirtualJoystick.prototype.down	= function(){
 			if( this._pressed === false )	return false;
-			var deltaX	= this.deltaX();
-			var deltaY	= this.deltaY();
+			let deltaX	= this.deltaX();
+			let deltaY	= this.deltaY();
 			if( deltaY <= 0 )				return false;
 			if( Math.abs(deltaX) > 2*Math.abs(deltaY) )	return false;
 			return true;	
 		}
 		VirtualJoystick.prototype.right	= function(){
 			if( this._pressed === false )	return false;
-			var deltaX	= this.deltaX();
-			var deltaY	= this.deltaY();
+			let deltaX	= this.deltaX();
+			let deltaY	= this.deltaY();
 			if( deltaX <= 0 )				return false;
 			if( Math.abs(deltaY) > 2*Math.abs(deltaX) )	return false;
 			return true;	
 		}
 		VirtualJoystick.prototype.left	= function(){
 			if( this._pressed === false )	return false;
-			var deltaX	= this.deltaX();
-			var deltaY	= this.deltaY();
+			let deltaX	= this.deltaX();
+			let deltaY	= this.deltaY();
 			if( deltaX >= 0 )				return false;
 			if( Math.abs(deltaY) > 2*Math.abs(deltaX) )	return false;
 			return true;	
@@ -6278,12 +6297,12 @@ VirtualJoystick.prototype.destroy	= function()
 			this._stickY	= y;
 			
 			if(this._limitStickTravel === true){
-				var deltaX	= this.deltaX();
-				var deltaY	= this.deltaY();
-				var stickDistance = Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY) );
+				let deltaX	= this.deltaX();
+				let deltaY	= this.deltaY();
+				let stickDistance = Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY) );
 				if(stickDistance > this._stickRadius){
-					var stickNormalizedX = deltaX / stickDistance;
-					var stickNormalizedY = deltaY / stickDistance;
+					let stickNormalizedX = deltaX / stickDistance;
+					let stickNormalizedY = deltaY / stickDistance;
 					
 					this._stickX = stickNormalizedX * this._stickRadius + this._baseX;
 					this._stickY = stickNormalizedY * this._stickRadius + this._baseY;
@@ -6301,12 +6320,12 @@ VirtualJoystick.prototype.destroy	= function()
 				this._stickY	= y;
 				
 				if(this._limitStickTravel === true){
-					var deltaX	= this.deltaX();
-					var deltaY	= this.deltaY();
-					var stickDistance = Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY) );
+					let deltaX	= this.deltaX();
+					let deltaY	= this.deltaY();
+					let stickDistance = Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY) );
 					if(stickDistance > this._stickRadius){
-						var stickNormalizedX = deltaX / stickDistance;
-						var stickNormalizedY = deltaY / stickDistance;
+						let stickNormalizedX = deltaX / stickDistance;
+						let stickNormalizedY = deltaY / stickDistance;
 					
 						this._stickX = stickNormalizedX * this._stickRadius + this._baseX;
 						this._stickY = stickNormalizedY * this._stickRadius + this._baseY;
@@ -6330,15 +6349,15 @@ VirtualJoystick.prototype.destroy	= function()
 		VirtualJoystick.prototype._onMouseDown	= function(event)
 		{
 			event.preventDefault();
-			var x	= event.clientX;
-			var y	= event.clientY;
+			let x	= event.clientX;
+			let y	= event.clientY;
 			return this._onDown(x, y);
 		}
 
 		VirtualJoystick.prototype._onMouseMove	= function(event)
 		{
-			var x	= event.clientX;
-			var y	= event.clientY;
+			let x	= event.clientX;
+			let y	= event.clientY;
 			return this._onMove(x, y);
 		}
 
@@ -6352,7 +6371,7 @@ VirtualJoystick.prototype.destroy	= function()
 			if( this._touchIdx !== null )	return;
 
 			// notify event for validation
-			var isValid	= this.dispatchEvent('touchStartValidation', event);
+			let isValid	= this.dispatchEvent('touchStartValidation', event);
 			if( isValid === false )	return;
 			
 			// dispatch touchStart
@@ -6360,13 +6379,13 @@ VirtualJoystick.prototype.destroy	= function()
 
 			event.preventDefault();
 			// get the first who changed
-			var touch	= event.changedTouches[0];
+			let touch	= event.changedTouches[0];
 			// set the touchIdx of this joystick
 			this._touchIdx	= touch.identifier;
 
 			// forward the action
-			var x		= touch.pageX;
-			var y		= touch.pageY;
+			let x		= touch.pageX;
+			let y		= touch.pageY;
 			return this._onDown(x, y)
 		}
 
@@ -6379,10 +6398,13 @@ VirtualJoystick.prototype.destroy	= function()
 			this.dispatchEvent('touchEnd', event);
 
 			// try to find our touch event
-			var touchList	= event.changedTouches;
-			for(var i = 0; i < touchList.length && touchList[i].identifier !== this._touchIdx; i++);
-			// if touch event isnt found, 
-			if( i === touchList.length)	return;
+			let touchList	= event.changedTouches;
+			for(let i = 0; i < touchList.length && touchList[i].identifier !== this._touchIdx; i++){
+
+				// if touch event isnt found, 
+			if( i === touchList.length)	{return}
+			}
+			
 
 			// reset touchIdx - mark it as no-touch-in-progress
 			this._touchIdx	= null;
@@ -6400,7 +6422,7 @@ VirtualJoystick.prototype.destroy	= function()
 			if( this._touchIdx === null )	return;
 
 			// try to find our touch event
-			var touchList	= event.changedTouches;
+			let touchList	= event.changedTouches;
 			for(var i = 0; i < touchList.length && touchList[i].identifier !== this._touchIdx; i++ );
 			// if touch event with the proper identifier isnt found, do nothing
 			if( i === touchList.length)	return;
@@ -6423,11 +6445,11 @@ VirtualJoystick.prototype.destroy	= function()
 		 */
 		function _buildJoystickBase(stroke)
 		{
-			var canvas	= document.createElement( 'canvas' );
-			canvas.width	= 100; //126
-			canvas.height	= 100; //126
+			let canvas	= document.createElement( 'canvas' );
+			canvas.width	= 50; //126 //100
+			canvas.height	= 50; //126 //100
 			
-			var ctx		= canvas.getContext('2d');
+			let ctx		= canvas.getContext('2d');
 			ctx.beginPath(); 
 			ctx.strokeStyle = stroke; 
 			ctx.lineWidth	= 3; //6				//40
@@ -6448,10 +6470,10 @@ VirtualJoystick.prototype.destroy	= function()
 		 */
 		function _buildJoystickStick(stroke)
 		{
-			var canvas	= document.createElement( 'canvas' );
+			let canvas	= document.createElement( 'canvas' );
 			canvas.width	= 86;
 			canvas.height	= 86;
-			var ctx		= canvas.getContext('2d');
+			let ctx		= canvas.getContext('2d');
 			ctx.beginPath(); 
 			ctx.strokeStyle	= stroke; 
 			ctx.lineWidth	= 6; 
@@ -6481,7 +6503,7 @@ VirtualJoystick.prototype.destroy	= function()
 
 		VirtualJoystick.prototype._getTransformProperty = function() 
 		{
-			var styles = [
+			let styles = [
 				'webkitTransform',
 				'MozTransform',
 				'msTransform',
@@ -6489,10 +6511,10 @@ VirtualJoystick.prototype.destroy	= function()
 				'transform'
 			];
 
-			var el = document.createElement('p');
-			var style;
+			let el = document.createElement('p');
+			let style;
 
-			for (var i = 0; i < styles.length; i++) {
+			for (let i = 0; i < styles.length; i++) {
 				style = styles[i];
 				if (null != el.style[style]) {
 					return style;
@@ -6530,8 +6552,9 @@ VirtualJoystick.prototype.destroy	= function()
 		
 	loop();
 	update();// sets the main loop into motion
-	
+});
         
-    }
+	}
+	
 
 }

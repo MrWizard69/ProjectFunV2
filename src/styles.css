@@ -6,5 +6,7 @@ body{ /*.this is the jquery mobile wrapper over the body*/
 	background-color: black;
 	text-shadow:0 0 0;
 	font-family: 'Droid Sans', sans-serif;
+	height: 1063px;
+	overflow-y: hidden;
 	
 }
