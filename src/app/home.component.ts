@@ -208,18 +208,20 @@ canvas1.height = canvas.height;
     document.getElementById("RotWarBox").style.display = "none";
 
     document.getElementById("MoveStickInfo").style.display = "none";
-    document.getElementById("ShootStickInfo").style.display = "none";
+	document.getElementById("ShootStickInfo").style.display = "none";
+	
+	//This was a temporary fix to rotate the screen
 
-    document.getElementById('canvas').addEventListener('touchstart', canvasTap);
+    // document.getElementById('canvas').addEventListener('touchstart', canvasTap);
 
-    function canvasTap(){
+    // function canvasTap(){
 
-        if(canvas.width <= 300 && exitReload == 0){
+    //     if(canvas.width <= 300 && exitReload == 0){
 
-            document.getElementById("RotWarBox").style.display = "inline-block";
+    //         document.getElementById("RotWarBox").style.display = "inline-block";
 
-		}        
-    }
+	// 	}        
+    // }
 
     document.getElementById('closeRotWar').addEventListener('touchstart', closeRotWar);
 

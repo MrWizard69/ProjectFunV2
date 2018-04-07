@@ -18,8 +18,6 @@
 	-webkit-transition: all 1s; 
 	-o-transition: all 1s; 
 	transition: all 1s ;  
-	/*margin-left: 2%;*/
-	/*margin-top: -13%;*/
 	/*--------------This is what activates GPU graphic rendering End------------------*/
 	
 }
@@ -37,8 +35,6 @@
 	-webkit-transition: all 1s; 
 	-o-transition: all 1s; 
 	transition: all 1s ;  
-	/*margin-left: 2%;*/
-	/*margin-top: -13%;*/
 	/*--------------This is what activates GPU graphic rendering End------------------*/
 }
 
@@ -103,13 +99,7 @@ canvas {
 
 #title{
 	text-align: center;
-	/*margin-top: -.1%;*/
-	/*color: black;*/
 	color: white;
-
-	/* text-align: center; */
-	
-	
 }
 
 #RotWarBox{
@@ -121,8 +111,6 @@ canvas {
 	top: 30%;
 	left: 12%;
 	border-radius: 5px;
-	
-
 }
 
 #rotMessage{
@@ -135,21 +123,8 @@ canvas {
 
 h3{
 	text-align: center;
-	margin-top: -2.5%;
-	/*color: black;*/
+	margin-top: 2.0%;
 	color: white;
-	/*margin-top: -3%;*/
-}
-
-
-html, body {
-    /*margin-bottom: 100%;*/
-	/* width: 100%; */
-	/* height: 100%; */
-	margin: 0px;
-	display:inline;
-	overflow: hidden; /*  Disable scrollbars */
-	display: block;  /* No floating content on sides */
 }
 
 
@@ -159,11 +134,9 @@ html, body {
     left: 13.7%;
     width: 10%;
     height: 2em;
-	
+	top: 3%;
+    border-radius: 50px;
 }
-
-
-
 
 #rotWar{
 	
@@ -177,7 +150,7 @@ html, body {
 
 	position: absolute;
     top: 64%;
-	left: 4.5%;
+	left: 5.5%;
 	color: white;
 }
 
@@ -185,7 +158,7 @@ html, body {
 
 	position: absolute;
     top: 64%;
-	right: 4%;
+	right: 7.5%;
 	color: white;
 }
 
@@ -208,15 +181,27 @@ html, body {
 		margin-bottom: 5.5%;
 	}
 
+	#MoveStickInfo{
+
+		top: 64%;
+		left: 3.5%;
+	}
+	
+	#ShootStickInfo{
+	
+		top: 64%;
+		right: 5%;
+	}
+
 }
 
 @media screen and (max-width: 600px) {
 
-	#restartDiv{
+	/* #restartDiv{
 		
 		margin-top: -100%;
 
-	}
+	} */
 	
 	
 }
