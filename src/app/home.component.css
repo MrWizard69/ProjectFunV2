@@ -58,6 +58,16 @@
     border-radius: 25px;
 }
 
+#desktopOptions{
+
+	width: 55%;
+    height: 5em;
+    position: absolute;
+	top: 70%;
+	left: 22%;
+    border-radius: 25px;
+}
+
 #restartBtn{
 
 	width: 55%;
@@ -110,6 +120,7 @@ canvas {
 #title{
 	text-align: center;
 	color: white;
+	margin-top: 0px;
 }
 
 #RotWarBox{
