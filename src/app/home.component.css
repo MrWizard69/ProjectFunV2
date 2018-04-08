@@ -48,6 +48,16 @@
     border-radius: 25px;
 }
 
+#highscore{
+
+	width: 55%;
+    height: 5em;
+    position: absolute;
+	top: 60%;
+	left: 22%;
+    border-radius: 25px;
+}
+
 #restartBtn{
 
 	width: 55%;
@@ -169,7 +179,7 @@ h3{
 	
 	}
 	h2{
-		margin-top: -1.9%;
+		margin-top: -0.1%;
 	}
 
 	#canvas{
@@ -192,6 +202,14 @@ h3{
 		top: 64%;
 		right: 5%;
 	}
+
+	/* #play{
+		display: none;
+	} */
+
+	/* #canvas{
+		display: none;
+	} */
 
 }
 

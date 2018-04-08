@@ -78,17 +78,17 @@ let borderShade = 29;
 let borderBrightness = 61;
 let KeyboardBulletDelay = 10;
 	
-	// Obtain a reference to the canvas element
-	// using its id.
+// Obtain a reference to the canvas element
+// using its id.
 	
-    let canvas = <HTMLCanvasElement> document.getElementById("canvas");
-    ctx = canvas.getContext("2d");
+let canvas = <HTMLCanvasElement> document.getElementById("canvas");
+ctx = canvas.getContext("2d");
 
 
 // starting hue for the explosion
 let hue = 120;
 
-let menu = true;
+let menu: boolean = true;
 let mousePos;
 
 let canvas2 = <HTMLCanvasElement> document.getElementById("canvas"),
@@ -96,20 +96,20 @@ let canvas2 = <HTMLCanvasElement> document.getElementById("canvas"),
 	   
 	   
 // Create all the stars
-		for(let i = 0; i < numStars; i++) {
-			let x = Math.round(Math.random() * canvas.width);
-			let y = Math.round(Math.random() * canvas.height);
-			let length = 1 + Math.random() * 2;
-			let opacity = Math.random();
+for(let i = 0; i < numStars; i++) {
+	let x = Math.round(Math.random() * canvas.width);
+	let y = Math.round(Math.random() * canvas.height);
+	let length = 1 + Math.random() * 2;
+	let opacity = Math.random();
 		
-			// Create a new star and draw
-			let star = new Star(x, y, length, opacity);
+	// Create a new star and draw
+	let star = new Star(x, y, length, opacity);
 		
-		// Add the the stars array
-        stars.push(star);
+	// Add the the stars array
+    stars.push(star);
 		
 		
-	}
+}
 	   
 	   
 
@@ -139,9 +139,9 @@ let canvas2 = <HTMLCanvasElement> document.getElementById("canvas"),
 		// mouse y coordinate
 		//my;
 		
-// // set canvas dimensions
-canvas1.width = canvas.width;
-canvas1.height = canvas.height;
+	// // set canvas dimensions
+	canvas1.width = canvas.width;
+	canvas1.height = canvas.height;
 	
 	let joystick: any;
 	let shootStick: any;			
@@ -163,6 +163,14 @@ canvas1.height = canvas.height;
 	let BlackBox = [];
 	let BHEnemys = [];
 	let InfectedFleet = [];
+
+	let randomShipInterval;
+	let hunterShipInterval;
+	let stalkerShipInterval;
+	let lifePupInterval;
+	let bulletPupInterval;
+	let blackBoxInterval;
+	let infectedShipInterval;
 	
 	let score = 0;
 	let lives = 3;
@@ -240,23 +248,77 @@ canvas1.height = canvas.height;
     function rgTap(){
 
         //window.location.reload();
-		if(canvas.width > 500){
+		//if(canvas.width > 500){
 			
-			if (document.exitFullscreen) {
-                    document.exitFullscreen();
-            }
-			// } else if (document.msExitFullscreen) {
-			// 		document.msExitFullscreen();
-			// } else if (document.mozCancelFullScreen) {
-			// 		document.mozCancelFullScreen();
-			else if (document.webkitExitFullscreen) {
-					document.webkitExitFullscreen();
+		//this will take you out of fullscreen mode
+			// if (document.exitFullscreen) {
+            //         document.exitFullscreen();
+            // }
+			// // } else if (document.msExitFullscreen) {
+			// // 		document.msExitFullscreen();
+			// // } else if (document.mozCancelFullScreen) {
+			// // 		document.mozCancelFullScreen();
+			// else if (document.webkitExitFullscreen) {
+			// 		document.webkitExitFullscreen();
+			// }
+
+			playerPositionX = canvas.width * .50;
+			playerPositionY = canvas.height * .50;
+			
+			//this will update the players position if the screen size changes
+			x = playerPositionX;
+			y = playerPositionY;
+
+			menu = true;
+			moveReady = false;
+			shootReady = false;
+			slowMotion = false;
+			clearTimeout(slowMoDelay);
+			clearInterval(randomShipInterval);
+			clearInterval(hunterShipInterval);
+			clearInterval(stalkerShipInterval);
+			clearInterval(lifePupInterval);
+			clearInterval(bulletPupInterval);
+			clearInterval(blackBoxInterval);
+			clearInterval(infectedShipInterval);
+			exitReload = 0;
+			score = 0;
+			lives = 3;
+			bulletSpeed = 0;
+			bulletPower = 0;
+			KeyboardBulletDelay = 10;
+			RandomShipFleet = [];
+			HunterFleet = [];
+			StalkerFleet = [];
+			bulletClip = [];
+			LifePowerPack = [];
+			BulletPowerPack = [];
+			BlackBox = [];
+			BHEnemys = [];
+			InfectedFleet = [];
+			LazerBattery = [];
+			document.getElementById("title").style.display = "block";
+			document.getElementById("score").style.display = "none";
+			document.getElementById("exitGame").style.display = "none";
+			document.getElementById("play").style.display = "inline-block";
+			document.getElementById("restartBtn").style.display = "none";
+			document.getElementById("ShootStickInfo").style.display = "none";
+			document.getElementById("MoveStickInfo").style.display = "none";
+
+			// console.log(joystick);
+			
+			if(joystick != undefined && shootStick != undefined){
+
+				joystick.destroy();
+				shootStick.destroy();
 			}
+
+			document.getElementById("shootStick").style.display = "none";
+			document.getElementById("container").style.display = "none";
 			
-			
-			window.location.reload();
+			//window.location.reload();
 			//alert("reload");
-		}
+		//}
 		// else if(canvas.width < 499){
 		// 	if(canvas.width < 261){
 				
@@ -287,13 +349,135 @@ canvas1.height = canvas.height;
 
         slowMotion = false;
 		clearTimeout(slowMoDelay);
+		clearInterval(randomShipInterval);
+		clearInterval(hunterShipInterval);
+		clearInterval(stalkerShipInterval);
+		clearInterval(lifePupInterval);
+		clearInterval(bulletPupInterval);
+		clearInterval(blackBoxInterval);
+		clearInterval(infectedShipInterval);
+		//this will create new enemies
+		randomShipInterval = setInterval(function(){
+
+			if(moveReady == true && shootReady == true){
+                
+                let Enemy1 = Object.assign({}, RandomShip);
+				Enemy1.x = Math.round(Math.random() * (canvas.width * .90));
+				Enemy1.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy1.direction = Math.round(Math.random() * 7);
+				
+				if (exitReload == 0 || x > Enemy1.x && x < Enemy1.x && //TODO: Figure out a way to get the enemys to ONLY spawn around the player
+					y > Enemy1.y && y < Enemy1.y + (playerSize * 15)) {
+						
+					RandomShipFleet.push(Enemy1);
+				
+				}
+			}
+		}, 1100);
+		
+		hunterShipInterval = setInterval(function(){
+
+			if(moveReady == true && shootReady == true){
+                
+                let Enemy2 = Object.assign({}, Hunter);
+				Enemy2.x = Math.round(Math.random() * (canvas.width * .90));
+				Enemy2.y = Math.round(Math.random() * (canvas.height * .90));
+				
+				if (exitReload == 0 || x < Enemy2.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy2.x &&
+					y < Enemy2.y + (playerSize * 15) && y + (playerSize * 15) > Enemy2.y) {
+					
+					HunterFleet.push(Enemy2);
+				}
+				
+			}
+		}, 5000);	
+		
+		stalkerShipInterval = setInterval(function(){
+
+			if(moveReady == true && shootReady == true){
+                
+                let Enemy3 = Object.assign({}, Stalker);
+				Enemy3.x = Math.round(Math.random() * (canvas.width * .90));
+				Enemy3.y = Math.round(Math.random() * (canvas.height * .90));
+				
+				if (exitReload == 0 || x < Enemy3.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy3.x &&
+					y < Enemy3.y + (playerSize * 15) && y + (playerSize * 15) > Enemy3.y) {
+						
+					StalkerFleet.push(Enemy3);
+				}
+			}
+		}, 9000);	
+		
+		
+		lifePupInterval = setInterval(function(){
+
+			if(moveReady == true && shootReady == true){
+                
+                let LifePup = Object.assign({}, LifePowerUp);
+				LifePup.x = Math.round(Math.random() * (canvas.width * .90));
+				LifePup.y = Math.round(Math.random() * (canvas.height * .90));
+				
+				if(exitReload == 0){
+						
+					LifePowerPack.push(LifePup);
+				}
+			}
+		}, 25000); //60000
+		
+		bulletPupInterval = setInterval(function(){
+
+			if(moveReady == true && shootReady == true){
+                
+                let BulletPup = Object.assign({}, BulletPowerUp);
+				BulletPup.x = Math.round(Math.random() * (canvas.width * .90));
+				BulletPup.y = Math.round(Math.random() * (canvas.height * .90));
+				
+				if(exitReload == 0){
+						
+					BulletPowerPack.push(BulletPup);
+				}
+			}
+		}, 20000);	//30000	
+
+
+		blackBoxInterval = setInterval(function(){
+
+			if(moveReady == true && shootReady == true){
+                
+                let Enemy4 = Object.assign({}, BlackHole);
+				Enemy4.x = Math.round(Math.random() * (canvas.width * .90));
+				Enemy4.y = Math.round(Math.random() * (canvas.height * .90));
+				
+				if (exitReload == 0 || x < Enemy4.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy4.x &&
+					y < Enemy4.y + (playerSize * 15) && y + (playerSize * 15) > Enemy4.y) {
+						
+					BlackBox.push(Enemy4);
+				}
+			}
+		}, 55000);	
+
+		infectedShipInterval = setInterval(function(){
+
+			if(moveReady == true && shootReady == true){
+                
+                let Enemy5 = Object.assign({}, InfectedShip);
+				Enemy5.x = Math.round(Math.random() * (canvas.width * .90));
+				Enemy5.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy5.direction = Math.round(Math.random() * 7);
+				
+				if (exitReload == 0 || x < Enemy5.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy5.x &&
+					y < Enemy5.y + (playerSize * 15) && y + (playerSize * 15) > Enemy5.y) {
+						
+					InfectedFleet.push(Enemy5);
+				}
+			}
+		}, 30000);		
 		exitReload = 0;
 		score = 0;
 		lives = 3;
 		bulletSpeed = 0;
 		bulletPower = 0;
 		KeyboardBulletDelay = 10;
-		menu = false;
 		RandomShipFleet = [];
 		HunterFleet = [];
 		StalkerFleet = [];
@@ -306,6 +490,9 @@ canvas1.height = canvas.height;
 		LazerBattery = [];
         document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
 		document.getElementById("restartBtn").style.display = "none";
+		document.getElementById("score").style.display = "inline-block";
+		document.getElementById("exitGame").style.display = "inline-block";
+		document.getElementById("title").style.display = "none";
     }
 	
     document.getElementById("exitGame").style.display = "none";
@@ -471,7 +658,7 @@ canvas1.height = canvas.height;
 			
 			
 		//this will create new enemies
-		setInterval(function(){
+		randomShipInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
@@ -491,7 +678,7 @@ canvas1.height = canvas.height;
 			//console.log(entities);
 		}, 1100);
 		
-		setInterval(function(){
+		hunterShipInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
@@ -509,7 +696,7 @@ canvas1.height = canvas.height;
 			//console.log(entities);
 		}, 5000);	
 		
-		setInterval(function(){
+		stalkerShipInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
@@ -527,7 +714,7 @@ canvas1.height = canvas.height;
 		}, 9000);	
 		
 		
-		setInterval(function(){
+		lifePupInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
@@ -543,7 +730,7 @@ canvas1.height = canvas.height;
 			//console.log(entities);
 		}, 25000); //60000
 		
-		setInterval(function(){
+		bulletPupInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
@@ -560,7 +747,7 @@ canvas1.height = canvas.height;
 		}, 20000);	//30000	
 
 
-		setInterval(function(){
+		blackBoxInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
@@ -577,7 +764,7 @@ canvas1.height = canvas.height;
 			//console.log(Enemy4);
 		}, 55000);	
 
-		setInterval(function(){
+		infectedShipInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
@@ -599,7 +786,9 @@ canvas1.height = canvas.height;
         document.getElementById("title").style.display = "none";
         document.getElementById("score").style.display = "inline-block";
         document.getElementById("MoveStickInfo").style.display = "inline-block";
-        document.getElementById("ShootStickInfo").style.display = "inline-block";
+		document.getElementById("ShootStickInfo").style.display = "inline-block";
+		document.getElementById("shootStick").style.display = "inline-block";
+		document.getElementById("container").style.display = "inline-block";
     }
 	
 
@@ -651,10 +840,14 @@ canvas1.height = canvas.height;
 	// Resets the canvas dimensions to match window,
 	// then draws the new borders accordingly.
 	function resizeCanvas() {
+
+		canvas.width = 0;
+		canvas.height = 0;
 		
 		//This will dynamically resize the game play area		
 		canvas.width = (window.innerWidth) * .72;
 		canvas.height = (window.innerHeight) * .80; //.80
+		stars = []; // this will clear the stars array before pushing in more with new width
 		
 		//console.log("Canvas Width " + canvas.width);
 		//$("#result").html(canvas.width); //display the screen size/////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
@@ -710,11 +903,66 @@ canvas1.height = canvas.height;
 		
 		if(canvas.width <= 300){
 
-            document.getElementById("play").style.display = "none";
-            //document.getElementById("ShootStickInfo").style.marginTop = "-6.5%";
+			document.getElementById("play").style.display = "none";
+			document.getElementById("restartBtn").style.display = "none";
+			document.getElementById("ShootStickInfo").style.display = "none";
+			document.getElementById("MoveStickInfo").style.display = "none";
             // document.getElementById("rotWar").style.display = "inline-block";
-            document.getElementById("shootStick").style.display = "none";
-            document.getElementById("container").style.display = "none";
+            
+			document.getElementById("highscore").style.display = "inline-block";
+			
+			moveReady = false;
+			shootReady = false;
+			slowMotion = false;
+			clearTimeout(slowMoDelay);
+			clearInterval(randomShipInterval);
+			clearInterval(hunterShipInterval);
+			clearInterval(stalkerShipInterval);
+			clearInterval(lifePupInterval);
+			clearInterval(bulletPupInterval);
+			clearInterval(blackBoxInterval);
+			clearInterval(infectedShipInterval);
+			exitReload = 0;
+			score = 0;
+			lives = 3;
+			bulletSpeed = 0;
+			bulletPower = 0;
+			KeyboardBulletDelay = 10;
+			RandomShipFleet = [];
+			HunterFleet = [];
+			StalkerFleet = [];
+			bulletClip = [];
+			LifePowerPack = [];
+			BulletPowerPack = [];
+			BlackBox = [];
+			BHEnemys = [];
+			InfectedFleet = [];
+			LazerBattery = [];
+			document.getElementById("title").style.display = "block";
+			document.getElementById("score").style.display = "none";
+			document.getElementById("exitGame").style.display = "none";
+
+			if(menu == false && joystick != undefined && shootStick != undefined){
+
+				joystick.destroy();
+				shootStick.destroy();
+			}
+			menu = true;
+
+			document.getElementById("shootStick").style.display = "none";
+			document.getElementById("container").style.display = "none";
+
+			//this will take you out of fullscreen mode
+			if (document.exitFullscreen) {
+                    document.exitFullscreen();
+            }
+			// } else if (document.msExitFullscreen) {
+			// 		document.msExitFullscreen();
+			// } else if (document.mozCancelFullScreen) {
+			// 		document.mozCancelFullScreen();
+			else if (document.webkitExitFullscreen) {
+					document.webkitExitFullscreen();
+			}
 			
 		}
 		else if(canvas.width >= 350 && menu == false){
@@ -724,9 +972,16 @@ canvas1.height = canvas.height;
 		}		
 		 else if(canvas.width >= 350){
 			
-            document.getElementById("play").style.display = "inline-block";
-            document.getElementById("shootStick").style.display = "inline-block";
-            document.getElementById("container").style.display = "inline-block";
+			document.getElementById("play").style.display = "inline-block";
+			document.getElementById("canvas").style.display = "inline-block";
+            
+			document.getElementById("highscore").style.display = "none";
+
+			if(menu == false){
+
+				document.getElementById("shootStick").style.display = "inline-block";
+				document.getElementById("container").style.display = "inline-block";
+			}
 			
 			 if(exitReload == 1){
 
@@ -2351,7 +2606,7 @@ canvas1.height = canvas.height;
 			ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
             //document.getElementsByTagName("canvas")[1].style.display = "none";
-            setTimeout(update, 30); //refresh the screen to update positions//
+            setTimeout(update, 28); //refresh the screen to update positions// was 30
 
 			if(slowMotion == true){
 
@@ -4117,12 +4372,15 @@ canvas1.height = canvas.height;
 			//console.log(exitReload);
 			
 			if(menu == false){
-			
+//*****************************This is the player************************************ */
+
 				ctx.beginPath(); //this is the player
 				ctx.fillStyle = "#A23BEC";
 				ctx.arc(x, y, playerSize, 0, Math.PI * 2); // draw the player playerSize is about 19.43999
 				ctx.fill();
 				ctx.closePath();
+
+//*****************************This is the player************************************ */
 			}
 			
 															 						
@@ -4144,24 +4402,30 @@ canvas1.height = canvas.height;
 					}
 				}
 
-				if (RandomShipFleet[i].x > canvas.width - playerSize + 1) { // colision with game boarders x-axis playerSize is about 19.43999
-				
-					RandomShipFleet.splice(i, 1);
-            	} else if (RandomShipFleet[i].x < playerSize - 1) {
-				
-					RandomShipFleet.splice(i, 1);
-            	}
-			
-				if (RandomShipFleet[i].y > canvas.height - playerSize + 1) { // colision with game boarders y-axis playerSize is about 19.43999
-				
-					RandomShipFleet.splice(i, 1);
-            	} else if (RandomShipFleet[i].y < playerSize - 1) {
-				
-					RandomShipFleet.splice(i, 1);
-				}
-				
 				if(RandomShipFleet[i] != undefined){
 
+					if (RandomShipFleet[i].x > canvas.width - playerSize + 1) { // colision with game boarders x-axis playerSize is about 19.43999
+						
+						RandomShipFleet.splice(i, 1);
+					} else if (RandomShipFleet[i].x < playerSize - 1) {
+						
+						RandomShipFleet.splice(i, 1);
+					}
+
+					if(RandomShipFleet[i].y != undefined){
+
+						if (RandomShipFleet[i].y > canvas.height - playerSize + 1) { // colision with game boarders y-axis playerSize is about 19.43999
+						
+							RandomShipFleet.splice(i, 1);
+						} else if (RandomShipFleet[i].y < playerSize - 1) {
+							
+							RandomShipFleet.splice(i, 1);
+						}
+					}
+				}
+
+					if(RandomShipFleet[i] != undefined){
+					
 					//this is a colision with the randomly spawning ai guys
 					if (x < RandomShipFleet[i].x + playerSize  && x + playerSize  > RandomShipFleet[i].x &&
 					y < RandomShipFleet[i].y + playerSize && y + playerSize > RandomShipFleet[i].y) {
@@ -5481,7 +5745,6 @@ canvas1.height = canvas.height;
 				
 				x = canvas.width * 0.50;
 				y = canvas.height * 0.50;
-				menu = true;
 
 				document.getElementById("restartBtn").style.display = "inline-block";
 				
@@ -5972,7 +6235,7 @@ function createTitleParticles( x, y ) {
 // main demo loop
 function loop() {
 	// this function will run endlessly with requestAnimationFrame
-	requestAnimFrame(); //loop was in there
+	//requestAnimFrame(); //loop was in there
 	
 	// increase the hue to get different colored fireworks over time
 	hue += 0.3;
@@ -6552,7 +6815,7 @@ VirtualJoystick.prototype.destroy	= function()
 
 
 		
-	loop();
+	//loop();
 	update();// sets the main loop into motion
 });
         
