@@ -305,7 +305,7 @@ for(let i = 0; i < numStars; i++) {
 			document.getElementById("ShootStickInfo").style.display = "none";
 			document.getElementById("MoveStickInfo").style.display = "none";
 
-			if(canvas.width >= 470){
+			if(canvas.width >= 596){
 				
 				document.getElementById("highscore").style.display = "inline-block";
 				document.getElementById("desktopOptions").style.display = "inline-block";
@@ -979,11 +979,12 @@ for(let i = 0; i < numStars; i++) {
             document.getElementById("play").style.display = "none";
 
 		}		
-		 else if(canvas.width > 350 && canvas.width <= 460){
+		 else if(canvas.width > 350 && canvas.width <= 595){
 			
 			document.getElementById("play").style.display = "inline-block";
             
 			document.getElementById("highscore").style.display = "none";
+			document.getElementById("desktopOptions").style.display = "none";
 
 			if(menu == false){
 
@@ -997,7 +998,7 @@ for(let i = 0; i < numStars; i++) {
 			 }
              //document.getElementById("rotWar").style.display = "none";
 		 }
-		 else if(canvas.width >= 470){
+		 else if(canvas.width >= 596){
 
 			document.getElementById("play").style.display = "inline-block";
             
