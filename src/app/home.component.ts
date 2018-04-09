@@ -131,7 +131,7 @@ for(let i = 0; i < numStars; i++) {
 		limiterTotal = 5,
 		limiterTick = 0,
 		// this will time the auto launches of fireworks, one launch per 80 loop ticks
-		timerTotal = 60, //75
+		timerTotal = 30, //75 // currently was 60
 		timerTick = 0,
 		mousedown = false;
 		// mouse x coordinate,
@@ -217,6 +217,7 @@ for(let i = 0; i < numStars; i++) {
 
     document.getElementById("MoveStickInfo").style.display = "none";
 	document.getElementById("ShootStickInfo").style.display = "none";
+	document.getElementById("directInfo").style.display = "none";
 	
 	//This was a temporary fix to rotate the screen
 
@@ -242,7 +243,7 @@ for(let i = 0; i < numStars; i++) {
 	
     //when the game is quit, the screen goes back to normal and the page is reloaded or a message appears
 
-	document.getElementById('exitGame').addEventListener('touchstart', rgTap);
+	//document.getElementById('exitGame').addEventListener('touchstart', rgTap);
 	document.getElementById('exitGame').addEventListener('click', rgTap);
     
     function rgTap(){
@@ -304,6 +305,8 @@ for(let i = 0; i < numStars; i++) {
 			document.getElementById("restartBtn").style.display = "none";
 			document.getElementById("ShootStickInfo").style.display = "none";
 			document.getElementById("MoveStickInfo").style.display = "none";
+			document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+			document.getElementById("directInfo").style.display = "none";
 
 			if(canvas.width >= 596){
 				
@@ -518,7 +521,8 @@ for(let i = 0; i < numStars; i++) {
 
         joyTouch = true; // the joystick was touched and now in the Update function it will be checking the direction of the joystick
         moveReady = true;//this checks the joystick to see if the player knows what it does. First touch starts the game
-        document.getElementById("MoveStickInfo").style.display = "none"; //hides the message
+		document.getElementById("MoveStickInfo").style.display = "none"; //hides the message
+		document.getElementById("directInfo").style.display = "none"; // hides another message
         //document.getElementById("ShootStickInfo").style.marginTop = "-13.8%";
     }
 
@@ -531,7 +535,8 @@ for(let i = 0; i < numStars; i++) {
 			shootReady = true; //this checks the shootStick to see if the player knows what it does. First touch starts the game
             //document.getElementById("MoveStickInfo").style.marginTop = "-14%";
 
-            document.getElementById("ShootStickInfo").style.display = "none";
+			document.getElementById("ShootStickInfo").style.display = "none"; // hides the message
+			document.getElementById("directInfo").style.display = "none"; // hides another message
 			
 			if(bulletPower >= 9){
 				
@@ -635,6 +640,8 @@ for(let i = 0; i < numStars; i++) {
 		document.getElementById("exitGame").style.display = "inline-block";
 		document.getElementById("highscore").style.display = "none";
 		document.getElementById("desktopOptions").style.display = "none";
+		document.getElementById("title-image").style.display = "none";
+		document.getElementById("directInfo").style.display = "inline-block";
 		
 		setTimeout(function() {
 			
@@ -919,6 +926,8 @@ for(let i = 0; i < numStars; i++) {
             // document.getElementById("rotWar").style.display = "inline-block";
             
 			document.getElementById("highscore").style.display = "inline-block";
+			document.getElementById("title-image").style.display = "inline-block";
+			document.getElementById("directInfo").style.display = "none";
 			
 			moveReady = false;
 			shootReady = false;
@@ -985,6 +994,7 @@ for(let i = 0; i < numStars; i++) {
             
 			document.getElementById("highscore").style.display = "none";
 			document.getElementById("desktopOptions").style.display = "none";
+			document.getElementById("title-image").style.display = "none";
 
 			if(menu == false){
 
@@ -4428,7 +4438,7 @@ for(let i = 0; i < numStars; i++) {
 						RandomShipFleet.splice(i, 1);
 					}
 
-					if(RandomShipFleet[i].y != undefined){
+					if(RandomShipFleet[i] != undefined){
 
 						if (RandomShipFleet[i].y > canvas.height - playerSize + 1) { // colision with game boarders y-axis playerSize is about 19.43999
 						

@@ -183,6 +183,23 @@ h3{
 	color: white;
 }
 
+#title-image{
+
+	width: 29%;
+    position: absolute;
+    z-index: 10;
+    top: -7%;
+    left: 31%;
+}
+
+#directInfo{
+
+	position: absolute;
+    top: 77%;
+    color: white;
+    left: 36%;
+}
+
 @media screen and (max-width: 1000px) {
     #rest{
 	
@@ -198,7 +215,7 @@ h3{
 	}
 	#score{
 	
-		margin-left: 28%;
+		margin-left: 31%;
 		margin-bottom: 5.5%;
 	}
 
@@ -212,6 +229,23 @@ h3{
 	
 		top: 64%;
 		right: 5%;
+	}
+
+	#title-image{
+
+		width: 100%;
+		position: absolute;
+		z-index: 10;
+		top: 5%;
+		left: -5%;
+	}
+
+	#directInfo{
+
+		position: absolute;
+		top: 77%;
+		color: white;
+		left: 18%;
 	}
 
 	/* #play{
