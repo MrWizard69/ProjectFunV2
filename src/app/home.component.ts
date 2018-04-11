@@ -209,6 +209,24 @@ for(let i = 0; i < numStars; i++) {
 
 	let moveReady = false;
 	let shootReady = false;
+
+	let playerTop = new Image();
+	playerTop.src = "./assets/images/ProjectFunShipTop.png";
+	let playerBottom = new Image();
+	playerBottom.src = "./assets/images/ProjectFunShipBottom.png";
+	let playerLeft = new Image();
+	playerLeft.src = "./assets/images/ProjectFunShipLeft.png";
+	let playerRight = new Image();
+	playerRight.src = "./assets/images/ProjectFunShipRight.png";
+
+	let playerTopRight = new Image();
+	playerTopRight.src = "./assets/images/ProjectFunShipTopRight.png";
+	let playerTopLeft = new Image();
+	playerTopLeft.src = "./assets/images/ProjectFunShipTopLeft.png";
+	let playerBottomLeft = new Image();
+	playerBottomLeft.src = "./assets/images/ProjectFunShipBottomLeft.png";
+	let playerBottomRight = new Image();
+	playerBottomRight.src = "./assets/images/ProjectFunShipBottomRight.png";
 	
 	
     document.getElementById("score").style.display = "none";
@@ -2629,10 +2647,10 @@ for(let i = 0; i < numStars; i++) {
 
 			ctx.strokeStyle = 'hsl(' + borderHue + ',' + borderShade + '%, ' + borderBrightness + '%)';
 			ctx.lineWidth = '5';
-			ctx.strokeRect(0, 0, canvas.width, canvas.height);
+			//ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
             //document.getElementsByTagName("canvas")[1].style.display = "none";
-            setTimeout(update, 28); //refresh the screen to update positions// was 30
+            //setTimeout(update, 30); //refresh the screen to update positions// was 30
 
 			if(slowMotion == true){
 
@@ -2656,9 +2674,12 @@ for(let i = 0; i < numStars; i++) {
 			
 			//----------------------------------------------------------
 			draw();	//this draws all the enemies in the game area
+
+			ctx.strokeRect(0, 0, canvas.width, canvas.height);
 			
 			
-				
+			
+			setTimeout(update, 30); //refresh the screen to update positions// was 30
 
         }
 		
@@ -4405,6 +4426,44 @@ for(let i = 0; i < numStars; i++) {
 				ctx.arc(x, y, playerSize, 0, Math.PI * 2); // draw the player playerSize is about 19.43999
 				ctx.fill();
 				ctx.closePath();
+
+			// if(joyDirX == "left" && joyDirY == "up"){
+				
+			// 	ctx.drawImage(playerTopLeft, x * 0.93, y, playerSize * 4, playerSize * 4);
+			// }
+			// else if(joyDirX == "left" && joyDirY == "down" ){
+				
+			// 	ctx.drawImage(playerBottomLeft, x * 0.93, y, playerSize * 4, playerSize * 4);
+			// }
+			// else if(joyDirY == "up" && joyDirX == "right"){
+				
+			// 	ctx.drawImage(playerTopRight, x * 0.93, y, playerSize * 4, playerSize * 4);
+			// }
+			// else if(joyDirY == "down" && joyDirX == "right"){
+				
+			// 	ctx.drawImage(playerBottomRight, x * 0.93, y, playerSize * 4, playerSize * 4);
+			// }
+			// else if(joyDirX == "left"){
+				
+			// 	ctx.drawImage(playerLeft, x * 0.93, y, playerSize * 4, playerSize * 4);
+			// }
+			// else if(joyDirX == "right"){
+				
+			// 	ctx.drawImage(playerRight, x * 0.93, y, playerSize * 4, playerSize * 4);
+			// }
+			// else if(joyDirY == "up"){
+				
+			// 	ctx.drawImage(playerTop, x * 0.93, y, playerSize * 4, playerSize * 4);
+			// }
+			// else if(joyDirY == "down"){
+				
+			// 	ctx.drawImage(playerBottom, x * 0.93, y, playerSize * 4, playerSize * 4);
+
+			// }
+			// else if(joyDirX == "" && joyDirY == ""){
+
+			// 	ctx.drawImage(playerTop, x * 0.93, y, playerSize * 4, playerSize * 4);
+			// }
 
 //*****************************This is the player************************************ */
 			}
