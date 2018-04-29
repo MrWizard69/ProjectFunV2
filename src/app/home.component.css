@@ -58,7 +58,7 @@
     border-radius: 25px;
 }
 
-#desktopOptions{
+#options{
 
 	width: 55%;
     height: 5em;
@@ -198,6 +198,7 @@ h3{
     top: 77%;
     color: white;
 	left: 25%;
+	line-height: 2em;
 }
 
 #rotate-image{
@@ -246,18 +247,25 @@ h3{
 		width: 100%;
 		position: absolute;
 		z-index: 10;
-		top: 5%;
+		top: -5%;
 		left: -5%;
+	}
+
+	#highscore{
+
+		top: 49%;
+	}
+	
+	#options{
+	
+		top: 61%;
 	}
 
 	#directInfo{
 
-		position: absolute;
-		top: 70%;
-		color: white;
-		left: 22%;
-		width: 56%;
-		line-height: 2em
+		top: 60%;
+    	left: 13.5%;
+    	width: 72%;
 	}
 
 	#rotate-image{
@@ -265,9 +273,9 @@ h3{
 		display: inline-block;
 		position: absolute;
 		z-index: 11;
-		width: 22%;
-		top: 70%;
-		left: 38%;
+		width: 15%;
+		top: 73%;
+		left: 40%;
 	}
 
 	#rotate-image-message{
@@ -277,7 +285,7 @@ h3{
 		z-index: 11;
 		width: 50%;
 		color: white;
-		left: 30%;
+		left: 28%;
 		top: 79%;
 	}
 
@@ -289,6 +297,21 @@ h3{
 		display: none;
 	} */
 
+}
+
+@media screen and (min-height: 812px) {
+
+	#title-image{
+		top: 1%;
+	}
+}
+
+@media screen and (min-height: 360px) {
+
+	#directInfo{
+		top: 70%;
+		left: 14.5%;
+	}
 }
 
 @media screen and (max-width: 600px) {

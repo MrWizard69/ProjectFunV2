@@ -334,7 +334,7 @@ for(let i = 0; i < numStars; i++) {
 			if(canvas.width >= 596){
 				
 				document.getElementById("highscore").style.display = "inline-block";
-				document.getElementById("desktopOptions").style.display = "inline-block";
+				document.getElementById("options").style.display = "inline-block";
 				document.getElementById("title-image").style.display = "inline-block";
 			 }
 
@@ -670,7 +670,7 @@ for(let i = 0; i < numStars; i++) {
 		
 		document.getElementById("exitGame").style.display = "inline-block";
 		document.getElementById("highscore").style.display = "none";
-		document.getElementById("desktopOptions").style.display = "none";
+		document.getElementById("options").style.display = "none";
 		document.getElementById("title-image").style.display = "none";
 		document.getElementById("directInfo").style.display = "inline-block";
 		
@@ -955,7 +955,7 @@ for(let i = 0; i < numStars; i++) {
 			document.getElementById("restartBtn").style.display = "none";
 			document.getElementById("ShootStickInfo").style.display = "none";
 			document.getElementById("MoveStickInfo").style.display = "none";
-			document.getElementById("desktopOptions").style.display = "none";
+			document.getElementById("options").style.display = "inline-block";
             // document.getElementById("rotWar").style.display = "inline-block";
             
 			document.getElementById("highscore").style.display = "inline-block";
@@ -1028,7 +1028,7 @@ for(let i = 0; i < numStars; i++) {
 			document.getElementById("play").style.display = "inline-block";
             
 			document.getElementById("highscore").style.display = "none";
-			document.getElementById("desktopOptions").style.display = "none";
+			document.getElementById("options").style.display = "none";
 			document.getElementById("title-image").style.display = "none";
 
 			document.getElementById("rotate-image").style.display = "none";
@@ -1051,7 +1051,7 @@ for(let i = 0; i < numStars; i++) {
 			document.getElementById("play").style.display = "inline-block";
             
 			document.getElementById("highscore").style.display = "inline-block";
-			document.getElementById("desktopOptions").style.display = "inline-block";
+			document.getElementById("options").style.display = "inline-block";
 		 }	
 		
 		//console.log("Canvas Height " + canvas.height);		
