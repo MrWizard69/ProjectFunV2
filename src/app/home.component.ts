@@ -290,8 +290,8 @@ for(let i = 0; i < numStars; i++) {
 			x = playerPositionX;
 			y = playerPositionY;
 
-			newX = canvas.width * .47;
-			newY = canvas.height * .45;
+			newX = canvas.width * .461;
+			newY = canvas.height * .44;
 
 			menu = true;
 			moveReady = false;
@@ -523,8 +523,8 @@ for(let i = 0; i < numStars; i++) {
 		BHEnemys = [];
 		InfectedFleet = [];
 		LazerBattery = [];
-		newX = canvas.width * .47;
-		newY = canvas.height * .45;
+		newX = canvas.width * .461;
+		newY = canvas.height * .44;
         document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
 		document.getElementById("restartBtn").style.display = "none";
 		document.getElementById("score").style.display = "inline-block";
@@ -872,8 +872,8 @@ for(let i = 0; i < numStars; i++) {
 		playerPositionX = canvas.width * .50;
 		playerPositionY = canvas.height * .50;
 
-		newX = canvas.width * .47;
-		newY = canvas.height * .45;
+		newX = canvas.width * .461;
+		newY = canvas.height * .44;
 		
 		//this will update the players position if the screen size changes
 		x = playerPositionX;
@@ -960,6 +960,8 @@ for(let i = 0; i < numStars; i++) {
             
 			document.getElementById("highscore").style.display = "inline-block";
 			document.getElementById("title-image").style.display = "inline-block";
+			document.getElementById("rotate-image").style.display = "inline-block";
+			document.getElementById("rotate-image-message").style.display = "inline-block";
 			document.getElementById("directInfo").style.display = "none";
 			
 			moveReady = false;
@@ -1029,6 +1031,9 @@ for(let i = 0; i < numStars; i++) {
 			document.getElementById("desktopOptions").style.display = "none";
 			document.getElementById("title-image").style.display = "none";
 
+			document.getElementById("rotate-image").style.display = "none";
+			document.getElementById("rotate-image-message").style.display = "none";
+
 			if(menu == false){
 
 				document.getElementById("shootStick").style.display = "inline-block";
@@ -1068,8 +1073,8 @@ for(let i = 0; i < numStars; i++) {
             friction = 0.3, //0.98
 			keys = [];
 			
-		newX = canvas.width * .47;
-		newY = canvas.height * .45;
+		newX = canvas.width * .461;
+		newY = canvas.height * .44;
 
         function update() { //------------player movement with keyboard---------------------------------//
 			
@@ -2596,30 +2601,30 @@ for(let i = 0; i < numStars; i++) {
 			newX += velX;
 			newY += velY
 			
-			if (x > canvas.width - playerSize * 2.1) { // colision with game boarders x-axis playerSize is about 19.43999
-                x = canvas.width - playerSize * 2.1;
-            } else if (x < playerSize * 2.1) {
-                x = playerSize * 2.1;
+			if (x > canvas.width - playerSize * 2.6) { // colision with game boarders x-axis playerSize is about 19.43999
+                x = canvas.width - playerSize * 2.6;
+            } else if (x < playerSize * 2.6) {
+                x = playerSize * 2.6;
             }
 			
-			if (y > canvas.height - playerSize * 2.1) { // colision with game boarders y-axis playerSize is about 19.43999
-                y = canvas.height - playerSize * 2.1;
-            } else if (y < playerSize * 2.1) {
-                y = playerSize * 2.1;
+			if (y > canvas.height - playerSize * 2.6) { // colision with game boarders y-axis playerSize is about 19.43999
+                y = canvas.height - playerSize * 2.6;
+            } else if (y < playerSize * 2.6) {
+                y = playerSize * 2.6;
             }
 			
 			
 			
-			if (newX > canvas.width - playerSize * 4) { // colision with game boarders x-axis playerSize is about 19.43999
-                newX = canvas.width - playerSize * 4;
-            } else if (newX < playerSize / 4) {
-                newX = playerSize / 4;
+			if (newX > canvas.width - playerSize * 5) { // colision with game boarders x-axis playerSize is about 19.43999
+                newX = canvas.width - playerSize * 5;
+            } else if (newX < playerSize / 5) {
+                newX = playerSize / 5;
             }
 			
-			if (newY > canvas.height - playerSize * 4) { // colision with game boarders y-axis playerSize is about 19.43999
-                newY = canvas.height - playerSize * 4;
-            } else if (newY < playerSize / 4) {
-                newY = playerSize / 4;
+			if (newY > canvas.height - playerSize * 5) { // colision with game boarders y-axis playerSize is about 19.43999
+                newY = canvas.height - playerSize * 5;
+            } else if (newY < playerSize / 5) {
+                newY = playerSize / 5;
             }
 			
 			
@@ -4462,40 +4467,40 @@ for(let i = 0; i < numStars; i++) {
 
 				if(joyDirX == "left" && joyDirY == "up"){
 					
-					ctx.drawImage(playerTopLeft, newX, newY, playerSize * 4, playerSize * 4);
+					ctx.drawImage(playerTopLeft, newX, newY, playerSize * 5, playerSize * 5);
 				}
 				else if(joyDirX == "left" && joyDirY == "down" ){
 					
-					ctx.drawImage(playerBottomLeft, newX, newY, playerSize * 4, playerSize * 4);
+					ctx.drawImage(playerBottomLeft, newX, newY, playerSize * 5, playerSize * 5);
 				}
 				else if(joyDirY == "up" && joyDirX == "right"){
 					
-					ctx.drawImage(playerTopRight, newX, newY, playerSize * 4, playerSize * 4);
+					ctx.drawImage(playerTopRight, newX, newY, playerSize * 5, playerSize * 5);
 				}
 				else if(joyDirY == "down" && joyDirX == "right"){
 					
-					ctx.drawImage(playerBottomRight, newX, newY, playerSize * 4, playerSize * 4);
+					ctx.drawImage(playerBottomRight, newX, newY, playerSize * 5, playerSize * 5);
 				}
 				else if(joyDirX == "left"){
 					
-					ctx.drawImage(playerLeft, newX, newY, playerSize * 4, playerSize * 4);
+					ctx.drawImage(playerLeft, newX, newY, playerSize * 5, playerSize * 5);
 				}
 				else if(joyDirX == "right"){
 					
-					ctx.drawImage(playerRight, newX, newY, playerSize * 4, playerSize * 4);
+					ctx.drawImage(playerRight, newX, newY, playerSize * 5, playerSize * 5);
 				}
 				else if(joyDirY == "up"){
 					
-					ctx.drawImage(playerTop, newX, newY, playerSize * 4, playerSize * 4);
+					ctx.drawImage(playerTop, newX, newY, playerSize * 5, playerSize * 5);
 				}
 				else if(joyDirY == "down"){
 					
-					ctx.drawImage(playerBottom, newX, newY, playerSize * 4, playerSize * 4);
+					ctx.drawImage(playerBottom, newX, newY, playerSize * 5, playerSize * 5);
 
 				}
 				else if(joyDirX == "" && joyDirY == ""){
 
-					ctx.drawImage(playerTop, newX, newY, playerSize * 4, playerSize * 4);
+					ctx.drawImage(playerTop, newX, newY, playerSize * 5, playerSize * 5);
 				}
 
 //*****************************This is the player************************************ */
@@ -4648,111 +4653,128 @@ for(let i = 0; i < numStars; i++) {
 
 				for(let j = 0; j < RandomShipFleet.length; j++){
 
-					//this is a colision with the randomly spawning ai guys
-					if (RandomShipFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && RandomShipFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
-					RandomShipFleet[j].y < InfectedFleet[i].y + InfectedFleet[i].size && RandomShipFleet[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
 
-						InfectedFleet[i].size += (playerSize / 2);
-						//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
-						InfectedFleet[i].hp += 2;
-						RandomShipFleet.splice(j, 1);
+					if(RandomShipFleet[j] != undefined){
 
+						//this is a colision with the randomly spawning ai guys
+						if (RandomShipFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && RandomShipFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
+						RandomShipFleet[j].y < InfectedFleet[i].y + InfectedFleet[i].size && RandomShipFleet[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
+
+							InfectedFleet[i].size += (playerSize / 2);
+							//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
+							InfectedFleet[i].hp += 2;
+							RandomShipFleet.splice(j, 1);
+
+						}
 					}
 
 				}
 
 				for(let j = 0; j < StalkerFleet.length; j++){
 
-					//this is a colision with the randomly spawning ai guys
-					if (StalkerFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && StalkerFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
-					StalkerFleet[j].y < InfectedFleet[i].y + InfectedFleet[i].size && StalkerFleet[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
+					if(StalkerFleet[j] != undefined){
 
-						InfectedFleet[i].size += playerSize;
-						//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
-						InfectedFleet[i].hp += 3;
-						StalkerFleet.splice(j, 1);
+						//this is a colision with the randomly spawning ai guys
+						if (StalkerFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && StalkerFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
+						StalkerFleet[j].y < InfectedFleet[i].y + InfectedFleet[i].size && StalkerFleet[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
 
+							InfectedFleet[i].size += playerSize;
+							//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
+							InfectedFleet[i].hp += 3;
+							StalkerFleet.splice(j, 1);
+
+						}
 					}
-
+					
 				}
 
 				for(let j = 0; j < HunterFleet.length; j++){
 
-					//this is a colision with the randomly spawning ai guys
-					if (HunterFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && HunterFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
-					HunterFleet[j].y < InfectedFleet[i].y + InfectedFleet[i].size && HunterFleet[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
+					if(HunterFleet[j] != undefined){
 
-						InfectedFleet[i].size += (playerSize / 2);
-						//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
-						InfectedFleet[i].hp += 3;
-						HunterFleet.splice(j, 1);
+						//this is a colision with the randomly spawning ai guys
+						if (HunterFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && HunterFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
+						HunterFleet[j].y < InfectedFleet[i].y + InfectedFleet[i].size && HunterFleet[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
 
-					}
+							InfectedFleet[i].size += (playerSize / 2);
+							//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
+							InfectedFleet[i].hp += 3;
+							HunterFleet.splice(j, 1);
 
+						}
+					}	
 				}
 
 				for(let j = 0; j < BHEnemys.length; j++){
 
-					//this is a colision with the randomly spawning ai guys
-					if (BHEnemys[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && BHEnemys[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
-					BHEnemys[j].y < InfectedFleet[i].y + InfectedFleet[i].size && BHEnemys[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
+					if(BHEnemys[j] != undefined){
 
-						InfectedFleet[i].size += playerSize;
-						//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
-						InfectedFleet[i].hp += 4;
-						BHEnemys.splice(j, 1);
+						//this is a colision with the randomly spawning ai guys
+						if (BHEnemys[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && BHEnemys[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
+						BHEnemys[j].y < InfectedFleet[i].y + InfectedFleet[i].size && BHEnemys[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
 
+							InfectedFleet[i].size += playerSize;
+							//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
+							InfectedFleet[i].hp += 4;
+							BHEnemys.splice(j, 1);
+
+						}
 					}
-
 				}
 
 				for(let j = 0; j < InfectedFleet.length; j++){
 
-					//this is a colision with the randomly spawning ai guys
-					if (InfectedFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && InfectedFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
-					InfectedFleet[j].y < InfectedFleet[i].y + InfectedFleet[i].size && InfectedFleet[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
+					if(InfectedFleet[j] != undefined){
 
-						if(InfectedFleet[i].size > InfectedFleet[j].size){
+						//this is a colision with the randomly spawning ai guys
+						if (InfectedFleet[j].x < InfectedFleet[i].x + InfectedFleet[i].size  && InfectedFleet[j].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
+						InfectedFleet[j].y < InfectedFleet[i].y + InfectedFleet[i].size && InfectedFleet[j].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
 
-							InfectedFleet[i].size += playerSize;
-							//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
-							InfectedFleet[i].hp += 4;
-							InfectedFleet.splice(j, 1);
+							if(InfectedFleet[i].size > InfectedFleet[j].size){
 
-						}						
+								InfectedFleet[i].size += playerSize;
+								//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
+								InfectedFleet[i].hp += 4;
+								InfectedFleet.splice(j, 1);
 
+							}						
+
+						}
 					}
-
 				}
 
 				for(let k = 0; k < BulletPowerPack.length; k++){
 
-					//this is a colision with the randomly spawning ai guys
-					if (BulletPowerPack[k].x < InfectedFleet[i].x + InfectedFleet[i].size  && BulletPowerPack[k].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
-					BulletPowerPack[k].y < InfectedFleet[i].y + InfectedFleet[i].size && BulletPowerPack[k].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
+					if(BulletPowerPack[k] != undefined){
 
-							InfectedFleet[i].size += playerSize;
-							//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
-							InfectedFleet[i].hp += 4;
-							BulletPowerPack.splice(k, 1);					
+						//this is a colision with the randomly spawning ai guys
+						if (BulletPowerPack[k].x < InfectedFleet[i].x + InfectedFleet[i].size  && BulletPowerPack[k].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
+						BulletPowerPack[k].y < InfectedFleet[i].y + InfectedFleet[i].size && BulletPowerPack[k].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
 
+								InfectedFleet[i].size += playerSize;
+								//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
+								InfectedFleet[i].hp += 4;
+								BulletPowerPack.splice(k, 1);					
+
+						}
 					}
-
 				}
 
 				for(let l = 0; l < LifePowerPack.length; l++){
 
-					//this is a colision with the randomly spawning ai guys
-					if (LifePowerPack[l].x < InfectedFleet[i].x + InfectedFleet[i].size  && LifePowerPack[l].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
-					LifePowerPack[l].y < InfectedFleet[i].y + InfectedFleet[i].size && LifePowerPack[l].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
+					if(LifePowerPack[l] != undefined){
 
-							InfectedFleet[i].size += playerSize;
-							//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
-							InfectedFleet[i].hp += 4;
-							LifePowerPack.splice(l, 1);						
+						//this is a colision with the randomly spawning ai guys
+						if (LifePowerPack[l].x < InfectedFleet[i].x + InfectedFleet[i].size  && LifePowerPack[l].x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
+						LifePowerPack[l].y < InfectedFleet[i].y + InfectedFleet[i].size && LifePowerPack[l].y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
 
+								InfectedFleet[i].size += playerSize;
+								//InfectedFleet[i].direction = Math.round(Math.random() * 7) + 1;
+								InfectedFleet[i].hp += 4;
+								LifePowerPack.splice(l, 1);						
+
+						}
 					}
-
 				}
 
 								
@@ -4811,28 +4833,29 @@ for(let i = 0; i < numStars; i++) {
 
 				for(let b = 0; b < BlackBox.length; b++){
 
-					
-					if (InfectedFleet[i].x < BlackBox[b].x + ((InfectedFleet[i].size / 4) * 3)  && InfectedFleet[i].x + ((InfectedFleet[i].size / (playerSize / 4)) * 3)  > BlackBox[b].x &&
-					 InfectedFleet[i].y < BlackBox[b].y + ((InfectedFleet[i].size / 4) * 3) && InfectedFleet[i].y + ((InfectedFleet[i].size / (playerSize / 4)) * 3) > BlackBox[b].y) {
+					if(InfectedFleet[i] != undefined){
 
-						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
-						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
-						 BlackBox[b].hp -= 1;
+						if (InfectedFleet[i].x < BlackBox[b].x + ((InfectedFleet[i].size / 4) * 3)  && InfectedFleet[i].x + ((InfectedFleet[i].size / (playerSize / 4)) * 3)  > BlackBox[b].x &&
+					 	InfectedFleet[i].y < BlackBox[b].y + ((InfectedFleet[i].size / 4) * 3) && InfectedFleet[i].y + ((InfectedFleet[i].size / (playerSize / 4)) * 3) > BlackBox[b].y) {
 
-						 if(InfectedFleet[i].size > (playerSize * 5)){
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
+							BlackBox[b].hp -= 1;
 
-							BlackBox[b].hp -= 15;
+							if(InfectedFleet[i].size > (playerSize * 5)){
+
+								BlackBox[b].hp -= 15;
+
+							}
+							else{
+
+								BlackBox[b].hp -= 10;
+							} 
+
+							InfectedFleet.splice(i, 1); //this will destroy the enemy
 
 						}
-						else{
-
-							BlackBox[b].hp -= 10;
-						} 
-
-						 InfectedFleet.splice(i, 1); //this will destroy the enemy
-
-					 }
-
+					}
 				}
 				
 			}
@@ -4895,17 +4918,19 @@ for(let i = 0; i < numStars; i++) {
 
 				for(let b = 0; b < BlackBox.length; b++){
 
-					
-					if (HunterFleet[i].x < BlackBox[b].x + (playerSize * 3)  && HunterFleet[i].x + (playerSize * 3)  > BlackBox[b].x &&
-					 HunterFleet[i].y < BlackBox[b].y + (playerSize * 3) && HunterFleet[i].y + (playerSize * 3) > BlackBox[b].y) {
+					if(HunterFleet[i] != undefined){
+
+						if (HunterFleet[i].x < BlackBox[b].x + (playerSize * 3)  && HunterFleet[i].x + (playerSize * 3)  > BlackBox[b].x &&
+					 	HunterFleet[i].y < BlackBox[b].y + (playerSize * 3) && HunterFleet[i].y + (playerSize * 3) > BlackBox[b].y) {
 
 						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
 						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
 						 BlackBox[b].hp -= 1;
 						 HunterFleet.splice(i, 1); //this will destroy the enemy on colision with the player
 
-					 }
-
+					 	}
+					}
+					
 				}
 				
 				// if (HunterFleet[i].x > canvas.width) { // colision with game boarders x-axis playerSize is about 19.43999
@@ -4985,17 +5010,18 @@ for(let i = 0; i < numStars; i++) {
 
 				for(let b = 0; b < BlackBox.length; b++){
 
-					
-					if (LazerBattery[i].x < BlackBox[b].x + (playerSize * 3)  && LazerBattery[i].x + (playerSize * 3)  > BlackBox[b].x &&
-					 LazerBattery[i].y < BlackBox[b].y + (playerSize * 3) && LazerBattery[i].y + (playerSize * 3) > BlackBox[b].y) {
+					if(LazerBattery[i] != undefined){
 
-						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
-						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
-						 BlackBox[b].hp -= 2;
-						 LazerBattery.splice(i, 1); //this will destroy the enemy on colision with the player
+						if (LazerBattery[i].x < BlackBox[b].x + (playerSize * 3)  && LazerBattery[i].x + (playerSize * 3)  > BlackBox[b].x &&
+					 	LazerBattery[i].y < BlackBox[b].y + (playerSize * 3) && LazerBattery[i].y + (playerSize * 3) > BlackBox[b].y) {
 
-					 }
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
+							BlackBox[b].hp -= 2;
+							LazerBattery.splice(i, 1); //this will destroy the enemy on colision with the player
 
+						}
+					}
 				}
 				
 				// if (HunterFleet[i].x > canvas.width) { // colision with game boarders x-axis playerSize is about 19.43999
@@ -5077,16 +5103,18 @@ for(let i = 0; i < numStars; i++) {
 
 				for(let b = 0; b < BlackBox.length; b++){
 
-					
-					if (StalkerFleet[i].x < BlackBox[b].x + (playerSize * 3)  && StalkerFleet[i].x + (playerSize * 3)  > BlackBox[b].x &&
-					 StalkerFleet[i].y < BlackBox[b].y + (playerSize * 3) && StalkerFleet[i].y + (playerSize * 3) > BlackBox[b].y) {
+					if(StalkerFleet[i] != undefined){
 
-						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
-						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
-						 BlackBox[b].hp -= 1;
-						 StalkerFleet.splice(i, 1); //this will destroy the enemy on colision with the player
+						if (StalkerFleet[i].x < BlackBox[b].x + (playerSize * 3)  && StalkerFleet[i].x + (playerSize * 3)  > BlackBox[b].x &&
+						StalkerFleet[i].y < BlackBox[b].y + (playerSize * 3) && StalkerFleet[i].y + (playerSize * 3) > BlackBox[b].y) {
 
-					 }
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
+							BlackBox[b].hp -= 1;
+							StalkerFleet.splice(i, 1); //this will destroy the enemy on colision with the player
+
+						}
+					}
 
 				}
 				
