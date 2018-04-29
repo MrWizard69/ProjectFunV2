@@ -275,7 +275,7 @@ h3{
 		z-index: 11;
 		width: 15%;
 		top: 73%;
-		left: 40%;
+		left: 42%;
 	}
 
 	#rotate-image-message{
@@ -285,7 +285,7 @@ h3{
 		z-index: 11;
 		width: 50%;
 		color: white;
-		left: 28%;
+		left: 31%;
 		top: 79%;
 	}
 
@@ -303,6 +303,13 @@ h3{
 
 	#title-image{
 		top: 1%;
+	}
+}
+
+@media screen and (max-width: 320px) {
+
+	#rotate-image-message{
+		left: 26%;
 	}
 }
 
