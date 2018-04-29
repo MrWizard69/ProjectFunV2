@@ -704,92 +704,92 @@ for(let i = 0; i < numStars; i++) {
 			
 			
 		//this will create new enemies
-		// randomShipInterval = setInterval(function(){
+		randomShipInterval = setInterval(function(){
 
-		// 	if(moveReady == true && shootReady == true){
+			if(moveReady == true && shootReady == true){
                 
-        //         let Enemy1 = Object.assign({}, RandomShip);
-		// 		Enemy1.x = Math.round(Math.random() * (canvas.width * .90));
-		// 		Enemy1.y = Math.round(Math.random() * (canvas.height * .90));
-		// 		Enemy1.direction = Math.round(Math.random() * 7);
+                let Enemy1 = Object.assign({}, RandomShip);
+				Enemy1.x = Math.round(Math.random() * (canvas.width * .90));
+				Enemy1.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy1.direction = Math.round(Math.random() * 7);
 				
-		// 		if (exitReload == 0 || x > Enemy1.x && x < Enemy1.x && //TODO: Figure out a way to get the enemys to ONLY spawn around the player
-		// 			y > Enemy1.y && y < Enemy1.y + (playerSize * 15)) {
+				if (exitReload == 0 || x > Enemy1.x && x < Enemy1.x && //TODO: Figure out a way to get the enemys to ONLY spawn around the player
+					y > Enemy1.y && y < Enemy1.y + (playerSize * 15)) {
 						
-		// 			RandomShipFleet.push(Enemy1);
+					RandomShipFleet.push(Enemy1);
 				
-		// 		}
-		// 	}
+				}
+			}
 
-		// }, 1100);
+		}, 1100);
 		
-		// hunterShipInterval = setInterval(function(){
+		hunterShipInterval = setInterval(function(){
 
-		// 	if(moveReady == true && shootReady == true){
+			if(moveReady == true && shootReady == true){
                 
-        //         let Enemy2 = Object.assign({}, Hunter);
-		// 		Enemy2.x = Math.round(Math.random() * (canvas.width * .90));
-		// 		Enemy2.y = Math.round(Math.random() * (canvas.height * .90));
+                let Enemy2 = Object.assign({}, Hunter);
+				Enemy2.x = Math.round(Math.random() * (canvas.width * .90));
+				Enemy2.y = Math.round(Math.random() * (canvas.height * .90));
 				
-		// 		if (exitReload == 0 || x < Enemy2.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy2.x &&
-		// 			y < Enemy2.y + (playerSize * 15) && y + (playerSize * 15) > Enemy2.y) {
+				if (exitReload == 0 || x < Enemy2.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy2.x &&
+					y < Enemy2.y + (playerSize * 15) && y + (playerSize * 15) > Enemy2.y) {
 					
-		// 			HunterFleet.push(Enemy2);
-		// 		}
+					HunterFleet.push(Enemy2);
+				}
 				
-		// 	}
+			}
 
-		// }, 5000);	
+		}, 5000);	
 		
-		// stalkerShipInterval = setInterval(function(){
+		stalkerShipInterval = setInterval(function(){
 
-		// 	if(moveReady == true && shootReady == true){
+			if(moveReady == true && shootReady == true){
                 
-        //         let Enemy3 = Object.assign({}, Stalker);
-		// 		Enemy3.x = Math.round(Math.random() * (canvas.width * .90));
-		// 		Enemy3.y = Math.round(Math.random() * (canvas.height * .90));
+                let Enemy3 = Object.assign({}, Stalker);
+				Enemy3.x = Math.round(Math.random() * (canvas.width * .90));
+				Enemy3.y = Math.round(Math.random() * (canvas.height * .90));
 				
-		// 		if (exitReload == 0 || x < Enemy3.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy3.x &&
-		// 			y < Enemy3.y + (playerSize * 15) && y + (playerSize * 15) > Enemy3.y) {
+				if (exitReload == 0 || x < Enemy3.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy3.x &&
+					y < Enemy3.y + (playerSize * 15) && y + (playerSize * 15) > Enemy3.y) {
 						
-		// 			StalkerFleet.push(Enemy3);
-		// 		}
-		// 	}
+					StalkerFleet.push(Enemy3);
+				}
+			}
 
-		// }, 9000);	
+		}, 9000);	
 		
 		
-		// lifePupInterval = setInterval(function(){
+		lifePupInterval = setInterval(function(){
 
-		// 	if(moveReady == true && shootReady == true){
+			if(moveReady == true && shootReady == true){
                 
-        //         let LifePup = Object.assign({}, LifePowerUp);
-		// 		LifePup.x = Math.round(Math.random() * (canvas.width * .90));
-		// 		LifePup.y = Math.round(Math.random() * (canvas.height * .90));
+                let LifePup = Object.assign({}, LifePowerUp);
+				LifePup.x = Math.round(Math.random() * (canvas.width * .90));
+				LifePup.y = Math.round(Math.random() * (canvas.height * .90));
 				
-		// 		if(exitReload == 0){
+				if(exitReload == 0){
 						
-		// 			LifePowerPack.push(LifePup);
-		// 		}
-		// 	}
+					LifePowerPack.push(LifePup);
+				}
+			}
 
-		// }, 25000); //60000
+		}, 25000); //60000
 		
-		// bulletPupInterval = setInterval(function(){
+		bulletPupInterval = setInterval(function(){
 
-		// 	if(moveReady == true && shootReady == true){
+			if(moveReady == true && shootReady == true){
                 
-        //         let BulletPup = Object.assign({}, BulletPowerUp);
-		// 		BulletPup.x = Math.round(Math.random() * (canvas.width * .90));
-		// 		BulletPup.y = Math.round(Math.random() * (canvas.height * .90));
+                let BulletPup = Object.assign({}, BulletPowerUp);
+				BulletPup.x = Math.round(Math.random() * (canvas.width * .90));
+				BulletPup.y = Math.round(Math.random() * (canvas.height * .90));
 				
-		// 		if(exitReload == 0){
+				if(exitReload == 0){
 						
-		// 			BulletPowerPack.push(BulletPup);
-		// 		}
-		// 	}
+					BulletPowerPack.push(BulletPup);
+				}
+			}
 
-		// }, 20000);	//30000	
+		}, 20000);	//30000	
 
 
 		blackBoxInterval = setInterval(function(){
@@ -807,25 +807,25 @@ for(let i = 0; i < numStars; i++) {
 				}
 			}
 
-		}, 2000);	//55000
+		}, 55000);	//55000
 
-		// infectedShipInterval = setInterval(function(){
+		infectedShipInterval = setInterval(function(){
 
-		// 	if(moveReady == true && shootReady == true){
+			if(moveReady == true && shootReady == true){
                 
-        //         let Enemy5 = Object.assign({}, InfectedShip);
-		// 		Enemy5.x = Math.round(Math.random() * (canvas.width * .90));
-		// 		Enemy5.y = Math.round(Math.random() * (canvas.height * .90));
-		// 		Enemy5.direction = Math.round(Math.random() * 7);
+                let Enemy5 = Object.assign({}, InfectedShip);
+				Enemy5.x = Math.round(Math.random() * (canvas.width * .90));
+				Enemy5.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy5.direction = Math.round(Math.random() * 7);
 				
-		// 		if (exitReload == 0 || x < Enemy5.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy5.x &&
-		// 			y < Enemy5.y + (playerSize * 15) && y + (playerSize * 15) > Enemy5.y) {
+				if (exitReload == 0 || x < Enemy5.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy5.x &&
+					y < Enemy5.y + (playerSize * 15) && y + (playerSize * 15) > Enemy5.y) {
 						
-		// 			InfectedFleet.push(Enemy5);
-		// 		}
-		// 	}
+					InfectedFleet.push(Enemy5);
+				}
+			}
 
-		// }, 30000);		
+		}, 30000);		
         
         document.getElementById("play").style.display = "none";
         document.getElementById("title").style.display = "none";
@@ -2664,7 +2664,7 @@ for(let i = 0; i < numStars; i++) {
             // ctx.arc(target.Ex, target.Ey, playerSize, 0, Math.PI * 2); // draws the ai. ai has hard coded position
             // ctx.fill();
             // ctx.closePath();
-			var flicker = Math.floor((Math.random() * 30) + 1);
+			let flicker = Math.floor((Math.random() * 30) + 1);
 
 			if(flicker == 15){
 
@@ -2707,7 +2707,7 @@ for(let i = 0; i < numStars; i++) {
 			
 			
 			
-			setTimeout(update, 30); //refresh the screen to update positions// was 30
+			setTimeout(update, 28); //refresh the screen to update positions// was 30
 
         }
 		
@@ -2719,7 +2719,7 @@ for(let i = 0; i < numStars; i++) {
          };
 		 
 		 
-		 var PlayerBullet = {
+		 let PlayerBullet = {
   			color: "yellow",
   			x: x,
   			y: y,
@@ -2862,7 +2862,7 @@ for(let i = 0; i < numStars; i++) {
 					}
 
 
-				for(var i = 0; i < BlackBox.length; i++){
+				for(let i = 0; i < BlackBox.length; i++){
 
 					 if (this.x < BlackBox[i].x + (playerSize * 17)  && this.x + (playerSize * 17)  > BlackBox[i].x &&
 					 this.y < BlackBox[i].y + (playerSize * 17) && this.y + (playerSize * 17) > BlackBox[i].y) {
@@ -5184,20 +5184,25 @@ for(let i = 0; i < numStars; i++) {
             	} else if (BHEnemys[i].y < playerSize - 1) {
 				
 					BHEnemys.splice(i, 1);
-            	}
+				}
+				
+				
 
 				for(let b = 0; b < BlackBox.length; b++){
 
-					
-					if (BHEnemys[i].x < BlackBox[b].x + (playerSize * 3)  && BHEnemys[i].x + (playerSize * 3)  > BlackBox[b].x &&
-					 BHEnemys[i].y < BlackBox[b].y + (playerSize * 3) && BHEnemys[i].y + (playerSize * 3) > BlackBox[b].y) {
+					if(BHEnemys[i] != undefined){
 
-						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
-						 fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
-						 BlackBox[b].hp -= 1;
-						 BHEnemys.splice(i, 1); //this will destroy the enemy
+						if (BHEnemys[i].x < BlackBox[b].x + (playerSize * 3)  && BHEnemys[i].x + (playerSize * 3)  > BlackBox[b].x &&
+						BHEnemys[i].y < BlackBox[b].y + (playerSize * 3) && BHEnemys[i].y + (playerSize * 3) > BlackBox[b].y) {
 
-					 }
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[b].x, BlackBox[b].y ) );
+							BlackBox[b].hp -= 1;
+							BHEnemys.splice(i, 1); //this will destroy the enemy
+
+						}
+
+					}
 
 				}
 
