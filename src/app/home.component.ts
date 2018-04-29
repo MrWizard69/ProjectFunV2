@@ -69,6 +69,8 @@ let slowMotion = false;
 let slowMoDelay;
 let x = 0;
 let y = 0;
+let newX = 0; //newX and newY are for the players image placement
+let newY = 0 //x and y are still used for collisions and shooting position
 let ctx;
 let slowHue = 240;
 let slowShade = 100;
@@ -288,6 +290,9 @@ for(let i = 0; i < numStars; i++) {
 			x = playerPositionX;
 			y = playerPositionY;
 
+			newX = canvas.width * .47;
+			newY = canvas.height * .45;
+
 			menu = true;
 			moveReady = false;
 			shootReady = false;
@@ -330,6 +335,7 @@ for(let i = 0; i < numStars; i++) {
 				
 				document.getElementById("highscore").style.display = "inline-block";
 				document.getElementById("desktopOptions").style.display = "inline-block";
+				document.getElementById("title-image").style.display = "inline-block";
 			 }
 
 			// console.log(joystick);
@@ -370,7 +376,7 @@ for(let i = 0; i < numStars; i++) {
 		// }
     }
 
-    document.getElementById('restartBtn').addEventListener('touchstart', restartBtnTap);
+    document.getElementById('restartBtn').addEventListener('click', restartBtnTap);
 
     function restartBtnTap(){
 
@@ -500,6 +506,8 @@ for(let i = 0; i < numStars; i++) {
 			}
 		}, 30000);		
 		exitReload = 0;
+		moveReady = false;
+		shootReady = false;
 		score = 0;
 		lives = 3;
 		bulletSpeed = 0;
@@ -515,11 +523,16 @@ for(let i = 0; i < numStars; i++) {
 		BHEnemys = [];
 		InfectedFleet = [];
 		LazerBattery = [];
+		newX = canvas.width * .47;
+		newY = canvas.height * .45;
         document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
 		document.getElementById("restartBtn").style.display = "none";
 		document.getElementById("score").style.display = "inline-block";
 		document.getElementById("exitGame").style.display = "inline-block";
 		document.getElementById("title").style.display = "none";
+		document.getElementById("MoveStickInfo").style.display = "inline-block";
+		document.getElementById("ShootStickInfo").style.display = "inline-block";
+		document.getElementById("directInfo").style.display = "inline-block";
     }
 	
     document.getElementById("exitGame").style.display = "none";
@@ -707,8 +720,7 @@ for(let i = 0; i < numStars; i++) {
 				
 				}
 			}
-			//$("#result").html(entities.length);
-			//console.log(entities);
+
 		}, 1100);
 		
 		hunterShipInterval = setInterval(function(){
@@ -726,7 +738,7 @@ for(let i = 0; i < numStars; i++) {
 				}
 				
 			}
-			//console.log(entities);
+
 		}, 5000);	
 		
 		stalkerShipInterval = setInterval(function(){
@@ -743,7 +755,7 @@ for(let i = 0; i < numStars; i++) {
 					StalkerFleet.push(Enemy3);
 				}
 			}
-			//console.log(entities);
+
 		}, 9000);	
 		
 		
@@ -760,7 +772,7 @@ for(let i = 0; i < numStars; i++) {
 					LifePowerPack.push(LifePup);
 				}
 			}
-			//console.log(entities);
+
 		}, 25000); //60000
 		
 		bulletPupInterval = setInterval(function(){
@@ -776,7 +788,7 @@ for(let i = 0; i < numStars; i++) {
 					BulletPowerPack.push(BulletPup);
 				}
 			}
-			//console.log(entities);
+
 		}, 20000);	//30000	
 
 
@@ -794,7 +806,7 @@ for(let i = 0; i < numStars; i++) {
 					BlackBox.push(Enemy4);
 				}
 			}
-			//console.log(Enemy4);
+
 		}, 55000);	
 
 		infectedShipInterval = setInterval(function(){
@@ -812,7 +824,7 @@ for(let i = 0; i < numStars; i++) {
 					InfectedFleet.push(Enemy5);
 				}
 			}
-			//console.log(Enemy5);
+
 		}, 30000);		
         
         document.getElementById("play").style.display = "none";
@@ -859,6 +871,9 @@ for(let i = 0; i < numStars; i++) {
 		//when the screen size changes, the player will be redirected to the center of the screen
 		playerPositionX = canvas.width * .50;
 		playerPositionY = canvas.height * .50;
+
+		newX = canvas.width * .47;
+		newY = canvas.height * .45;
 		
 		//this will update the players position if the screen size changes
 		x = playerPositionX;
@@ -1051,9 +1066,10 @@ for(let i = 0; i < numStars; i++) {
             velX = 0,
             speed = 6,
             friction = 0.3, //0.98
-            keys = [];
+			keys = [];
 			
-		let timeout;	
+		newX = canvas.width * .47;
+		newY = canvas.height * .45;
 
         function update() { //------------player movement with keyboard---------------------------------//
 			
@@ -2575,24 +2591,36 @@ for(let i = 0; i < numStars; i++) {
             velY *= friction; //friction and final positioning
             y += velY;
             velX *= friction;
-            x += velX;
+			x += velX;
+
+			newX += velX;
+			newY += velY
 			
-			
-			if (x > canvas.width - playerSize) { // colision with game boarders x-axis playerSize is about 19.43999
-                x = canvas.width - playerSize;
-            } else if (x < playerSize) {
-                x = playerSize + 2;
+			if (x > canvas.width - playerSize * 2.1) { // colision with game boarders x-axis playerSize is about 19.43999
+                x = canvas.width - playerSize * 2.1;
+            } else if (x < playerSize * 2.1) {
+                x = playerSize * 2.1;
             }
 			
-			if (y > canvas.height - playerSize) { // colision with game boarders y-axis playerSize is about 19.43999
-                y = canvas.height - playerSize;
-            } else if (y < playerSize) {
-                y = playerSize + 2;
+			if (y > canvas.height - playerSize * 2.1) { // colision with game boarders y-axis playerSize is about 19.43999
+                y = canvas.height - playerSize * 2.1;
+            } else if (y < playerSize * 2.1) {
+                y = playerSize * 2.1;
             }
 			
 			
 			
+			if (newX > canvas.width - playerSize * 4) { // colision with game boarders x-axis playerSize is about 19.43999
+                newX = canvas.width - playerSize * 4;
+            } else if (newX < playerSize / 4) {
+                newX = playerSize / 4;
+            }
 			
+			if (newY > canvas.height - playerSize * 4) { // colision with game boarders y-axis playerSize is about 19.43999
+                newY = canvas.height - playerSize * 4;
+            } else if (newY < playerSize / 4) {
+                newY = playerSize / 4;
+            }
 			
 			
 			
@@ -4420,50 +4448,55 @@ for(let i = 0; i < numStars; i++) {
 			
 			if(menu == false){
 //*****************************This is the player************************************ */
+				// ctx.beginPath(); //this is the player image position offset
+				// ctx.fillStyle = "#A23BEC";
+				// ctx.arc(newX, newY, playerSize, 0, Math.PI * 2); // draw the player playerSize is about 19.43999
+				// ctx.fill();
+				// ctx.closePath();
 
-				ctx.beginPath(); //this is the player
-				ctx.fillStyle = "#A23BEC";
-				ctx.arc(x, y, playerSize, 0, Math.PI * 2); // draw the player playerSize is about 19.43999
-				ctx.fill();
-				ctx.closePath();
+				// ctx.beginPath(); //this is the players true position
+				// ctx.fillStyle = "#A23BEC";
+				// ctx.arc(x, y, playerSize, 0, Math.PI * 2); // draw the player playerSize is about 19.43999
+				// ctx.fill();
+				// ctx.closePath();
 
-			// if(joyDirX == "left" && joyDirY == "up"){
-				
-			// 	ctx.drawImage(playerTopLeft, x * 0.93, y, playerSize * 4, playerSize * 4);
-			// }
-			// else if(joyDirX == "left" && joyDirY == "down" ){
-				
-			// 	ctx.drawImage(playerBottomLeft, x * 0.93, y, playerSize * 4, playerSize * 4);
-			// }
-			// else if(joyDirY == "up" && joyDirX == "right"){
-				
-			// 	ctx.drawImage(playerTopRight, x * 0.93, y, playerSize * 4, playerSize * 4);
-			// }
-			// else if(joyDirY == "down" && joyDirX == "right"){
-				
-			// 	ctx.drawImage(playerBottomRight, x * 0.93, y, playerSize * 4, playerSize * 4);
-			// }
-			// else if(joyDirX == "left"){
-				
-			// 	ctx.drawImage(playerLeft, x * 0.93, y, playerSize * 4, playerSize * 4);
-			// }
-			// else if(joyDirX == "right"){
-				
-			// 	ctx.drawImage(playerRight, x * 0.93, y, playerSize * 4, playerSize * 4);
-			// }
-			// else if(joyDirY == "up"){
-				
-			// 	ctx.drawImage(playerTop, x * 0.93, y, playerSize * 4, playerSize * 4);
-			// }
-			// else if(joyDirY == "down"){
-				
-			// 	ctx.drawImage(playerBottom, x * 0.93, y, playerSize * 4, playerSize * 4);
+				if(joyDirX == "left" && joyDirY == "up"){
+					
+					ctx.drawImage(playerTopLeft, newX, newY, playerSize * 4, playerSize * 4);
+				}
+				else if(joyDirX == "left" && joyDirY == "down" ){
+					
+					ctx.drawImage(playerBottomLeft, newX, newY, playerSize * 4, playerSize * 4);
+				}
+				else if(joyDirY == "up" && joyDirX == "right"){
+					
+					ctx.drawImage(playerTopRight, newX, newY, playerSize * 4, playerSize * 4);
+				}
+				else if(joyDirY == "down" && joyDirX == "right"){
+					
+					ctx.drawImage(playerBottomRight, newX, newY, playerSize * 4, playerSize * 4);
+				}
+				else if(joyDirX == "left"){
+					
+					ctx.drawImage(playerLeft, newX, newY, playerSize * 4, playerSize * 4);
+				}
+				else if(joyDirX == "right"){
+					
+					ctx.drawImage(playerRight, newX, newY, playerSize * 4, playerSize * 4);
+				}
+				else if(joyDirY == "up"){
+					
+					ctx.drawImage(playerTop, newX, newY, playerSize * 4, playerSize * 4);
+				}
+				else if(joyDirY == "down"){
+					
+					ctx.drawImage(playerBottom, newX, newY, playerSize * 4, playerSize * 4);
 
-			// }
-			// else if(joyDirX == "" && joyDirY == ""){
+				}
+				else if(joyDirX == "" && joyDirY == ""){
 
-			// 	ctx.drawImage(playerTop, x * 0.93, y, playerSize * 4, playerSize * 4);
-			// }
+					ctx.drawImage(playerTop, newX, newY, playerSize * 4, playerSize * 4);
+				}
 
 //*****************************This is the player************************************ */
 			}
@@ -4512,8 +4545,8 @@ for(let i = 0; i < numStars; i++) {
 					if(RandomShipFleet[i] != undefined){
 					
 					//this is a colision with the randomly spawning ai guys
-					if (x < RandomShipFleet[i].x + playerSize  && x + playerSize  > RandomShipFleet[i].x &&
-					y < RandomShipFleet[i].y + playerSize && y + playerSize > RandomShipFleet[i].y) {
+					if (x < RandomShipFleet[i].x + playerSize * 2  && x + playerSize * 2 > RandomShipFleet[i].x &&
+					y < RandomShipFleet[i].y + playerSize * 2 && y + playerSize * 2 > RandomShipFleet[i].y) {
 						// The objects are touching
 						
 						velX *= friction - 2; //this will stop the player from moving
@@ -5220,172 +5253,180 @@ for(let i = 0; i < numStars; i++) {
 					}
 
 				}
-								
-				//this is a colision with the player and the black hole
-				if (x < BlackBox[i].x + (playerSize * 2)  && x + (playerSize * 2)  > BlackBox[i].x &&
-				y < BlackBox[i].y + (playerSize * 2) && y + (playerSize * 2) > BlackBox[i].y) {
-					// The objects are touching
-				
-					lives -= 2;
 
-					fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[i].x, BlackBox[i].y ) );
-					fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[i].x, BlackBox[i].y ) );
+				if(BlackBox[i] != undefined){
+								
+					//this is a colision with the player and the black hole
+					if (x < BlackBox[i].x + (playerSize * 2)  && x + (playerSize * 2)  > BlackBox[i].x &&
+					y < BlackBox[i].y + (playerSize * 2) && y + (playerSize * 2) > BlackBox[i].y) {
+						// The objects are touching
 					
-					document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-					
-					if(lives < 1){
-							
-							exitReload = 1;
-							slowMotion = false;
-							lives = 0;
-							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-						}
-					
-					BlackBox.splice(i, 1); //this will destroy the enemy on colision with the player
+						lives -= 2;
+
+						fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[i].x, BlackBox[i].y ) );
+						fireworks.push( new Firework( canvas.width / 2, canvas.height, BlackBox[i].x, BlackBox[i].y ) );
+						
+						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+						
+						if(lives < 1){
+								
+								exitReload = 1;
+								slowMotion = false;
+								lives = 0;
+								document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+							}
+						
+						BlackBox.splice(i, 1); //this will destroy the enemy on colision with the player
+					}
+
 				}
 
 
 			//when the player is flying close to the black hole
 
-			if (x < BlackBox[i].x + (playerSize * 17)  && x + (playerSize * 17)  > BlackBox[i].x &&
-			y < BlackBox[i].y + (playerSize * 17) && y + (playerSize * 17) > BlackBox[i].y) {
+			if(BlackBox[i] != undefined){
 
-				//this will make make the player move towards the black hole
+				if (x < BlackBox[i].x + (playerSize * 17)  && x + (playerSize * 17)  > BlackBox[i].x &&
+				y < BlackBox[i].y + (playerSize * 17) && y + (playerSize * 17) > BlackBox[i].y) {
 
-				  if(x < BlackBox[i].x && y < BlackBox[i].y){
-					 
-					 //this.x += 1;
-					 //this.y += 1;
+					//this will make make the player move towards the black hole
 
-					if(slowMotion == true){
+					if(x < BlackBox[i].x && y < BlackBox[i].y){
+						
+						//this.x += 1;
+						//this.y += 1;
 
-						x += (canvas.width) * 0.0010;
-					 	y += (canvas.height) * 0.0010;
-					 }
-					 else if(slowMotion == false){
+						if(slowMotion == true){
 
-						x += (canvas.width) * 0.0020;
-					 	y += (canvas.height) * 0.0020;
-					 } 
-					 
-				 }
-				 if(x > BlackBox[i].x && y > BlackBox[i].y){
-					 
-					 //this.x -= 1;
-					 //this.y -= 1;
+							x += (canvas.width) * 0.0010;
+							y += (canvas.height) * 0.0010;
+						}
+						else if(slowMotion == false){
 
-					if(slowMotion == true){
+							x += (canvas.width) * 0.0020;
+							y += (canvas.height) * 0.0020;
+						} 
+						
+					}
+					if(x > BlackBox[i].x && y > BlackBox[i].y){
+						
+						//this.x -= 1;
+						//this.y -= 1;
 
-						x -= (canvas.width) * 0.0010;
-					 	y -= (canvas.height) * 0.0010;
-					 }
-					 else if(slowMotion == false){
+						if(slowMotion == true){
 
-						x -= (canvas.width) * 0.0020;
-					 	y -= (canvas.height) * 0.0020;
-					 } 
+							x -= (canvas.width) * 0.0010;
+							y -= (canvas.height) * 0.0010;
+						}
+						else if(slowMotion == false){
 
-					 
-				 }
-				 if(x > BlackBox[i].x && y < BlackBox[i].y){
-					 
-					 //this.x -= 1;
-					 //this.y += 1;
+							x -= (canvas.width) * 0.0020;
+							y -= (canvas.height) * 0.0020;
+						} 
 
-					if(slowMotion == true){
+						
+					}
+					if(x > BlackBox[i].x && y < BlackBox[i].y){
+						
+						//this.x -= 1;
+						//this.y += 1;
 
-						x -= (canvas.width) * 0.0010;
-					 	y += (canvas.height) * 0.0010;
-					 }
-					 else if(slowMotion == false){
+						if(slowMotion == true){
 
-						x -= (canvas.width) * 0.0020;
-					 	y += (canvas.height) * 0.0020;
-					 } 
+							x -= (canvas.width) * 0.0010;
+							y += (canvas.height) * 0.0010;
+						}
+						else if(slowMotion == false){
 
-					 
-				 }
-				 if(x > BlackBox[i].x && y < BlackBox[i].y){
-					 
-					 //this.x -= 1;
-					 //this.y += 1;
+							x -= (canvas.width) * 0.0020;
+							y += (canvas.height) * 0.0020;
+						} 
 
-					 if(slowMotion == true){
+						
+					}
+					if(x > BlackBox[i].x && y < BlackBox[i].y){
+						
+						//this.x -= 1;
+						//this.y += 1;
 
-						x += (canvas.width) * 0.0010;
-					 	y -= (canvas.height) * 0.0010;
-					 }
-					 else if(slowMotion == false){
+						if(slowMotion == true){
 
-						x += (canvas.width) * 0.0020;
-					 	y -= (canvas.height) * 0.0020;
-					 } 
+							x += (canvas.width) * 0.0010;
+							y -= (canvas.height) * 0.0010;
+						}
+						else if(slowMotion == false){
 
-					 
-				 }
-				 if(x < BlackBox[i].x){
-					 
-					 //this.x += 1.1;
+							x += (canvas.width) * 0.0020;
+							y -= (canvas.height) * 0.0020;
+						} 
 
-					if(slowMotion == true){
+						
+					}
+					if(x < BlackBox[i].x){
+						
+						//this.x += 1.1;
 
-						x += (canvas.width) * 0.0010;
-					 }
-					 else if(slowMotion == false){
+						if(slowMotion == true){
 
-						x += (canvas.width) * 0.0020;
-					 } 
+							x += (canvas.width) * 0.0010;
+						}
+						else if(slowMotion == false){
 
-					 
-				 }
-				 if(y > BlackBox[i].y){
-					 
-					 //this.y -= 1.1;
+							x += (canvas.width) * 0.0020;
+						} 
 
-					if(slowMotion == true){
+						
+					}
+					if(y > BlackBox[i].y){
+						
+						//this.y -= 1.1;
 
-						y -= (canvas.height) * 0.0010;
-					 }
-					 else if(slowMotion == false){
+						if(slowMotion == true){
 
-						y -= (canvas.height) * 0.0020;
-					 } 
+							y -= (canvas.height) * 0.0010;
+						}
+						else if(slowMotion == false){
 
-					 
-				 }
-				 if(x > BlackBox[i].x){
-					 
-					 //this.x -= 1.1;
+							y -= (canvas.height) * 0.0020;
+						} 
 
-					if(slowMotion == true){
+						
+					}
+					if(x > BlackBox[i].x){
+						
+						//this.x -= 1.1;
 
-						x -= (canvas.width) * 0.0010;
-					 }
-					 else if(slowMotion == false){
+						if(slowMotion == true){
 
-						x -= (canvas.width) * 0.0020;
-					 } 
+							x -= (canvas.width) * 0.0010;
+						}
+						else if(slowMotion == false){
 
-					 
-				 }
-				 if(y < BlackBox[i].y){
-					 
-					 //this.y += 1.1;
+							x -= (canvas.width) * 0.0020;
+						} 
 
-					 if(slowMotion == true){
+						
+					}
+					if(y < BlackBox[i].y){
+						
+						//this.y += 1.1;
 
-						y += (canvas.height) * 0.0010;
-					 }
-					 else if(slowMotion == false){
+						if(slowMotion == true){
 
-						y += (canvas.height) * 0.0020;
-					 } 
+							y += (canvas.height) * 0.0010;
+						}
+						else if(slowMotion == false){
 
-					 
-				 }
+							y += (canvas.height) * 0.0020;
+						} 
+
+						
+					}
 
 
+					}
 				}
+				//
 
 				 if(BlackBox[i].hp < 1){
 

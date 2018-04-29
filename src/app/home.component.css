@@ -197,7 +197,7 @@ h3{
 	position: absolute;
     top: 77%;
     color: white;
-    left: 36%;
+    left: 31.5%;
 }
 
 @media screen and (max-width: 1000px) {
@@ -243,9 +243,11 @@ h3{
 	#directInfo{
 
 		position: absolute;
-		top: 77%;
+		top: 70%;
 		color: white;
-		left: 18%;
+		left: 28%;
+		width: 43%;
+		line-height: 2em;
 	}
 
 	/* #play{
