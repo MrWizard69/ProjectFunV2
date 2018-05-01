@@ -389,23 +389,24 @@ for(let i = 0; i < numStars; i++) {
 		clearInterval(bulletPupInterval);
 		clearInterval(blackBoxInterval);
 		clearInterval(infectedShipInterval);
+
 		//this will create new enemies
 		randomShipInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy1 = Object.assign({}, RandomShip);
-				Enemy1.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy1.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy1.x = Math.round(Math.random() * (canvas.width * .80) + (canvas.width / 15));
+				Enemy1.y = Math.round(Math.random() * (canvas.height * .80) + (canvas.height / 15));
 				Enemy1.direction = Math.round(Math.random() * 7);
-				
-				if (exitReload == 0 || x > Enemy1.x && x < Enemy1.x && //TODO: Figure out a way to get the enemys to ONLY spawn around the player
-					y > Enemy1.y && y < Enemy1.y + (playerSize * 15)) {
+
+				if (exitReload == 0 && Enemy1.x > x + (playerSize * 3) || Enemy1.x + (playerSize * 3)  < x &&
+				Enemy1.y > y + (playerSize * 3) || Enemy1.y + (playerSize * 3) < y) {
 						
 					RandomShipFleet.push(Enemy1);
-				
 				}
 			}
+
 		}, 1100);
 		
 		hunterShipInterval = setInterval(function(){
@@ -413,16 +414,17 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy2 = Object.assign({}, Hunter);
-				Enemy2.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy2.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy2.x = Math.round(Math.random() * (canvas.width * .90) + (canvas.width / 15));
+				Enemy2.y = Math.round(Math.random() * (canvas.height * .90) + (canvas.height / 15));
 				
-				if (exitReload == 0 || x < Enemy2.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy2.x &&
-					y < Enemy2.y + (playerSize * 15) && y + (playerSize * 15) > Enemy2.y) {
+				if (exitReload == 0 && Enemy2.x > x + (playerSize * 3) || Enemy2.x + (playerSize * 3)  < x &&
+				Enemy2.y > y + (playerSize * 3) || Enemy2.y + (playerSize * 3) < y) {
 					
 					HunterFleet.push(Enemy2);
 				}
 				
 			}
+
 		}, 5000);	
 		
 		stalkerShipInterval = setInterval(function(){
@@ -430,15 +432,16 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy3 = Object.assign({}, Stalker);
-				Enemy3.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy3.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy3.x = Math.round(Math.random() * (canvas.width * .90) + (canvas.width / 15));
+				Enemy3.y = Math.round(Math.random() * (canvas.height * .90) + (canvas.height / 15));
 				
-				if (exitReload == 0 || x < Enemy3.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy3.x &&
-					y < Enemy3.y + (playerSize * 15) && y + (playerSize * 15) > Enemy3.y) {
+				if (exitReload == 0 && Enemy3.x > x + (playerSize * 3) || Enemy3.x + (playerSize * 3)  < x &&
+				Enemy3.y > y + (playerSize * 3) || Enemy3.y + (playerSize * 3) < y) {
 						
 					StalkerFleet.push(Enemy3);
 				}
 			}
+
 		}, 9000);	
 		
 		
@@ -447,14 +450,15 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let LifePup = Object.assign({}, LifePowerUp);
-				LifePup.x = Math.round(Math.random() * (canvas.width * .90));
-				LifePup.y = Math.round(Math.random() * (canvas.height * .90));
+				LifePup.x = Math.round(Math.random() * (canvas.width * .80) + (canvas.width / 15));
+				LifePup.y = Math.round(Math.random() * (canvas.height * .80) + (canvas.height / 15));
 				
 				if(exitReload == 0){
 						
 					LifePowerPack.push(LifePup);
 				}
 			}
+
 		}, 25000); //60000
 		
 		bulletPupInterval = setInterval(function(){
@@ -462,15 +466,16 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let BulletPup = Object.assign({}, BulletPowerUp);
-				BulletPup.x = Math.round(Math.random() * (canvas.width * .90));
-				BulletPup.y = Math.round(Math.random() * (canvas.height * .90));
+				BulletPup.x = Math.round(Math.random() * (canvas.width * .80) + (canvas.width / 15));
+				BulletPup.y = Math.round(Math.random() * (canvas.height * .80) + (canvas.height / 15));
 				
 				if(exitReload == 0){
 						
 					BulletPowerPack.push(BulletPup);
 				}
 			}
-		}, 20000);	//30000	
+
+		}, 20000);	//20000	
 
 
 		blackBoxInterval = setInterval(function(){
@@ -478,33 +483,35 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy4 = Object.assign({}, BlackHole);
-				Enemy4.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy4.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy4.x = Math.round(Math.random() * (canvas.width * .90) + (canvas.width / 15));
+				Enemy4.y = Math.round(Math.random() * (canvas.height * .90) + (canvas.height / 15));
 				
-				if (exitReload == 0 || x < Enemy4.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy4.x &&
-					y < Enemy4.y + (playerSize * 15) && y + (playerSize * 15) > Enemy4.y) {
+				if (exitReload == 0 && Enemy4.x > x + (playerSize * 3) || Enemy4.x + (playerSize * 3)  < x &&
+				Enemy4.y > y + (playerSize * 3) || Enemy4.y + (playerSize * 3) < y) {
 						
 					BlackBox.push(Enemy4);
 				}
 			}
-		}, 55000);	
+
+		}, 35000);	//55000
 
 		infectedShipInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy5 = Object.assign({}, InfectedShip);
-				Enemy5.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy5.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy5.x = Math.round(Math.random() * (canvas.width * .90) + (canvas.width / 15));
+				Enemy5.y = Math.round(Math.random() * (canvas.height * .90) + (canvas.height / 15));
 				Enemy5.direction = Math.round(Math.random() * 7);
 				
-				if (exitReload == 0 || x < Enemy5.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy5.x &&
-					y < Enemy5.y + (playerSize * 15) && y + (playerSize * 15) > Enemy5.y) {
+				if (exitReload == 0 && Enemy5.x > x + (playerSize * 3) || Enemy5.x + (playerSize * 3)  < x &&
+				Enemy5.y > y + (playerSize * 3) || Enemy5.y + (playerSize * 3) < y) {
 						
 					InfectedFleet.push(Enemy5);
 				}
 			}
-		}, 30000);		
+
+		}, 30000);
 		exitReload = 0;
 		moveReady = false;
 		shootReady = false;
@@ -699,9 +706,6 @@ for(let i = 0; i < numStars; i++) {
 			});
 
 		}, 400);
-
-		
-			
 			
 		//this will create new enemies
 		randomShipInterval = setInterval(function(){
@@ -709,15 +713,14 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy1 = Object.assign({}, RandomShip);
-				Enemy1.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy1.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy1.x = Math.round(Math.random() * (canvas.width * .80) + (canvas.width / 15));
+				Enemy1.y = Math.round(Math.random() * (canvas.height * .80) + (canvas.height / 15));
 				Enemy1.direction = Math.round(Math.random() * 7);
-				
-				if (exitReload == 0 || x > Enemy1.x && x < Enemy1.x && //TODO: Figure out a way to get the enemys to ONLY spawn around the player
-					y > Enemy1.y && y < Enemy1.y + (playerSize * 15)) {
+
+				if (exitReload == 0 && Enemy1.x > x + (playerSize * 3) || Enemy1.x + (playerSize * 3)  < x &&
+				Enemy1.y > y + (playerSize * 3) || Enemy1.y + (playerSize * 3) < y) {
 						
 					RandomShipFleet.push(Enemy1);
-				
 				}
 			}
 
@@ -728,11 +731,11 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy2 = Object.assign({}, Hunter);
-				Enemy2.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy2.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy2.x = Math.round(Math.random() * (canvas.width * .90) + (canvas.width / 15));
+				Enemy2.y = Math.round(Math.random() * (canvas.height * .90) + (canvas.height / 15));
 				
-				if (exitReload == 0 || x < Enemy2.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy2.x &&
-					y < Enemy2.y + (playerSize * 15) && y + (playerSize * 15) > Enemy2.y) {
+				if (exitReload == 0 && Enemy2.x > x + (playerSize * 3) || Enemy2.x + (playerSize * 3)  < x &&
+				Enemy2.y > y + (playerSize * 3) || Enemy2.y + (playerSize * 3) < y) {
 					
 					HunterFleet.push(Enemy2);
 				}
@@ -746,11 +749,11 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy3 = Object.assign({}, Stalker);
-				Enemy3.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy3.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy3.x = Math.round(Math.random() * (canvas.width * .90) + (canvas.width / 15));
+				Enemy3.y = Math.round(Math.random() * (canvas.height * .90) + (canvas.height / 15));
 				
-				if (exitReload == 0 || x < Enemy3.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy3.x &&
-					y < Enemy3.y + (playerSize * 15) && y + (playerSize * 15) > Enemy3.y) {
+				if (exitReload == 0 && Enemy3.x > x + (playerSize * 3) || Enemy3.x + (playerSize * 3)  < x &&
+				Enemy3.y > y + (playerSize * 3) || Enemy3.y + (playerSize * 3) < y) {
 						
 					StalkerFleet.push(Enemy3);
 				}
@@ -764,8 +767,8 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let LifePup = Object.assign({}, LifePowerUp);
-				LifePup.x = Math.round(Math.random() * (canvas.width * .90));
-				LifePup.y = Math.round(Math.random() * (canvas.height * .90));
+				LifePup.x = Math.round(Math.random() * (canvas.width * .80) + (canvas.width / 15));
+				LifePup.y = Math.round(Math.random() * (canvas.height * .80) + (canvas.height / 15));
 				
 				if(exitReload == 0){
 						
@@ -780,8 +783,8 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let BulletPup = Object.assign({}, BulletPowerUp);
-				BulletPup.x = Math.round(Math.random() * (canvas.width * .90));
-				BulletPup.y = Math.round(Math.random() * (canvas.height * .90));
+				BulletPup.x = Math.round(Math.random() * (canvas.width * .80) + (canvas.width / 15));
+				BulletPup.y = Math.round(Math.random() * (canvas.height * .80) + (canvas.height / 15));
 				
 				if(exitReload == 0){
 						
@@ -789,7 +792,7 @@ for(let i = 0; i < numStars; i++) {
 				}
 			}
 
-		}, 20000);	//30000	
+		}, 20000);	//20000	
 
 
 		blackBoxInterval = setInterval(function(){
@@ -797,29 +800,29 @@ for(let i = 0; i < numStars; i++) {
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy4 = Object.assign({}, BlackHole);
-				Enemy4.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy4.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy4.x = Math.round(Math.random() * (canvas.width * .90) + (canvas.width / 15));
+				Enemy4.y = Math.round(Math.random() * (canvas.height * .90) + (canvas.height / 15));
 				
-				if (exitReload == 0 || x < Enemy4.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy4.x &&
-					y < Enemy4.y + (playerSize * 15) && y + (playerSize * 15) > Enemy4.y) {
+				if (exitReload == 0 && Enemy4.x > x + (playerSize * 3) || Enemy4.x + (playerSize * 3)  < x &&
+				Enemy4.y > y + (playerSize * 3) || Enemy4.y + (playerSize * 3) < y) {
 						
 					BlackBox.push(Enemy4);
 				}
 			}
 
-		}, 55000);	//55000
+		}, 35000);	//55000
 
 		infectedShipInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
                 
                 let Enemy5 = Object.assign({}, InfectedShip);
-				Enemy5.x = Math.round(Math.random() * (canvas.width * .90));
-				Enemy5.y = Math.round(Math.random() * (canvas.height * .90));
+				Enemy5.x = Math.round(Math.random() * (canvas.width * .90) + (canvas.width / 15));
+				Enemy5.y = Math.round(Math.random() * (canvas.height * .90) + (canvas.height / 15));
 				Enemy5.direction = Math.round(Math.random() * 7);
 				
-				if (exitReload == 0 || x < Enemy5.x + (playerSize * 15)  && x + (playerSize * 15)  > Enemy5.x &&
-					y < Enemy5.y + (playerSize * 15) && y + (playerSize * 15) > Enemy5.y) {
+				if (exitReload == 0 && Enemy5.x > x + (playerSize * 3) || Enemy5.x + (playerSize * 3)  < x &&
+				Enemy5.y > y + (playerSize * 3) || Enemy5.y + (playerSize * 3) < y) {
 						
 					InfectedFleet.push(Enemy5);
 				}
