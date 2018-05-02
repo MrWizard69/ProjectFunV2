@@ -794,7 +794,6 @@ for(let i = 0; i < numStars; i++) {
 
 		}, 20000);	//20000	
 
-
 		blackBoxInterval = setInterval(function(){
 
 			if(moveReady == true && shootReady == true){
@@ -810,7 +809,7 @@ for(let i = 0; i < numStars; i++) {
 				}
 			}
 
-		}, 35000);	//55000
+		}, 35000);	//35000
 
 		infectedShipInterval = setInterval(function(){
 
@@ -4782,57 +4781,58 @@ for(let i = 0; i < numStars; i++) {
 
 								
 				//this is a colision with the randomly spawning ai guys
-				if (x < InfectedFleet[i].x + InfectedFleet[i].size  && x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
-				y < InfectedFleet[i].y + InfectedFleet[i].size && y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
-					// The objects are touching
-				
-					velX *= friction - 2; //this will stop the player from moving
-					velY *= friction - 2;
-					
-					if(InfectedFleet[i].size >= (playerSize * 5)){
+				if(InfectedFleet[i] != undefined){
 
-						lives -= 6;
-
-					}
-					else{
-
-						lives -= 1;
-					} 
+					if (x < InfectedFleet[i].x + InfectedFleet[i].size  && x + (InfectedFleet[i].size / (playerSize / 4))  > InfectedFleet[i].x &&
+					y < InfectedFleet[i].y + InfectedFleet[i].size && y + (InfectedFleet[i].size / (playerSize / 4)) > InfectedFleet[i].y) {
+						// The objects are touching
 					
-					slowMo();
-					
-					if(bulletPower > 0){
+						velX *= friction - 2; //this will stop the player from moving
+						velY *= friction - 2;
 						
-						bulletPower -= 1;
-					}
-					else{
-						bulletPower = 0;
-					}
-					
-					if(shootStickTouch == false){
-						
-                        shootStickTapEnd();
-					}
-					else{
-                        shootStickTapEnd();
-                        shootStickTap();
-					}
-					
-					fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
-					document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-					
-					if(lives < 1){
-							
-							exitReload = 1;
-							slowMotion = false;
-							lives = 0;
-							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+						if(InfectedFleet[i].size >= (playerSize * 5)){
+	
+							lives -= 6;
+	
 						}
-					
-					InfectedFleet.splice(i, 1); //this will destroy the enemy on colision with the player
+						else{
+	
+							lives -= 1;
+						} 
+						
+						slowMo();
+						
+						if(bulletPower > 0){
+							
+							bulletPower -= 1;
+						}
+						else{
+							bulletPower = 0;
+						}
+						
+						if(shootStickTouch == false){
+							
+							shootStickTapEnd();
+						}
+						else{
+							shootStickTapEnd();
+							shootStickTap();
+						}
+						
+						fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
+						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+						
+						if(lives < 1){
+								
+								exitReload = 1;
+								slowMotion = false;
+								lives = 0;
+								document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+							}
+						
+						InfectedFleet.splice(i, 1); //this will destroy the enemy on colision with the player
+					}
 				}
-				
-				
 
 				for(let b = 0; b < BlackBox.length; b++){
 
@@ -4879,45 +4879,49 @@ for(let i = 0; i < numStars; i++) {
 				}
 								
 				//this is a colision with the randomly spawning ai guys
-				if (x < HunterFleet[i].x + playerSize  && x + playerSize  > HunterFleet[i].x &&
-				y < HunterFleet[i].y + playerSize && y + playerSize > HunterFleet[i].y) {
-					// The objects are touching
-				
-					velX *= friction - 2; //this will stop the player from moving
-					velY *= friction - 2;
-					lives -= 1;
-					slowMo();
-					
-					if(bulletPower > 0){
+				if(HunterFleet[i] != undefined){
+
+					if (x < HunterFleet[i].x + playerSize  && x + playerSize  > HunterFleet[i].x &&
+						y < HunterFleet[i].y + playerSize && y + playerSize > HunterFleet[i].y) {
+							// The objects are touching
 						
-						bulletPower -= 1;
-					}
-					else{
-						bulletPower = 0;
-					}
-					
-					if(shootStickTouch == false){
-						
-                        shootStickTapEnd();
-					}
-					else{
-                        shootStickTapEnd();
-                        shootStickTap();
-					}
-					
-					fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
-					document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-					
-					if(lives < 1){
+							velX *= friction - 2; //this will stop the player from moving
+							velY *= friction - 2;
+							lives -= 1;
+							slowMo();
 							
-							exitReload = 1;
-							lives = 0;
-							slowMotion = false;
+							if(bulletPower > 0){
+								
+								bulletPower -= 1;
+							}
+							else{
+								bulletPower = 0;
+							}
+							
+							if(shootStickTouch == false){
+								
+								shootStickTapEnd();
+							}
+							else{
+								shootStickTapEnd();
+								shootStickTap();
+							}
+							
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
 							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-						}
-					
-					HunterFleet.splice(i, 1); //this will destroy the enemy on colision with the player
+							
+							if(lives < 1){
+									
+									exitReload = 1;
+									lives = 0;
+									slowMotion = false;
+									document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+								}
+							
+							HunterFleet.splice(i, 1); //this will destroy the enemy on colision with the player
+					}
 				}
+				
 
 				for(let b = 0; b < BlackBox.length; b++){
 
@@ -4971,46 +4975,49 @@ for(let i = 0; i < numStars; i++) {
 				}
 								
 				//this is a colision with the randomly spawning ai guys
-				if (x < LazerBattery[i].x + playerSize  && x + playerSize  > LazerBattery[i].x &&
-				y < LazerBattery[i].y + playerSize && y + playerSize > LazerBattery[i].y) {
-					// The objects are touching
-				
-					velX *= friction - 2; //this will stop the player from moving
-					velY *= friction - 2;
-					lives -= 2;
-					slowMo();
-					
-					if(bulletPower > 0){
-						
-						bulletPower -= 1;
-					}
-					else{
-						bulletPower = 0;
-					}
-					
-					if(shootStickTouch == false){
-                        
-                        shootStickTapEnd();
-					}
-					else{
-                        shootStickTapEnd();
-                        shootStickTap();
-					}
-					
-					fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
-					document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-					
-					if(lives < 1){
-							
-							exitReload = 1;
-							lives = 0;
-							slowMotion = false;
-							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-						}
-					
-					LazerBattery.splice(i, 1); //this will destroy the enemy on colision with the player
-				}
+				if(LazerBattery[i] != undefined){
 
+					if (x < LazerBattery[i].x + playerSize  && x + playerSize  > LazerBattery[i].x &&
+					y < LazerBattery[i].y + playerSize && y + playerSize > LazerBattery[i].y) {
+							// The objects are touching
+						
+							velX *= friction - 2; //this will stop the player from moving
+							velY *= friction - 2;
+							lives -= 2;
+							slowMo();
+							
+							if(bulletPower > 0){
+								
+								bulletPower -= 1;
+							}
+							else{
+								bulletPower = 0;
+							}
+							
+							if(shootStickTouch == false){
+								
+								shootStickTapEnd();
+							}
+							else{
+								shootStickTapEnd();
+								shootStickTap();
+							}
+							
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+							
+							if(lives < 1){
+									
+									exitReload = 1;
+									lives = 0;
+									slowMotion = false;
+									document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+								}
+							
+							LazerBattery.splice(i, 1); //this will destroy the enemy on colision with the player
+					}
+				}
+				
 				for(let b = 0; b < BlackBox.length; b++){
 
 					if(LazerBattery[i] != undefined){
@@ -5063,47 +5070,50 @@ for(let i = 0; i < numStars; i++) {
 
 								
 				//this is a colision with the randomly spawning ai guys
-				if (x < StalkerFleet[i].x + playerSize  && x + playerSize  > StalkerFleet[i].x &&
-				y < StalkerFleet[i].y + playerSize && y + playerSize > StalkerFleet[i].y) {
-					// The objects are touching
-				
-					velX *= friction - 2; //this will stop the player from moving
-					velY *= friction - 2;					
-					lives -= 1;
-					slowMo();
-					
-					
-					if(bulletPower > 0){
-						
-						bulletPower -= 1;
-					}
-					else{
-						bulletPower = 0;
-					}
-					
-					if(shootStickTouch == false){
-						
-                        shootStickTapEnd();
-					}
-					else{
-                        shootStickTapEnd();
-                        shootStickTap();
-					}
-					
-					fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
-					document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-					
-					if(lives < 1){
-							
-							exitReload = 1;
-							slowMotion = false;
-							lives = 0;
-							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-						}
-					
-					StalkerFleet.splice(i, 1); //this will destroy the enemy on colision with the player
-				}
+				if(StalkerFleet[i] != undefined){
 
+					if (x < StalkerFleet[i].x + playerSize  && x + playerSize  > StalkerFleet[i].x &&
+					y < StalkerFleet[i].y + playerSize && y + playerSize > StalkerFleet[i].y) {
+							// The objects are touching
+						
+							velX *= friction - 2; //this will stop the player from moving
+							velY *= friction - 2;					
+							lives -= 1;
+							slowMo();
+							
+							
+							if(bulletPower > 0){
+								
+								bulletPower -= 1;
+							}
+							else{
+								bulletPower = 0;
+							}
+							
+							if(shootStickTouch == false){
+								
+								shootStickTapEnd();
+							}
+							else{
+								shootStickTapEnd();
+								shootStickTap();
+							}
+							
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+							
+							if(lives < 1){
+									
+									exitReload = 1;
+									slowMotion = false;
+									lives = 0;
+									document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+								}
+							
+							StalkerFleet.splice(i, 1); //this will destroy the enemy on colision with the player
+					}
+				}
+				
 				for(let b = 0; b < BlackBox.length; b++){
 
 					if(StalkerFleet[i] != undefined){
@@ -5160,65 +5170,69 @@ for(let i = 0; i < numStars; i++) {
 				}
 								
 				//this is a colision with the randomly spawning ai guys
-				if (x < BHEnemys[i].x + playerSize  && x + playerSize  > BHEnemys[i].x &&
-				y < BHEnemys[i].y + playerSize && y + playerSize > BHEnemys[i].y) {
-					// The objects are touching
-				
-					velX *= friction - 2; //this will stop the player from moving
-					velY *= friction - 2;
-					
-					lives -= 1;
-					slowMo();
-					
-					if(bulletPower > 0){
-						
-						bulletPower -= 1;
-					}
-					else{
-						bulletPower = 0;
-					}
-					
-					if(shootStickTouch == false){
-						
-                        shootStickTapEnd();
-					}
-					else{
-                        shootStickTapEnd();
-                        shootStickTap();
-					}
-					
-					fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
-					document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-					
-					if(lives < 1){
-							
-							exitReload = 1;
-							lives = 0;
-							slowMotion = false;
-							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-						}
-					
-					BHEnemys.splice(i, 1); //this will destroy the enemy on colision with the player
-				}
-				
-				if (BHEnemys[i].x > canvas.width - playerSize + 1) { // colision with game boarders x-axis playerSize is about 19.43999
-				
-					BHEnemys.splice(i, 1);
-            	} else if (BHEnemys[i].x < playerSize - 1) {
-				
-					BHEnemys.splice(i, 1);
-            	}
-			
-				if (BHEnemys[i].y > canvas.height - playerSize + 1) { // colision with game boarders y-axis playerSize is about 19.43999
-				
-					BHEnemys.splice(i, 1);
-            	} else if (BHEnemys[i].y < playerSize - 1) {
-				
-					BHEnemys.splice(i, 1);
-				}
-				
-				
+				if(BHEnemys[i] != undefined){
 
+					if (x < BHEnemys[i].x + playerSize  && x + playerSize  > BHEnemys[i].x &&
+					y < BHEnemys[i].y + playerSize && y + playerSize > BHEnemys[i].y) {
+							// The objects are touching
+						
+							velX *= friction - 2; //this will stop the player from moving
+							velY *= friction - 2;
+							
+							lives -= 1;
+							slowMo();
+							
+							if(bulletPower > 0){
+								
+								bulletPower -= 1;
+							}
+							else{
+								bulletPower = 0;
+							}
+							
+							if(shootStickTouch == false){
+								
+								shootStickTapEnd();
+							}
+							else{
+								shootStickTapEnd();
+								shootStickTap();
+							}
+							
+							fireworks.push( new Firework( canvas.width / 2, canvas.height, x, y ) );
+							document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+							
+							if(lives < 1){
+									
+									exitReload = 1;
+									lives = 0;
+									slowMotion = false;
+									document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+								}
+							
+							BHEnemys.splice(i, 1); //this will destroy the enemy on colision with the player
+					}
+				}
+				
+				if(BHEnemys[i] != undefined){
+
+					if (BHEnemys[i].x > canvas.width - playerSize + 1) { // colision with game boarders x-axis playerSize is about 19.43999
+				
+						BHEnemys.splice(i, 1);
+					} else if (BHEnemys[i].x < playerSize - 1) {
+					
+						BHEnemys.splice(i, 1);
+					}
+				
+					if (BHEnemys[i].y > canvas.height - playerSize + 1) { // colision with game boarders y-axis playerSize is about 19.43999
+					
+						BHEnemys.splice(i, 1);
+					} else if (BHEnemys[i].y < playerSize - 1) {
+					
+						BHEnemys.splice(i, 1);
+					}
+				}
+				
 				for(let b = 0; b < BlackBox.length; b++){
 
 					if(BHEnemys[i] != undefined){
@@ -5570,27 +5584,30 @@ for(let i = 0; i < numStars; i++) {
 			//draws the bullets and makes them move
 			for(let j = 0; j < bulletClip.length; j++){
 					
-					bulletClip[j].draw();
-					bulletClip[j].movement();					
-					
-				if (bulletClip[j].x > canvas.width - playerSize) { // colision with game boarders x-axis playerSize is about 19.43999
-					
-					fireworks.push( new WCFirework( canvas.width / 2, canvas.height, bulletClip[j].x, bulletClip[j].y ) );
-					bulletClip.splice(j, 1);
-				} else if (bulletClip[j].x < playerSize) {
-					
-					fireworks.push( new WCFirework( canvas.width / 2, canvas.height, bulletClip[j].x, bulletClip[j].y ) );
-					bulletClip.splice(j, 1);
-				}
+				bulletClip[j].draw();
+				bulletClip[j].movement();					
 				
-				else if (bulletClip[j].y > canvas.height - playerSize) { // colision with game boarders y-axis playerSize is about 19.43999
+				if(bulletClip[j] != undefined){
+
+					if (bulletClip[j].x > canvas.width - playerSize) { // colision with game boarders x-axis playerSize is about 19.43999
 					
-					fireworks.push( new WCFirework( canvas.width / 2, canvas.height, bulletClip[j].x, bulletClip[j].y ) );
-					bulletClip.splice(j, 1);
-				} else if (bulletClip[j].y < playerSize) {
+						fireworks.push( new WCFirework( canvas.width / 2, canvas.height, bulletClip[j].x, bulletClip[j].y ) );
+						bulletClip.splice(j, 1);
+					} else if (bulletClip[j].x < playerSize) {
+						
+						fireworks.push( new WCFirework( canvas.width / 2, canvas.height, bulletClip[j].x, bulletClip[j].y ) );
+						bulletClip.splice(j, 1);
+					}
 					
-					fireworks.push( new WCFirework( canvas.width / 2, canvas.height, bulletClip[j].x, bulletClip[j].y ) );
-					bulletClip.splice(j, 1);
+					else if (bulletClip[j].y > canvas.height - playerSize) { // colision with game boarders y-axis playerSize is about 19.43999
+						
+						fireworks.push( new WCFirework( canvas.width / 2, canvas.height, bulletClip[j].x, bulletClip[j].y ) );
+						bulletClip.splice(j, 1);
+					} else if (bulletClip[j].y < playerSize) {
+						
+						fireworks.push( new WCFirework( canvas.width / 2, canvas.height, bulletClip[j].x, bulletClip[j].y ) );
+						bulletClip.splice(j, 1);
+					}
 				}
 					
 			}
@@ -5841,40 +5858,27 @@ for(let i = 0; i < numStars; i++) {
 				LifePowerPack[i].draw(); //this will draw the life power up as they are created
 								
 				//this is a colision with the player and the power up
-				if (x < LifePowerPack[i].x + (playerSize * 2)  && x + (playerSize * 2)  > LifePowerPack[i].x &&
-				y < LifePowerPack[i].y + (playerSize * 2) && y + (playerSize * 2) > LifePowerPack[i].y) {
-					// The objects are touching
-				
-					//velX *= friction - 2; //this will stop the player from moving
-					//velY *= friction - 2;
-					lives += 1;//(Math.round( 0.5 * 10 ) / 10);
-					score += 10;
-					//lives.toFixed(1);
-					document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+				if(LifePowerPack[i] != undefined){
+
+					if (x < LifePowerPack[i].x + (playerSize * 2)  && x + (playerSize * 2)  > LifePowerPack[i].x &&
+					y < LifePowerPack[i].y + (playerSize * 2) && y + (playerSize * 2) > LifePowerPack[i].y) {
+						// The objects are touching
 					
-					// if(lives == 0){
-							
-					// 		exitReload = 1;
-					// 	}
-					
-					LifePowerPack.splice(i, 1); //this will destroy the enemy on colision with the player
+						//velX *= friction - 2; //this will stop the player from moving
+						//velY *= friction - 2;
+						lives += 1;//(Math.round( 0.5 * 10 ) / 10);
+						score += 10;
+						//lives.toFixed(1);
+						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+						
+						// if(lives == 0){
+								
+						// 		exitReload = 1;
+						// 	}
+						
+						LifePowerPack.splice(i, 1); //this will destroy the enemy on colision with the player
+					}
 				}
-				
-			// 	if (LifePowerPack[j].x > canvas.width - bulletSize) { // colision with game boarders x-axis playerSize is about 19.43999
-					
-			// 		LifePowerPack.splice(j, 1);
-			// 	} else if (LifePowerPack[j].x < bulletSize) {
-					
-			// 		LifePowerPack.splice(j, 1);
-			// 	}
-				
-			// 	else if (LifePowerPack[j].y > canvas.height - bulletSize) { // colision with game boarders y-axis playerSize is about 19.43999
-					
-			// 		LifePowerPack.splice(j, 1);
-			// 	} else if (LifePowerPack[j].y < bulletSize) {
-					
-			// 		LifePowerPack.splice(j, 1);
-			// 	}
 				
 			 }
 			 
@@ -5884,53 +5888,40 @@ for(let i = 0; i < numStars; i++) {
 				BulletPowerPack[i].draw(); //this will draw the life power up as they are created
 								
 				//this is a colision with the player and the power up
-				if (x < BulletPowerPack[i].x + (playerSize * 2)  && x + (playerSize * 2)  > BulletPowerPack[i].x &&
-				y < BulletPowerPack[i].y + (playerSize * 2) && y + (playerSize * 2) > BulletPowerPack[i].y) {
-					// The objects are touching
-				
-					//velX *= friction - 2; //this will stop the player from moving
-					//velY *= friction - 2;
-					bulletPower += 2;
-					score += 10;
-					if(shootStickTouch == false){
-						
-                        shootStickTapEnd();
-					}
-					else{
-                        shootStickTapEnd();
-                        shootStickTap();
-					}
+				if(BulletPowerPack[i] != undefined){
+
+					if (x < BulletPowerPack[i].x + (playerSize * 2)  && x + (playerSize * 2)  > BulletPowerPack[i].x &&
+					y < BulletPowerPack[i].y + (playerSize * 2) && y + (playerSize * 2) > BulletPowerPack[i].y) {
+						// The objects are touching
 					
-					//console.log(shootStickTouch);
-					
-					
-					//clearInterval(bulletLoop);
-					//lives.toFixed(1);
-					document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
-					
-					// if(lives == 0){
+						//velX *= friction - 2; //this will stop the player from moving
+						//velY *= friction - 2;
+						bulletPower += 2;
+						score += 10;
+						if(shootStickTouch == false){
 							
-					// 		exitReload = 1;
-					// 	}
-					
-					BulletPowerPack.splice(i, 1); //this will destroy the enemy on colision with the player
+							shootStickTapEnd();
+						}
+						else{
+							shootStickTapEnd();
+							shootStickTap();
+						}
+						
+						//console.log(shootStickTouch);
+						
+						
+						//clearInterval(bulletLoop);
+						//lives.toFixed(1);
+						document.getElementById("score").innerHTML = "Score: " + score + " | Health: " + lives  + " | Bullet Power: " + bulletPower;
+						
+						// if(lives == 0){
+								
+						// 		exitReload = 1;
+						// 	}
+						
+						BulletPowerPack.splice(i, 1); //this will destroy the enemy on colision with the player
+					}
 				}
-				
-			// 	if (LifePowerPack[j].x > canvas.width - bulletSize) { // colision with game boarders x-axis playerSize is about 19.43999
-					
-			// 		LifePowerPack.splice(j, 1);
-			// 	} else if (LifePowerPack[j].x < bulletSize) {
-					
-			// 		LifePowerPack.splice(j, 1);
-			// 	}
-				
-			// 	else if (LifePowerPack[j].y > canvas.height - bulletSize) { // colision with game boarders y-axis playerSize is about 19.43999
-					
-			// 		LifePowerPack.splice(j, 1);
-			// 	} else if (LifePowerPack[j].y < bulletSize) {
-					
-			// 		LifePowerPack.splice(j, 1);
-			// 	}
 				
 			 }
 			
