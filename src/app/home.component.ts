@@ -213,22 +213,22 @@ for(let i = 0; i < numStars; i++) {
 	let shootReady = false;
 
 	let playerTop = new Image();
-	playerTop.src = "./assets/images/ProjectFunShipTop.png";
+	playerTop.src = "./assets/images/player/ProjectFunShipTop.png";
 	let playerBottom = new Image();
-	playerBottom.src = "./assets/images/ProjectFunShipBottom.png";
+	playerBottom.src = "./assets/images/player/ProjectFunShipBottom.png";
 	let playerLeft = new Image();
-	playerLeft.src = "./assets/images/ProjectFunShipLeft.png";
+	playerLeft.src = "./assets/images/player/ProjectFunShipLeft.png";
 	let playerRight = new Image();
-	playerRight.src = "./assets/images/ProjectFunShipRight.png";
+	playerRight.src = "./assets/images/player/ProjectFunShipRight.png";
 
 	let playerTopRight = new Image();
-	playerTopRight.src = "./assets/images/ProjectFunShipTopRight.png";
+	playerTopRight.src = "./assets/images/player/ProjectFunShipTopRight.png";
 	let playerTopLeft = new Image();
-	playerTopLeft.src = "./assets/images/ProjectFunShipTopLeft.png";
+	playerTopLeft.src = "./assets/images/player/ProjectFunShipTopLeft.png";
 	let playerBottomLeft = new Image();
-	playerBottomLeft.src = "./assets/images/ProjectFunShipBottomLeft.png";
+	playerBottomLeft.src = "./assets/images/player/ProjectFunShipBottomLeft.png";
 	let playerBottomRight = new Image();
-	playerBottomRight.src = "./assets/images/ProjectFunShipBottomRight.png";
+	playerBottomRight.src = "./assets/images/player/ProjectFunShipBottomRight.png";
 	
 	
     document.getElementById("score").style.display = "none";
