@@ -212,7 +212,7 @@ for(let i = 0; i < numStars; i++) {
 	let moveReady = false;
 	let shootReady = false;
 
-	let playerTop = new Image();
+	let playerTop = new Image(); //Players images
 	playerTop.src = "./assets/images/player/ProjectFunShipTop.png";
 	let playerBottom = new Image();
 	playerBottom.src = "./assets/images/player/ProjectFunShipBottom.png";
@@ -724,7 +724,7 @@ for(let i = 0; i < numStars; i++) {
 				}
 			}
 
-		}, 1100);
+		}, 1100); //1100
 		
 		hunterShipInterval = setInterval(function(){
 
@@ -759,7 +759,7 @@ for(let i = 0; i < numStars; i++) {
 				}
 			}
 
-		}, 9000);	
+		}, 9000); //9000
 		
 		
 		lifePupInterval = setInterval(function(){
@@ -827,7 +827,7 @@ for(let i = 0; i < numStars; i++) {
 				}
 			}
 
-		}, 30000);		
+		}, 30000); //30000
         
         document.getElementById("play").style.display = "none";
         document.getElementById("title").style.display = "none";
@@ -3046,12 +3046,56 @@ for(let i = 0; i < numStars; i++) {
   			x: Math.round(Math.random() * (canvas.width * .90)),
   			y: Math.round(Math.random() * (canvas.height * .90)),
 			direction: Math.round(Math.random() * 7),
+			shipTop: new Image(),
+			shipBottom: new Image(),
+			shipLeft: new Image(),
+			shipRight: new Image(),
+			shipTopRight: new Image(),
+			shipTopLeft: new Image(),
+			shipBottomLeft: new Image(),
+			shipBottomRight: new Image(),
  			draw: function() {
-				ctx.beginPath(); // this is the ai guy
-    			ctx.fillStyle = this.color;
-    			ctx.arc(this.x, this.y, playerSize, 0, Math.PI * 2);
-				ctx.fill();
-            	ctx.closePath();
+				
+				this.shipTop.src = "./assets/images/randomShip/RandomShipTop.png";
+				this.shipBottom.src = "./assets/images/randomShip/RandomShipBottom.png";
+				this.shipLeft.src = "./assets/images/randomShip/RandomShipLeft.png";
+				this.shipRight.src = "./assets/images/randomShip/RandomShipRight.png";
+
+				this.shipTopRight.src = "./assets/images/randomShip/RandomShipTopRight.png";
+				this.shipTopLeft.src = "./assets/images/randomShip/RandomShipTopLeft.png";
+				this.shipBottomLeft.src = "./assets/images/randomShip/RandomShipBottomLeft.png";
+				this.shipBottomRight.src = "./assets/images/randomShip/RandomShipBottomRight.png";
+
+				if(this.direction == 0){
+					ctx.drawImage(this.shipLeft, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.direction == 1){
+					ctx.drawImage(this.shipRight, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.direction == 2){
+					ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.direction == 3){
+					ctx.drawImage(this.shipBottom, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.direction == 4){
+					ctx.drawImage(this.shipBottomRight, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.direction == 5){
+					ctx.drawImage(this.shipTopLeft, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.direction == 6){
+					ctx.drawImage(this.shipBottomLeft, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.direction == 7){
+					ctx.drawImage(this.shipTopRight, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				// ctx.beginPath(); // this is the ai guy
+    			// ctx.fillStyle = this.color;
+    			// ctx.arc(this.x, this.y, playerSize, 0, Math.PI * 2);
+				// ctx.fill();
+				// ctx.closePath();
+
  			 },
 			 movement: function(){
 				 
@@ -3308,14 +3352,21 @@ for(let i = 0; i < numStars; i++) {
   			y: Math.round(Math.random() * (canvas.height * .90)),
 			direction: Math.round(Math.random() * 7),
 			size: playerSize,
+			shipTop: new Image(),
 			hp: 7,
  			draw: function() {
-				ctx.beginPath(); // this is the ai guy
-    			ctx.fillStyle = this.color;
-    			//ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-				ctx.rect(this.x,this.y,this.size,this.size);
-				ctx.fill();
-            	ctx.closePath();
+
+				// ctx.beginPath(); // this is the ai guy
+    			// ctx.fillStyle = this.color;
+    			// //ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+				// ctx.rect(this.x,this.y,this.size,this.size);
+				// ctx.fill();
+            	// ctx.closePath();
+
+				this.shipTop.src = "./assets/images/infectedShip/infectedShip.png";
+				ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.0001), this.y + (canvas.width * -0.0001), this.size, this.size);
+
+				
  			 },
 			 movement: function(){
 				 
@@ -3932,13 +3983,34 @@ for(let i = 0; i < numStars; i++) {
 		let Hunter = {
   			color: "orange",
   			x: Math.round(Math.random() * (canvas.width * .90)),
-  			y: Math.round(Math.random() * (canvas.height * .90)),
+			y: Math.round(Math.random() * (canvas.height * .90)),
+			shipTop: new Image(),
+			shipBottom: new Image(),
  			draw: function() {
-				ctx.beginPath(); // this is the ai guy
-    			ctx.fillStyle = this.color;
-    			ctx.arc(this.x, this.y, playerSize, 0, Math.PI * 2);
-				ctx.fill();
-            	ctx.closePath();
+
+				this.shipTop.src = "./assets/images/hunterShip/HunterTopBottom.png";
+				this.shipBottom.src = "./assets/images/hunterShip/HunterTopBottomLeftRight.png";
+
+				// ctx.beginPath(); // this is the ai guy
+    			// ctx.fillStyle = this.color;
+    			// ctx.arc(this.x, this.y, playerSize, 0, Math.PI * 2);
+				// ctx.fill();
+				// ctx.closePath();
+
+				if(this.x < x){
+					ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.x > x){
+					ctx.drawImage(this.shipBottom, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				if(this.y < y){
+					ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.y > y){
+					ctx.drawImage(this.shipBottom, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+
+				
  			 },
 			 movement: function(){
 
@@ -4079,13 +4151,75 @@ for(let i = 0; i < numStars; i++) {
 		let Stalker = {
   			color: "red",
   			x: Math.round(Math.random() * (canvas.width * .90)),
-  			y: Math.round(Math.random() * (canvas.height * .90)),
+			y: Math.round(Math.random() * (canvas.height * .90)),
+			shipTop: new Image(),
+			shipBottom: new Image(),
+			shipLeft: new Image(),
+			shipRight: new Image(),
+			shipTopRight: new Image(),
+			shipTopLeft: new Image(),
+			shipBottomLeft: new Image(),
+			shipBottomRight: new Image(),
  			draw: function() {
-				ctx.beginPath(); // this is the ai guy
-    			ctx.fillStyle = this.color;
-    			ctx.arc(this.x, this.y, playerSize, 0, Math.PI * 2);
-				ctx.fill();
-            	ctx.closePath();
+
+				// ctx.beginPath(); // this is the ai guy
+    			// ctx.fillStyle = this.color;
+    			// ctx.arc(this.x, this.y, playerSize, 0, Math.PI * 2);
+				// ctx.fill();
+				// ctx.closePath();
+				
+				this.shipTop.src = "./assets/images/stalkerShip/StalkerShipTop.png";
+				this.shipBottom.src = "./assets/images/stalkerShip/StalkerShipBottom.png";
+				this.shipLeft.src = "./assets/images/stalkerShip/StalkerShipLeft.png";
+				this.shipRight.src = "./assets/images/stalkerShip/StalkerShipRight.png";
+
+				this.shipTopRight.src = "./assets/images/stalkerShip/StalkerShipTopRight.png";
+				this.shipTopLeft.src = "./assets/images/stalkerShip/StalkerShipTopLeft.png";
+				this.shipBottomLeft.src = "./assets/images/stalkerShip/StalkerShipBottomLeft.png";
+				this.shipBottomRight.src = "./assets/images/stalkerShip/StalkerShipBottomRight.png";
+
+				if(this.x < x && this.y < y){
+					ctx.drawImage(this.shipBottomRight, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.x > x && this.y > y){
+					ctx.drawImage(this.shipTopLeft, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.x < x && this.y > y){
+					ctx.drawImage(this.shipTopRight, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				else if(this.x > x && this.y < y){
+					ctx.drawImage(this.shipBottomLeft, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				}
+				// else if(this.x < x){
+				// 	ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
+				// else if(this.y > y){
+				// 	ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
+				// else if(this.x > x){
+				// 	ctx.drawImage(this.shipTopLeft, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
+				// else if(this.y < y){
+				// 	ctx.drawImage(this.shipBottom, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
+				// else{
+				// 	ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
+				// else if(this.x < x){
+				// 	ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
+				// else if(this.y > y){
+				// 	ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
+				// else if(this.x > x){
+				// 	ctx.drawImage(this.shipTopLeft, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
+				// else if(this.y < y){
+				// 	ctx.drawImage(this.shipBottom, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
+				// else if(this.direction == 7){
+				// 	ctx.drawImage(this.shipTop, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.015), playerSize * 2, playerSize * 2);
+				// }
  			 },
 			 movement: function(){
 				 
@@ -4143,7 +4277,7 @@ for(let i = 0; i < numStars; i++) {
 
 					 
 				 }
-				 if(this.x > x && this.y < y){
+				 if(this.x < x && this.y > y){
 					 
 					 //this.x -= 1;
 					 //this.y += 1;
