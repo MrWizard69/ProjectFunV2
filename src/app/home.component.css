@@ -41,41 +41,85 @@
 #play{
 
 	width: 55%;
-    height: 5em;
+    height: 3.5em;
     position: absolute;
 	top: 50%;
 	left: 22%;
-    border-radius: 25px;
+	border-radius: 25px;
+	
+	text-decoration: none;
+    color: #fff;
+    background-color: #3949ab;
+    text-align: center;
+	letter-spacing: .2em;
+	font-size: 1em;
+	outline: 0;
+	border: none;
+    display: inline-block;
+	text-transform: uppercase;
 }
 
 #highscore{
 
 	width: 55%;
-    height: 5em;
+    height: 3.5em;
     position: absolute;
 	top: 60%;
 	left: 22%;
-    border-radius: 25px;
+	border-radius: 25px;
+	
+	text-decoration: none;
+    color: #fff;
+    background-color: #3949ab;
+    text-align: center;
+	letter-spacing: .2em;
+	font-size: 1em;
+	outline: 0;
+	border: none;
+    display: inline-block;
+	text-transform: uppercase;
 }
 
 #options{
 
 	width: 55%;
-    height: 5em;
+    height: 3.5em;
     position: absolute;
 	top: 70%;
 	left: 22%;
-    border-radius: 25px;
+	border-radius: 25px;
+	
+	text-decoration: none;
+    color: #fff;
+    background-color: #3949ab;
+    text-align: center;
+	letter-spacing: .2em;
+	font-size: 1em;
+	outline: 0;
+	border: none;
+    display: inline-block;
+	text-transform: uppercase;
 }
 
 #restartBtn{
 
 	width: 55%;
-    height: 5em;
+    height: 3.5em;
     position: absolute;
 	top: 50%;
 	left: 22%;
-    border-radius: 25px;
+	border-radius: 25px;
+	
+	text-decoration: none;
+    color: #fff;
+    background-color: #3949ab;
+    text-align: center;
+	letter-spacing: .2em;
+	font-size: 1em;
+	outline: 0;
+	border: none;
+    display: inline-block;
+	text-transform: uppercase;
 }
 
 #canvas {
@@ -83,7 +127,6 @@
 	border-radius: 5px;
 	margin-left: 13%;
 	margin-top: -0.6%;
-	/*background-color: #151B54;*/
 	background-color: #000;
 
 	/*This is the game stage*/
@@ -156,7 +199,18 @@ h3{
     width: 10%;
     height: 2em;
 	top: 3%;
-    border-radius: 50px;
+	border-radius: 50px;
+	
+	text-decoration: none;
+    color: #fff;
+    background-color: #3949ab;
+    text-align: center;
+	letter-spacing: .2em;
+	font-size: 1em;
+	outline: 0;
+	border: none;
+    display: inline-block;
+	text-transform: uppercase;
 }
 
 #rotWar{

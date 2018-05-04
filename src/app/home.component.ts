@@ -776,7 +776,7 @@ for(let i = 0; i < numStars; i++) {
 				}
 			}
 
-		}, 25000); //60000
+		}, 25000); //25000
 		
 		bulletPupInterval = setInterval(function(){
 
@@ -4508,50 +4508,46 @@ for(let i = 0; i < numStars; i++) {
 		let LifePowerUp = {
   			color: "DarkGreen",
   			x: Math.round(Math.random() * (canvas.width * .90)),
-  			y: Math.round(Math.random() * (canvas.height * .90)),
+			y: Math.round(Math.random() * (canvas.height * .90)),
+			power: new Image(),
  			draw: function() {
 				 
-				ctx.fillStyle = this.color;
-				ctx.beginPath(); // this is the ai guy
-				//ctx.moveTo(15, 15);
-    			ctx.arc(this.x, this.y, bulletSize * 2.5, 0, Math.PI * 2);
-				ctx.closePath();
-				ctx.fill();
-				//ctx.stroke();
-				ctx.font = "25px serif";
-				ctx.textAlign = "center";
-				ctx.fillStyle = "rgba(255, 255, 200, 1)";
-				ctx.fillText("H",this.x,this.y + (0.63 * 10));
-				//ctx.moveTo(0, 0);
-				//ctx.fillStyle = "green";
-				//ctx.stroke();
+				// ctx.fillStyle = this.color;
+				// ctx.beginPath(); // this is the ai guy
+    			// ctx.arc(this.x, this.y, bulletSize * 2.5, 0, Math.PI * 2);
+				// ctx.closePath();
+				// ctx.fill();
+				// ctx.font = "25px serif";
+				// ctx.textAlign = "center";
+				// ctx.fillStyle = "rgba(255, 255, 200, 1)";
+				// ctx.fillText("H",this.x,this.y + (0.63 * 10));
+
+				this.power.src = "./assets/images/powerUps/HealthPowerUp.png";
+				ctx.drawImage(this.power, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.016), playerSize * 2, playerSize * 2);
  			 }						  
 		};
 		
 		let BulletPowerUp = {
   			color: "DarkSlateGray",
   			x: Math.round(Math.random() * (canvas.width * .90)),
-  			y: Math.round(Math.random() * (canvas.height * .90)),
+			y: Math.round(Math.random() * (canvas.height * .90)),
+			power: new Image(),
  			draw: function() {
 				 
-				ctx.fillStyle = this.color;
-				ctx.beginPath(); // this is the ai guy
-				//ctx.moveTo(15, 15);
-    			ctx.arc(this.x, this.y, bulletSize * 2.5, 0, Math.PI * 2);
-				ctx.closePath();
-				ctx.fill();
-				ctx.beginPath();
-				//ctx.stroke();
-				ctx.font = "25px serif";
-				ctx.textAlign = "center";
-				ctx.fillStyle = "rgba(255, 255, 200, 1)";
-				ctx.fillText("BP",this.x,this.y + (0.60 * 10));
-				//ctx.moveTo(0, 0);
-				//ctx.fillStyle = "yellow";
-				//ctx.stroke();
-            	ctx.closePath();
+				// ctx.fillStyle = this.color;
+				// ctx.beginPath(); // this is the ai guy
+    			// ctx.arc(this.x, this.y, bulletSize * 2.5, 0, Math.PI * 2);
+				// ctx.closePath();
+				// ctx.fill();
+				// ctx.beginPath();
+				// ctx.font = "25px serif";
+				// ctx.textAlign = "center";
+				// ctx.fillStyle = "rgba(255, 255, 200, 1)";
+				// ctx.fillText("BP",this.x,this.y + (0.60 * 10));
+            	// ctx.closePath();
 				
-				
+				this.power.src = "./assets/images/powerUps/BulletPowerUp.png";
+				ctx.drawImage(this.power, this.x + (canvas.width * -0.001) + (canvas.width * -0.015), this.y + (canvas.width * -0.016), playerSize * 2, playerSize * 2);
  			 }						  
 		};
 
@@ -4777,13 +4773,11 @@ for(let i = 0; i < numStars; i++) {
 
 						LazerBattery.push(bigLazer);
 					}
-					
-
 				}
 
-				if(InfectedFleet[i].size >= (playerSize * 12)){
+				if(InfectedFleet[i].size >= (playerSize * 10)){
 					
-					InfectedFleet[i].size = (playerSize * 12);
+					InfectedFleet[i].size = (playerSize * 10);
 
 				}
 
