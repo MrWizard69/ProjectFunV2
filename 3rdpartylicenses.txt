@@ -130,6 +130,10 @@ MIT
 MIT
 MIT
 
+@angular/common@5.2.9
+MIT
+MIT
+
 protractor@5.1.2
 MIT
 The MIT License
@@ -155,10 +159,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 @angular/compiler@5.2.9
-MIT
-MIT
-
-@angular/common@5.2.9
 MIT
 MIT
 
