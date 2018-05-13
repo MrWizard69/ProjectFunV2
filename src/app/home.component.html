@@ -1,4 +1,5 @@
-
+<div *ngIf="isLoaded === true">
+	
 	<div id="container"></div>
 	
 	<div id="shootStick"></div>
@@ -11,17 +12,6 @@
 	
 	<h2 id="title">{{title}}</h2>
 	<h3 id="score">Score: 0 | Health: 3 | Bullet Power: 0</h3>
-	<!-- <h5 id="rotWar">Please Rotate Your Device To Play</h5> -->
-
-	<div id="RotWarBox">
-
-		<h2 id="rotMessage">Please Rotate Your Device To Play</h2>
-
-		<input type="button" id="closeRotWar" value="Do It!" />
-
-	</div>
-	
-	<!--</div> -->
 	
 	
 	
@@ -44,6 +34,6 @@
 	<h4 id="ShootStickInfo">Shoot</h4>
 	<h4 id="directInfo">Tap and hold the Move and Shoot joystick to activate them. Rotate them in the direction you wish to Move or Shoot.</h4>		
 
-
+</div>
 
 <!-- <joystick></joystick> -->

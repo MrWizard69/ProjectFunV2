@@ -8,4 +8,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(AppModule,{
+
+  ngZone: 'noop' //this will take ngZones out
+});
